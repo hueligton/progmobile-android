@@ -1,50 +1,66 @@
 package com.example.progmobile_android.model;
 
+import android.content.Context;
+
 import com.example.progmobile_android.model.entities.Purchase;
 import com.example.progmobile_android.model.entities.User;
 import com.example.progmobile_android.model.entities.Event;
 import com.example.progmobile_android.model.entities.Pair;
 import com.example.progmobile_android.model.entities.Ticket;
 import com.example.progmobile_android.model.entities.UserToken;
-
-import java.util.ArrayList;
+import com.example.progmobile_android.model.manager.EventManager;
+import com.example.progmobile_android.model.manager.PurchaseManager;
+import com.example.progmobile_android.model.manager.UserManager;
 import java.util.List;
 
 public class ModelFacade {
+    private EventManager eventManager;
+    private UserManager userManager;
+    private PurchaseManager purchaseManager;
 
-    public UserToken login(String login, String password){
-        return new UserToken(new User(login, "Felipe", password, "teste@email.com"), "abc");
+    public ModelFacade(Context context) {
+        this.eventManager=new EventManager(context);
+        this.userManager=new UserManager(context);
+        this.purchaseManager=new PurchaseManager(context);
     }
 
-    public void logout(String userId, String token){
-
+    public UserToken login(String login, String password) {
+        return userManager.login(login,password);
     }
 
-    public User createUser(String login, String name, String password, String email){
-        return new User(login, name, password, email);
+    public void logout(String userId, String token) {
+        userManager.logout(userId, token);
     }
 
-    public List<Event> listEvents(){
-        return new ArrayList<Event>();
+    public User createUser(String login, String name, String password, String email) {
+        return userManager.createUser(login, name, password, email);
     }
 
-    public Event getEvent(int eventId){
-        return new Event();
+    public List<Event> getListEvents() {
+        return eventManager.getListEvents();
     }
 
-    public List<Purchase> listPurchases(String userId, String token){
-        return new ArrayList<Purchase>();
+    public List<Event> searchEventByName(String name) {
+        return eventManager.searchEventByName(name);
     }
 
-    public Purchase setPurchase(String userId, String token, int eventId, List<Pair> list){
-        return new Purchase();
+    public Event getEvent(int eventId) {
+        return eventManager.getEvent(eventId);
     }
 
-    public Purchase getPurchase(String userId, String token, int purchaseId){
-        return new Purchase();
+    public List<Purchase> getListPurchases(String userId, String token) {
+        return purchaseManager.getListPurchases(userId, token);
     }
 
-    public Ticket getTicket(String userId, String token, int ticketId){
-        return new Ticket();
+    public Purchase setPurchase(String userId, String token, int eventId, List<Pair> list) {
+        return purchaseManager.setPurchase(userId,token,eventId,list);
+    }
+
+    public Purchase getPurchase(String userId, String token, int purchaseId) {
+        return purchaseManager.getPurchase(userId, token, purchaseId);
+    }
+
+    public Ticket getTicket(String userId, String token, int ticketId) {
+        return purchaseManager.getTicket(userId, token, ticketId);
     }
 }

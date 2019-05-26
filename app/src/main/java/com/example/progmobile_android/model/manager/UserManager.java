@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.example.progmobile_android.model.entities.User;
 import com.example.progmobile_android.model.entities.UserToken;
+import com.example.progmobile_android.model.repository.ServerCallback;
 
 public class UserManager {
     private Context context;
@@ -12,15 +13,15 @@ public class UserManager {
         this.context=context;
     }
 
-    public UserToken login(String login, String password){
-        return new UserToken(new User(login,password), "test");
-    }
-
-    public void logout(String userId, String token) {
+    public void login(String login, String password, final ServerCallback serverCallback) {
 
     }
 
-    public User createUser(String login, String name, String password, String email) {
-        return new User(login, name, password, email);
+    public void logout(String userId, String token, final ServerCallback serverCallback) {
+
+    }
+
+    public void createUser(String login, String name, String password, String email, final ServerCallback serverCallback) {
+
     }
 }

@@ -5,6 +5,7 @@ import android.content.Context;
 import com.example.progmobile_android.model.entities.Pair;
 import com.example.progmobile_android.model.entities.Purchase;
 import com.example.progmobile_android.model.entities.Ticket;
+import com.example.progmobile_android.model.repository.ServerCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,19 +17,19 @@ public class PurchaseManager {
         this.context=context;
     }
 
-    public List<Purchase> getListPurchases(String userId, String token) {
-        return new ArrayList<Purchase>();
+    public void getListPurchases(String userId, String token, final ServerCallback serverCallback) {
+
     }
 
-    public Purchase setPurchase(String userId, String token, int eventId, List<Pair> list) {
-        return new Purchase();
+    public void setPurchase(String userId, String token, int eventId, List<Pair> list, final ServerCallback serverCallback) {
+
     }
 
-    public Purchase getPurchase(String userId, String token, int purchaseId) {
-        return new Purchase();
+    public void getPurchase(String userId, String token, int purchaseId, final ServerCallback serverCallback) {
+
     }
 
-    public Ticket getTicket(String userId, String token, int ticketId) {
-        return new Ticket();
+    public void getTicket(String userId, String token, int ticketId, final ServerCallback serverCallback) {
+
     }
 }

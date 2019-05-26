@@ -7,15 +7,19 @@ public class Event {
 
     private int eventId;
     private String name;
+    private String description;
     private Date date;
     private Place place;
+    private String image;
     private List<TicketType> ticketTypes;
 
-    public Event (int eventId, String name, Date date, Place place, List<TicketType> ticketTypes){
+    public Event(int eventId, String name, String description, Date date, Place place, String image, List<TicketType> ticketTypes) {
         this.eventId = eventId;
         this.name = name;
+        this.description = description;
         this.date = date;
         this.place = place;
+        this.image = image;
         this.ticketTypes = ticketTypes;
     }
 
@@ -61,6 +65,22 @@ public class Event {
 
     public void setTicketTypes(List<TicketType> ticketTypes) {
         this.ticketTypes = ticketTypes;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     @Override

@@ -2,15 +2,12 @@ package com.example.progmobile_android.model;
 
 import android.content.Context;
 
-import com.example.progmobile_android.model.entities.Purchase;
-import com.example.progmobile_android.model.entities.User;
-import com.example.progmobile_android.model.entities.Event;
 import com.example.progmobile_android.model.entities.Pair;
-import com.example.progmobile_android.model.entities.Ticket;
-import com.example.progmobile_android.model.entities.UserToken;
 import com.example.progmobile_android.model.manager.EventManager;
 import com.example.progmobile_android.model.manager.PurchaseManager;
 import com.example.progmobile_android.model.manager.UserManager;
+import com.example.progmobile_android.model.repository.ServerCallback;
+
 import java.util.List;
 
 public class ModelFacade {
@@ -24,43 +21,117 @@ public class ModelFacade {
         this.purchaseManager=new PurchaseManager(context);
     }
 
-    public UserToken login(String login, String password) {
-        return userManager.login(login,password);
+    /***
+     * Login de usuário
+     * @param serverCallback interface para retorno da chamada HTTP
+     * @param login login do usuário
+     * @param password senha do usuário
+     * @return Retorna Object via CallBack. Necessário cast para UserToken.
+     */
+    public void login(String login, String password, ServerCallback serverCallback) {
+        userManager.login(login, password, serverCallback);
     }
 
-    public void logout(String userId, String token) {
-        userManager.logout(userId, token);
+    /***
+     * Logout de usuário
+     * @param serverCallback interface para retorno da chamada HTTP
+     * @param userId id do usuário
+     * @param token token do usuário
+     * @return Sem retorno
+     */
+    public void logout(String userId, String token, ServerCallback serverCallback) {
+        userManager.logout(userId, token, serverCallback);
     }
 
-    public User createUser(String login, String name, String password, String email) {
-        return userManager.createUser(login, name, password, email);
+    /***
+     * Criação de usuário
+     * @param serverCallback interface para retorno da chamada HTTP
+     * @param login login do usuário
+     * @param name nome do usuário
+     * @param password senha do usuário
+     * @param email email do usuário
+     * @return Retorna Object via CallBack. Necessário cast para User.
+     */
+    public void createUser(String login, String name, String password, String email, ServerCallback serverCallback) {
+        userManager.createUser(login, name, password, email, serverCallback);
     }
 
-    public List<Event> getListEvents() {
-        return eventManager.getListEvents();
+    /***
+     * Lista de eventos
+     * @param serverCallback interface para retorno da chamada HTTP
+     * @return Retorna Object via CallBack. Necessário cast para List<Event>.
+     */
+    public void getListEvents(ServerCallback serverCallback) {
+        eventManager.getListEvents(serverCallback);
     }
 
-    public List<Event> searchEventByName(String name) {
-        return eventManager.searchEventByName(name);
+    /***
+     * Lista de eventos filtrada por nome
+     * @param serverCallback interface para retorno da chamada HTTP
+     * @param name nome do evento
+     * @return Retorna Object via CallBack. Necessário cast para List<Event>.
+     */
+    public void searchEventByName(String name, ServerCallback serverCallback) {
+        eventManager.searchEventByName(name, serverCallback);
     }
 
-    public Event getEvent(int eventId) {
-        return eventManager.getEvent(eventId);
+    /***
+     * Evento selecionado pelo seu ID
+     * @param serverCallback interface para retorno da chamada HTTP
+     * @param eventId id do evento
+     * @return Retorna Object via CallBack. Necessário cast para Event.
+     */
+    public void getEvent(int eventId, ServerCallback serverCallback) {
+        eventManager.getEvent(eventId, serverCallback);
     }
 
-    public List<Purchase> getListPurchases(String userId, String token) {
-        return purchaseManager.getListPurchases(userId, token);
+    /***
+     * Lista de compras de um usuário
+     * @param serverCallback interface para retorno da chamada HTTP
+     * @param userId id do usuário
+     * @param token token do usuário
+     * @return Retorna Object via CallBack. Necessário cast para List<Purchase>.
+     */
+    public void getListPurchases(String userId, String token, ServerCallback serverCallback) {
+        purchaseManager.getListPurchases(userId, token, serverCallback);
     }
 
-    public Purchase setPurchase(String userId, String token, int eventId, List<Pair> list) {
-        return purchaseManager.setPurchase(userId,token,eventId,list);
+    /***
+     * Salvar compra
+     * @param serverCallback interface para retorno da chamada HTTP
+     * @param userId id do usuário
+     * @param token token do usuário
+     * @param eventId id do evento
+     * @param list lista tipo do ingresso e quantidade selecionados pelo usuário
+     * @return Retorna Object via CallBack. Necessário cast para Purchase.
+     */
+    public void setPurchase(String userId, String token, int eventId, List<Pair> list, ServerCallback serverCallback) {
+        purchaseManager.setPurchase(userId, token, eventId, list, serverCallback);
     }
 
-    public Purchase getPurchase(String userId, String token, int purchaseId) {
-        return purchaseManager.getPurchase(userId, token, purchaseId);
+    /***
+     * Compra de um usuário pelo ID da compra
+     * @param serverCallback interface para retorno da chamada HTTP
+     * @param userId id do usuário
+     * @param token token do usuário
+     * @param purchaseId id da compra
+     * @return Retorna Object via CallBack. Necessário cast para Purchase.
+     */
+    public void getPurchase(String userId, String token, int purchaseId, ServerCallback serverCallback) {
+        purchaseManager.getPurchase(userId, token, purchaseId, serverCallback);
     }
 
-    public Ticket getTicket(String userId, String token, int ticketId) {
-        return purchaseManager.getTicket(userId, token, ticketId);
+    /***
+     * Ticket de um usuário pelo ID do ticket
+     * @param serverCallback interface para retorno da chamada HTTP
+     * @param userId id do usuário
+     * @param token token do usuário
+     * @param ticketId id do ticket
+     * @return Retorna Object via CallBack. Necessário cast para Ticket.
+     */
+    public void getTicket(String userId, String token, int ticketId, ServerCallback serverCallback) {
+        purchaseManager.getTicket(userId, token, ticketId, serverCallback);
     }
+
+
 }

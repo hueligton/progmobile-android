@@ -6,9 +6,9 @@
 - Hueligton Melo - Model
 
 ## Tecnologias
-- Implementação: Java
+- Implementação: Java 1.8
 - WebService: NodeJS
-- Bibliotecas: Volley, GSon
+- Bibliotecas: GSon 2.8.5, Picasso 2.71828, Volley 1.1.1
 
 ## Repositórios
 - src/main/java/com/example/progmobile_android/ - contém Activities dos layouts

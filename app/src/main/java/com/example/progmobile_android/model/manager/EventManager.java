@@ -19,11 +19,12 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class EventManager {
     private Gson gson;
     private Context context;
-    private String url = "http://jsonplaceholder.typicode.com/";
+    private String url = Constants.URL;
 
     private List<Event> listEvent;
 
@@ -33,7 +34,16 @@ public class EventManager {
         listEvent = new ArrayList<>();
     }
 
+    /**
+     * Retorna via callback lista de todos os eventos disponíveis no webservice
+     *
+     * @param serverCallback callback para retorno
+     */
     public void getListEvents(final ServerCallback serverCallback) {
+        if (listEvent.size() > 0) {
+            listEvent.clear();
+        }
+
         final String endPoint = url + "events";
 
         JsonArrayRequest jsonObjectRequest = new JsonArrayRequest
@@ -61,25 +71,55 @@ public class EventManager {
         Repository.getInstance(context).addToRequestQueue(jsonObjectRequest);
     }
 
+    /**
+     * Retorna via callback lista de todos os eventos disponíveis no webservice filtrados pelo nome fornecido
+     *
+     * @param name           nome do evento
+     * @param serverCallback callback para retorno
+     */
     public void searchEventByName(String name, final ServerCallback serverCallback) {
+        //Se vazio, preencher lista
+        if (listEvent.size() == 0) {
+            getListEvents(new ServerCallback() {
+                @Override
+                public void onSuccess(Object object) {
+                    searchEventByName(name, serverCallback);
+                }
+            });
+        }
+        //Se lista já preenchida, filtra lista e retorna via callback para quem requisitou
+        else {
+            List<Event> eventList = listEvent.stream()
+                    .filter(e ->
+                            e.getName()
+                                    .toLowerCase()
+                                    .contains(name.toLowerCase()))
+                    .collect(Collectors.<Event>toList());
+
+            serverCallback.onSuccess(eventList);
+        }
     }
 
+    /**
+     * Retorna evento selecionado pelo seu ID via callback
+     * @param eventId id do evento
+     * @param serverCallback callback de retorno
+     */
     public void getEvent(int eventId, final ServerCallback serverCallback) {
-        String endPoint = url;
+        final String endPoint = url + "events/" + eventId;
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                 (Request.Method.GET, endPoint, null, new Response.Listener<JSONObject>() {
 
                     @Override
                     public void onResponse(JSONObject response) {
-                        Log.d("teste", response.toString());
+                        Event event = gson.fromJson(response.toString(), Event.class);
+                        serverCallback.onSuccess(event);
                     }
                 }, new Response.ErrorListener() {
-
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        // TODO: Handle error
-
+                        Log.e("getListEvents", error.toString());
                     }
                 });
 

@@ -119,7 +119,7 @@ public class EventManager {
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.e("getListEvents", error.toString());
+                        Log.e("getEvent", error.toString());
                     }
                 });
 

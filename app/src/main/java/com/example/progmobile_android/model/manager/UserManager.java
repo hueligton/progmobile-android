@@ -1,26 +1,131 @@
 package com.example.progmobile_android.model.manager;
 
 import android.content.Context;
+import android.util.Log;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.example.progmobile_android.model.entities.User;
 import com.example.progmobile_android.model.entities.UserToken;
+import com.example.progmobile_android.model.repository.Repository;
+import com.example.progmobile_android.model.repository.ServerCallback;
+import com.google.gson.Gson;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class UserManager {
+    private Gson gson;
     private Context context;
+    private String url = Constants.URL;
 
-    public UserManager(Context context){
-        this.context=context;
+    public UserManager(Context context) {
+        this.context = context;
+        this.gson = new Gson();
     }
 
-    public UserToken login(String login, String password){
-        return new UserToken(new User(login,password), "test");
+    public void login(String login, String password, final ServerCallback serverCallback) {
+        final String endPoint = url + "authentication";
+
+        JsonArrayRequest jsonObjectRequest = new JsonArrayRequest
+                (Request.Method.POST, endPoint, null, new Response.Listener<JSONArray>() {
+
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        try {
+                            JSONObject userJSON = response.getJSONObject(0);
+                            User user = gson.fromJson(userJSON.toString(), User.class);
+
+                            JSONObject tokenJSON = response.getJSONObject(1);
+                            String token = tokenJSON.getString("token");
+
+                            UserToken userToken = new UserToken(user, token);
+                            serverCallback.onSuccess(userToken);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e("login", error.toString());
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("login", login);
+                params.put("password", password);
+                return params;
+            }
+        };
+
+        Repository.getInstance(context).addToRequestQueue(jsonObjectRequest);
     }
 
-    public void logout(String userId, String token) {
+    public void logout(String userId, String token, final ServerCallback serverCallback) {
+        final String endPoint = url + "logout";
 
+        StringRequest stringRequest = new StringRequest
+                (Request.Method.DELETE, endPoint, new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        serverCallback.onSuccess(true);
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e("login", error.toString());
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("userId", userId);
+                params.put("token", token);
+                return params;
+            }
+        };
+
+        Repository.getInstance(context).addToRequestQueue(stringRequest);
     }
 
-    public User createUser(String login, String name, String password, String email) {
-        return new User(login, name, password, email);
+    public void createUser(String login, String name, String password, String email, final ServerCallback serverCallback) {
+        final String endPoint = url + "user";
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                (Request.Method.POST, endPoint, null, new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        User user = gson.fromJson(response.toString(), User.class);
+                        serverCallback.onSuccess(user);
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e("login", error.toString());
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("login", login);
+                params.put("password", password);
+                params.put("name", name);
+                params.put("email", email);
+                return params;
+            }
+        };
+
+        Repository.getInstance(context).addToRequestQueue(jsonObjectRequest);
     }
 }

@@ -1,4 +1,4 @@
-# Web Service REST - Venda de Ingressos
+# Aplicação Android - Venda de Ingressos
 **Programação para Dispositivos Móveis 2019/1 - FACOM - UFMS**  
 **Sob a orientação da Prof.ª Dra. Ana Karina Dourado Salina de Oliveira**
 

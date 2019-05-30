@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">progmobile-android</string>
+
+    <!--content home-->
+    <string name="buy_tickets">Comprar ingressos</string>
+    <string name="my_tickets">Meus ingressos</string>
+
+    <!--toolbar menu-->
+    <string name="action_login">login</string>
+
 </resources>

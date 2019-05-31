@@ -29,6 +29,13 @@
         </activity>
 
         <activity android:name=".MainActivity" />
+
+        <activity android:name=".view.Register">
+            android:parentActivityName=".view.Login">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.Login" />
+        </activity>
     </application>
 
 </manifest>

@@ -8,4 +8,14 @@
     <!--toolbar menu-->
     <string name="action_login">login</string>
 
+    <!--form-->
+    <string name="form_password">Password</string>
+    <string name="form_password_hint">********</string>
+    <string name="form_login">Login</string>
+    <string name="form_login_hint">Seu login</string>
+
+    <!--buttons-->
+    <string name="button_login">Login</string>
+    <string name="button_register">Cadastrar</string>
+
 </resources>

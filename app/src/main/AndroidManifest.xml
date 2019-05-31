@@ -20,8 +20,15 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".MainActivity"></activity>
+        <activity
+            android:name=".view.Login"
+            android:parentActivityName=".view.Home">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.Home" />
+        </activity>
 
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>

@@ -1,25 +1,21 @@
 package com.example.progmobile_android.view;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
 
 import com.example.progmobile_android.R;
 
-public class Home extends AppCompatActivity
-{
+public class Home extends AppCompatActivity {
     private Toolbar toolbar;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -32,33 +28,28 @@ public class Home extends AppCompatActivity
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
+    public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.app_bar_menu, menu);
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
+    public boolean onOptionsItemSelected(MenuItem item) {
 
-        switch (item.getItemId())
-        {
+        switch (item.getItemId()) {
             case R.id.action_login:
-                // startActivity(new Intent(this, Login.class));
+                startActivity(new Intent(this, Login.class));
                 return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-    public void buyTickets(View view)
-    {
+    public void buyTickets(View view) {
         // startActivity(new Intent(this, ListTickets.class));
     }
 
-    public void showMyTickets(View view)
-    {
+    public void showMyTickets(View view) {
         // startActivity(new Intent(this, MyTickets.class));
     }
 }

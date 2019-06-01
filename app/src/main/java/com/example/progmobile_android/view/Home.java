@@ -3,7 +3,6 @@ package com.example.progmobile_android.view;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,7 +11,6 @@ import android.view.WindowManager;
 import com.example.progmobile_android.R;
 
 public class Home extends AppCompatActivity {
-    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,9 +20,7 @@ public class Home extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.activity_home);
-
-        toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        setSupportActionBar(findViewById(R.id.toolbar));
     }
 
     @Override
@@ -36,17 +32,16 @@ public class Home extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        switch (item.getItemId()) {
-            case R.id.action_login:
-                startActivity(new Intent(this, Login.class));
-                return true;
+        if (item.getItemId() == R.id.action_login) {
+            startActivity(new Intent(this, Login.class));
+            return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
     public void buyTickets(View view) {
-        // startActivity(new Intent(this, ListTickets.class));
+        startActivity(new Intent(this, EventList.class));
     }
 
     public void showMyTickets(View view) {

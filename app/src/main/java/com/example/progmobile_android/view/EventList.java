@@ -67,7 +67,7 @@ public class EventList extends AppCompatActivity {
 
         list.forEach(event -> {
             eventImage.add(event.getImage());
-            eventName.add(event.getImage());
+            eventName.add(event.getName());
         });
 
         EventRecyclerAdapter eventRecyclerAdapter = new EventRecyclerAdapter(eventImage, eventName);

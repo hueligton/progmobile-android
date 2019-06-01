@@ -70,12 +70,6 @@ public class EventList extends AppCompatActivity {
             eventName.add(event.getImage());
         });
 
-        eventImage.add("http://caliescribe.com/sites/default/files/imagenes_revista/2011/noviembre/13-19/gastronomia/gastronomia-minimalista.jpg");
-        eventImage.add("https://img.pystatic.com/header-backgrounds/mobile/comida-internacional-6.jpg");
-
-        eventName.add("food 1");
-        eventName.add("food 2");
-
         EventRecyclerAdapter eventRecyclerAdapter = new EventRecyclerAdapter(eventImage, eventName);
         recyclerView.setAdapter(eventRecyclerAdapter);
     }

@@ -33,6 +33,15 @@ public class ManagerFacade {
     }
 
     /***
+     * Retorna usuário logado no sistema
+     * @param serverCallback interface para retorno da chamada HTTP
+     * @return Retorna Object via CallBack. Necessário cast para UserToken.
+     */
+    public void getUser(ServerCallback serverCallback) {
+        userManager.getUser(serverCallback);
+    }
+
+    /***
      * Logout de usuário
      * @param serverCallback interface para retorno da chamada HTTP
      * @param userId id do usuário

@@ -47,15 +47,15 @@ public class MainActivity extends AppCompatActivity {
 //        Picasso.get().load(url).into(imageView);
 
 
-        managerFacade.login("hueligton", "teste", object -> {
-            UserToken userToken = (UserToken) object;
-            User user = userToken.getUser();
-            String token = userToken.getToken();
-
-            txtViewUser.setText(user.toString());
-            txtViewToken.setText(token);
-
-        });
+//        managerFacade.login("hueligton", "teste", object -> {
+//            UserToken userToken = (UserToken) object;
+//            User user = userToken.getUser();
+//            String token = userToken.getToken();
+//
+//            txtViewUser.setText(user.toString());
+//            txtViewToken.setText(token);
+//
+//        });
 
     }
 }

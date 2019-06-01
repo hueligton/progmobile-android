@@ -10,6 +10,7 @@ import android.widget.EditText;
 
 import com.example.progmobile_android.R;
 import com.example.progmobile_android.model.ManagerFacade;
+import com.example.progmobile_android.model.repository.ServerCallback;
 
 import java.util.Objects;
 import java.util.stream.Stream;
@@ -49,7 +50,19 @@ public class Login extends AppCompatActivity {
         String password = etPassword.getText().toString();
 
         if(validateFields(login, password))
-            managerFacade.login(login, password, this::onSuccess);
+            managerFacade.login(login, password, new ServerCallback() {
+                @Override
+                public void onSuccess(Object object) {
+                    startActivity(new Intent(Login.this, Home.class));
+                }
+
+                @Override
+                public void onError(Object object) {
+                    makeText(Login.this, R.string.toast_invalid_login, LENGTH_SHORT).show();
+                    etLogin.getText().clear();
+                    etPassword.getText().clear();
+                }
+            });
     }
 
     private boolean validateFields(String login, String password) {
@@ -58,16 +71,6 @@ public class Login extends AppCompatActivity {
             return false;
         }
         return true;
-    }
-
-    private void onSuccess(Object object) {
-        if (object != null)
-            startActivity(new Intent(this, Home.class));
-        else {
-            makeText(this, R.string.toast_invalid_login, LENGTH_SHORT).show();
-            etLogin.getText().clear();
-            etPassword.getText().clear();
-        }
     }
 
     public void register(View view) {

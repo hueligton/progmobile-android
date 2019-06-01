@@ -10,6 +10,7 @@ import android.widget.EditText;
 
 import com.example.progmobile_android.R;
 import com.example.progmobile_android.model.ManagerFacade;
+import com.example.progmobile_android.model.repository.ServerCallback;
 
 import java.util.Objects;
 import java.util.stream.Stream;
@@ -55,7 +56,22 @@ public class Register extends AppCompatActivity {
         String password = etPassword.getText().toString();
 
         if(validateFields(name, email, login, password))
-            managerFacade.createUser(login, name, password, email, this::onSuccess);
+            managerFacade.createUser(login, name, password, email, new ServerCallback() {
+                @Override
+                public void onSuccess(Object object) {
+                    makeText(Register.this, R.string.toast_successful_registration, LENGTH_SHORT).show();
+                    startActivity(new Intent(Register.this, Login.class));
+                }
+
+                @Override
+                public void onError(Object object) {
+                    makeText(Register.this, R.string.toast_unsuccessful_registration, LENGTH_SHORT).show();
+                    etName.getText().clear();
+                    etEmail.getText().clear();
+                    etLogin.getText().clear();
+                    etPassword.getText().clear();
+                }
+            });
     }
 
     private boolean validateFields(String name, String email, String login, String password) {
@@ -65,18 +81,4 @@ public class Register extends AppCompatActivity {
         }
         return true;
     }
-
-    private void onSuccess(Object object) {
-        if (object != null) {
-            makeText(this, R.string.toast_successful_registration, LENGTH_SHORT).show();
-            startActivity(new Intent(this, Login.class));
-        } else {
-            makeText(this, R.string.toast_unsuccessful_registration, LENGTH_SHORT).show();
-            etName.getText().clear();
-            etEmail.getText().clear();
-            etLogin.getText().clear();
-            etPassword.getText().clear();
-        }
-    }
-
 }

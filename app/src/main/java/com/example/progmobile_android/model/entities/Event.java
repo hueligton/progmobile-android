@@ -74,11 +74,11 @@ public class Event {
         this.description = description;
     }
 
-    public String getImage() {
+    public String getImageURL() {
         return imageURL;
     }
 
-    public void setImage(String image) {
+    public void setImageURL(String image) {
         this.imageURL = image;
     }
 

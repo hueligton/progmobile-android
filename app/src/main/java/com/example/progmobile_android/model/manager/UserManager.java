@@ -57,7 +57,10 @@ public class UserManager {
                 e.printStackTrace();
             }
 
-        }, error -> Log.d("login", error.toString())) {
+        }, error -> {
+            Log.d("login", error.toString());
+            callback.onSuccess(null);
+        }) {
 
             @Override
             public byte[] getBody() {

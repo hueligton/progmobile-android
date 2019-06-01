@@ -4,23 +4,22 @@ import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.example.progmobile_android.R;
 import com.example.progmobile_android.model.ManagerFacade;
 
+import java.util.Objects;
+import java.util.stream.Stream;
+
+import static android.widget.Toast.*;
+
 public class Login extends AppCompatActivity {
 
-    private Toolbar toolbar;
+    private ManagerFacade managerFacade = new ManagerFacade(this);
 
-    private ManagerFacade managerFacade;
-
-    private Button btLogin;
     private EditText etLogin;
     private EditText etPassword;
 
@@ -32,19 +31,15 @@ public class Login extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.activity_login);
-
-        toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        setSupportActionBar(findViewById(R.id.toolbar));
 
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(actionBar).setDisplayHomeAsUpEnabled(true);
 
-        managerFacade = new ManagerFacade(this);
         captureViewComponents();
     }
 
     private void captureViewComponents() {
-        btLogin = findViewById(R.id.btLogin);
         etLogin = findViewById(R.id.etLogin);
         etPassword = findViewById(R.id.etPassword);
     }
@@ -53,38 +48,26 @@ public class Login extends AppCompatActivity {
         String login = etLogin.getText().toString();
         String password = etPassword.getText().toString();
 
-        final boolean[] loginValidation = {false};
-
-        if(validateFields(login, password)) {
-            managerFacade.login(login, password, object -> {
-                loginValidation[0] = true;
-            });
-
-            if (!loginValidation[0]) {
-                Toast.makeText(this, "Login e/ou senha invalido, verifique os dados preenchidos",
-                        Toast.LENGTH_SHORT).show();
-
-                etLogin.getText().clear();
-                etPassword.getText().clear();
-            }
-        }
-
-        if (loginValidation[0]) {
-            startActivity(new Intent(this, Home.class));
-        }
-
+        if(validateFields(login, password))
+            managerFacade.login(login, password, this::onSuccess);
     }
 
     private boolean validateFields(String login, String password) {
-        Boolean result = true;
-
-        if(login.isEmpty() || password.isEmpty()) {
-            Toast.makeText(this, "Por favor, insira um login e uma senha",
-                    Toast.LENGTH_SHORT).show();
-            result = false;
+        if(Stream.of(login, password).anyMatch(String::isEmpty)) {
+            makeText(this, R.string.toast_unfilled_fields, LENGTH_SHORT).show();
+            return false;
         }
+        return true;
+    }
 
-        return result;
+    private void onSuccess(Object object) {
+        if (object != null)
+            startActivity(new Intent(this, Home.class));
+        else {
+            makeText(this, R.string.toast_invalid_login, LENGTH_SHORT).show();
+            etLogin.getText().clear();
+            etPassword.getText().clear();
+        }
     }
 
     public void register(View view) {

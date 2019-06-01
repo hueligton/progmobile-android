@@ -4,20 +4,21 @@ import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.example.progmobile_android.R;
 import com.example.progmobile_android.model.ManagerFacade;
 
+import java.util.Objects;
+import java.util.stream.Stream;
+
+import static android.widget.Toast.*;
+
 public class Register extends AppCompatActivity {
 
-    private Toolbar toolbar;
-
-    private ManagerFacade managerFacade;
+    private ManagerFacade managerFacade = new ManagerFacade(this);
 
     private EditText etName;
     private EditText etEmail;
@@ -32,14 +33,11 @@ public class Register extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.activity_register);
-
-        toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        setSupportActionBar(findViewById(R.id.toolbar));
 
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(actionBar).setDisplayHomeAsUpEnabled(true);
 
-        managerFacade = new ManagerFacade(this);
         captureViewComponents();
     }
 
@@ -56,45 +54,29 @@ public class Register extends AppCompatActivity {
         String login = etLogin.getText().toString();
         String password = etPassword.getText().toString();
 
-        final boolean[] registerValidation = {false};
-
-        if(validateFields(name, email, login, password)) {
-
-            managerFacade.createUser(login, name, password, email, object -> {
-                registerValidation[0] = true;
-            });
-
-            if (!registerValidation[0]) {
-                Toast.makeText(Register.this, "Não conseguimos realizar seu " +
-                        "cadastro no momento, tente novamente mais tarde!", Toast.LENGTH_SHORT)
-                        .show();
-
-                etName.getText().clear();
-                etEmail.getText().clear();
-                etLogin.getText().clear();
-                etPassword.getText().clear();
-            }
-        }
-
-        if (registerValidation[0]) {
-            Toast.makeText(Register.this, "Cadastro realizado com sucesso",
-                    Toast.LENGTH_SHORT).show();
-
-            startActivity(new Intent(this, Login.class));
-        }
-
+        if(validateFields(name, email, login, password))
+            managerFacade.createUser(login, name, password, email, this::onSuccess);
     }
 
     private boolean validateFields(String name, String email, String login, String password) {
-        Boolean result = true;
-
-        if(name.isEmpty() || email.isEmpty() || login.isEmpty() || password.isEmpty()) {
-            Toast.makeText(this, "Por favor, preencha todos os campos",
-                    Toast.LENGTH_SHORT).show();
-            result = false;
+        if(Stream.of(name, email, login, password).anyMatch(String::isEmpty)) {
+            makeText(this, R.string.toast_unfilled_fields, LENGTH_SHORT).show();
+            return false;
         }
+        return true;
+    }
 
-        return result;
+    private void onSuccess(Object object) {
+        if (object != null) {
+            makeText(this, R.string.toast_successful_registration, LENGTH_SHORT).show();
+            startActivity(new Intent(this, Login.class));
+        } else {
+            makeText(this, R.string.toast_unsuccessful_registration, LENGTH_SHORT).show();
+            etName.getText().clear();
+            etEmail.getText().clear();
+            etLogin.getText().clear();
+            etPassword.getText().clear();
+        }
     }
 
 }

@@ -22,4 +22,10 @@
     <string name="button_login">Login</string>
     <string name="button_register">Cadastrar</string>
 
+    <!--Toast messages-->
+    <string name="toast_invalid_login">login inválido</string>
+    <string name="toast_unfilled_fields">campos obrigatórios não preenchidos</string>
+    <string name="toast_unsuccessful_registration">cadastro não realizado, por favor tente novamente</string>
+    <string name="toast_successful_registration">cadastro realizado com sucesso</string>
+
 </resources>

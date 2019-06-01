@@ -19,7 +19,7 @@ import static android.widget.Toast.*;
 
 public class Register extends AppCompatActivity {
 
-    private ManagerFacade managerFacade = new ManagerFacade(this);
+    private ManagerFacade managerFacade = ManagerFacade.getInstance(this);
 
     private EditText etName;
     private EditText etEmail;
@@ -60,7 +60,7 @@ public class Register extends AppCompatActivity {
                 @Override
                 public void onSuccess(Object object) {
                     makeText(Register.this, R.string.toast_successful_registration, LENGTH_SHORT).show();
-                    startActivity(new Intent(Register.this, Login.class));
+                    finish();
                 }
 
                 @Override

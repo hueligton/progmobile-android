@@ -14,11 +14,19 @@ public class ManagerFacade {
     private EventManager eventManager;
     private UserManager userManager;
     private PurchaseManager purchaseManager;
+    private static ManagerFacade managerFacade;
 
-    public ManagerFacade(Context context) {
+    private ManagerFacade(Context context) {
         this.eventManager=new EventManager(context);
         this.userManager=new UserManager(context);
         this.purchaseManager=new PurchaseManager(context);
+    }
+
+    public static ManagerFacade getInstance(Context context) {
+        if (managerFacade == null) {
+            managerFacade = new ManagerFacade(context);
+        }
+        return managerFacade;
     }
 
     /***
@@ -44,12 +52,10 @@ public class ManagerFacade {
     /***
      * Logout de usuário
      * @param serverCallback interface para retorno da chamada HTTP
-     * @param userId id do usuário
-     * @param token token do usuário
      * @return Sem retorno
      */
-    public void logout(String userId, String token, ServerCallback serverCallback) {
-        userManager.logout(userId, token, serverCallback);
+    public void logout(ServerCallback serverCallback) {
+        userManager.logout(serverCallback);
     }
 
     /***

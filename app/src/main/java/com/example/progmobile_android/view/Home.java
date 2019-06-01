@@ -9,8 +9,13 @@ import android.view.View;
 import android.view.WindowManager;
 
 import com.example.progmobile_android.R;
+import com.example.progmobile_android.model.ManagerFacade;
+import com.example.progmobile_android.model.repository.ServerCallback;
 
 public class Home extends AppCompatActivity {
+
+    private Menu menu;
+    private ManagerFacade managerFacade;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,10 +26,13 @@ public class Home extends AppCompatActivity {
 
         setContentView(R.layout.activity_home);
         setSupportActionBar(findViewById(R.id.toolbar));
+
+        managerFacade = ManagerFacade.getInstance(this);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        this.menu = menu;
         getMenuInflater().inflate(R.menu.app_bar_menu, menu);
         return true;
     }
@@ -33,7 +41,19 @@ public class Home extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         if (item.getItemId() == R.id.action_login) {
-            startActivity(new Intent(this, Login.class));
+            startActivityForResult(new Intent(this, Login.class), 0);
+            return true;
+        } else if (item.getItemId() == R.id.action_logout) {
+            managerFacade.logout(new ServerCallback() {
+                @Override
+                public void onSuccess(Object object) {
+                    updateMenu(true);
+                }
+
+                @Override
+                public void onError(Object object) {
+                }
+            });
             return true;
         }
 
@@ -46,5 +66,37 @@ public class Home extends AppCompatActivity {
 
     public void showMyTickets(View view) {
         // startActivity(new Intent(this, MyTickets.class));
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK) {
+            this.updateMenu(false);
+        }
+    }
+
+    private void updateMenu(boolean bLogin) {
+        MenuItem login = menu.findItem(R.id.action_login);
+        login.setVisible(bLogin);
+
+        MenuItem logout = menu.findItem(R.id.action_logout);
+        logout.setVisible(!bLogin);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        managerFacade.logout(new ServerCallback() {
+            @Override
+            public void onSuccess(Object object) {
+                updateMenu(true);
+            }
+
+            @Override
+            public void onError(Object object) {
+            }
+        });
     }
 }

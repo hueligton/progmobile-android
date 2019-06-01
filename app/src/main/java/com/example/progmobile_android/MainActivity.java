@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        managerFacade = new ManagerFacade(this);
+        managerFacade = ManagerFacade.getInstance(this);
 
         textView = findViewById(R.id.test);
         imageView = findViewById(R.id.imageView);

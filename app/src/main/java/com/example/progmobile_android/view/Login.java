@@ -19,7 +19,7 @@ import static android.widget.Toast.*;
 
 public class Login extends AppCompatActivity {
 
-    private ManagerFacade managerFacade = new ManagerFacade(this);
+    private ManagerFacade managerFacade = ManagerFacade.getInstance(this);
 
     private EditText etLogin;
     private EditText etPassword;
@@ -49,11 +49,12 @@ public class Login extends AppCompatActivity {
         String login = etLogin.getText().toString();
         String password = etPassword.getText().toString();
 
-        if(validateFields(login, password))
+        if (validateFields(login, password)) {
             managerFacade.login(login, password, new ServerCallback() {
                 @Override
                 public void onSuccess(Object object) {
-                    startActivity(new Intent(Login.this, Home.class));
+                    setResult(RESULT_OK);
+                    finish();
                 }
 
                 @Override
@@ -63,6 +64,7 @@ public class Login extends AppCompatActivity {
                     etPassword.getText().clear();
                 }
             });
+        }
     }
 
     private boolean validateFields(String login, String password) {

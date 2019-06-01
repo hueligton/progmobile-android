@@ -5,10 +5,7 @@ import android.util.Log;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.example.progmobile_android.model.entities.Pair;
 import com.example.progmobile_android.model.entities.Purchase;
 import com.example.progmobile_android.model.entities.Ticket;
@@ -38,27 +35,26 @@ public class PurchaseManager {
     public void getListPurchases(String userId, String token, final ServerCallback serverCallback) {
         final String endPoint = url + "purchases";
 
-        JsonArrayRequest jsonObjectRequest = new JsonArrayRequest
-                (Request.Method.GET, endPoint, null, new Response.Listener<JSONArray>() {
-
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        try {
-                            List<Purchase> listPurchase = new ArrayList<>();
-                            for (int i = 0; i < response.length(); i++) {
-                                JSONObject object = (JSONObject) response.get(i);
-                                listPurchase.add(gson.fromJson(object.toString(), Purchase.class));
-                            }
-                            serverCallback.onSuccess(listPurchase);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+        StringRequest stringRequest = new StringRequest(Request.Method.GET,
+                endPoint,
+                response -> {
+                    Log.d("getListPurchases", response);
+                    try {
+                        List<Purchase> listPurchase = new ArrayList<>();
+                        JSONArray jsonFromResponse = new JSONArray(response);
+                        for (int i = 0; i < jsonFromResponse.length(); i++) {
+                            JSONObject object = jsonFromResponse.getJSONObject(i);
+                            listPurchase.add(gson.fromJson(object.toString(), Purchase.class));
                         }
+                        serverCallback.onSuccess(listPurchase);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        serverCallback.onError(null);
                     }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.e("getListPurchases", error.toString());
-                    }
+                },
+                error -> {
+                    Log.d("getListPurchases", error.toString());
+                    serverCallback.onError(null);
                 }) {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
@@ -69,25 +65,22 @@ public class PurchaseManager {
             }
         };
 
-        Repository.getInstance(context).addToRequestQueue(jsonObjectRequest);
+        Repository.getInstance(context).addToRequestQueue(stringRequest);
     }
 
     public void setPurchase(String userId, String token, int eventId, List<Pair> list, final ServerCallback serverCallback) {
         final String endPoint = url + "purchases/";
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
-                (Request.Method.POST, endPoint, null, new Response.Listener<JSONObject>() {
-
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        final Purchase purchase = gson.fromJson(response.toString(), Purchase.class);
-                        serverCallback.onSuccess(purchase);
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.e("getPurchase", error.toString());
-                    }
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,
+                endPoint,
+                response -> {
+                    Log.d("setPurchase", response);
+                    final Purchase purchase = gson.fromJson(response, Purchase.class);
+                    serverCallback.onSuccess(purchase);
+                },
+                error -> {
+                    Log.d("setPurchase", error.toString());
+                    serverCallback.onError(null);
                 }) {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
@@ -98,33 +91,35 @@ public class PurchaseManager {
             }
 
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
+            public byte[] getBody() {
+                HashMap<String, String> params = new HashMap<>();
                 params.put("eventId", String.valueOf(eventId));
                 params.put("Pair", gson.toJson(list));
-                return params;
+                return new JSONObject(params).toString().getBytes();
+            }
+
+            @Override
+            public String getBodyContentType() {
+                return "application/json";
             }
         };
 
-        Repository.getInstance(context).addToRequestQueue(jsonObjectRequest);
+        Repository.getInstance(context).addToRequestQueue(stringRequest);
     }
 
     public void getPurchase(String userId, String token, int purchaseId, final ServerCallback serverCallback) {
         final String endPoint = url + "purchases/" + purchaseId;
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
-                (Request.Method.GET, endPoint, null, new Response.Listener<JSONObject>() {
-
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        final Purchase purchase = gson.fromJson(response.toString(), Purchase.class);
-                        serverCallback.onSuccess(purchase);
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.e("getPurchase", error.toString());
-                    }
+        StringRequest stringRequest = new StringRequest(Request.Method.GET,
+                endPoint,
+                response -> {
+                    Log.d("getPurchase", response);
+                    Purchase purchase = gson.fromJson(response, Purchase.class);
+                    serverCallback.onSuccess(purchase);
+                },
+                error -> {
+                    Log.d("getPurchase", error.toString());
+                    serverCallback.onError(null);
                 }) {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
@@ -135,25 +130,22 @@ public class PurchaseManager {
             }
         };
 
-        Repository.getInstance(context).addToRequestQueue(jsonObjectRequest);
+        Repository.getInstance(context).addToRequestQueue(stringRequest);
     }
 
     public void getTicket(String userId, String token, int ticketId, final ServerCallback serverCallback) {
         final String endPoint = url + "ticket/" + ticketId;
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
-                (Request.Method.GET, endPoint, null, new Response.Listener<JSONObject>() {
-
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        final Ticket ticket = gson.fromJson(response.toString(), Ticket.class);
-                        serverCallback.onSuccess(ticket);
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.e("getPurchase", error.toString());
-                    }
+        StringRequest stringRequest = new StringRequest(Request.Method.GET,
+                endPoint,
+                response -> {
+                    Log.d("getTicket", response);
+                    final Ticket ticket = gson.fromJson(response, Ticket.class);
+                    serverCallback.onSuccess(ticket);
+                },
+                error -> {
+                    Log.d("getTicket", error.toString());
+                    serverCallback.onError(null);
                 }) {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
@@ -164,6 +156,6 @@ public class PurchaseManager {
             }
         };
 
-        Repository.getInstance(context).addToRequestQueue(jsonObjectRequest);
+        Repository.getInstance(context).addToRequestQueue(stringRequest);
     }
 }

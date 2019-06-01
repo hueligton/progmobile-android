@@ -1,3 +1,36 @@
 <resources>
     <string name="app_name">progmobile-android</string>
+
+    <!--content home-->
+    <string name="buy_tickets">Comprar ingressos</string>
+    <string name="my_tickets">Meus ingressos</string>
+
+    <!--toolbar menu-->
+    <string name="action_login">login</string>
+
+    <!--form-->
+    <string name="form_email">Endereço de email</string>
+    <string name="form_email_hint">Seu endereço de email</string>
+    <string name="form_login">Login</string>
+    <string name="form_login_hint">Seu login</string>
+    <string name="form_name">Nome</string>
+    <string name="form_name_hint">Seu nome</string>
+    <string name="form_password">password</string>
+    <string name="form_password_hint">********</string>
+
+    <!--buttons-->
+    <string name="button_finalize_register">Finalizar cadastro</string>
+    <string name="button_login">Login</string>
+    <string name="button_register">Cadastrar</string>
+
+    <!--Toast messages-->
+    <string name="toast_invalid_login">login inválido</string>
+    <string name="toast_unfilled_fields">campos obrigatórios não preenchidos</string>
+    <string name="toast_unsuccessful_registration">cadastro não realizado, por favor tente novamente</string>
+    <string name="toast_successful_registration">cadastro realizado com sucesso</string>
+
+    <!--Event layout-->
+    <string name="event_example_name">Event 1</string>
+    <string name="event_example_description">Description of event 1</string>
+
 </resources>

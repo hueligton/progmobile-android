@@ -5,34 +5,33 @@ import java.util.List;
 
 public class Event {
 
-    private int eventId;
+    private int id;
     private String name;
     private String description;
     private Date date;
     private Place place;
-    private String image;
+    private String imageURL;
     private List<TicketType> ticketTypes;
 
+    public Event() {
+    }
+
     public Event(int eventId, String name, String description, Date date, Place place, String image, List<TicketType> ticketTypes) {
-        this.eventId = eventId;
+        this.id = eventId;
         this.name = name;
         this.description = description;
         this.date = date;
         this.place = place;
-        this.image = image;
+        this.imageURL = image;
         this.ticketTypes = ticketTypes;
     }
 
-    public Event() {
-
+    public int getId() {
+        return id;
     }
 
-    public int getEventId() {
-        return eventId;
-    }
-
-    public void setEventId(int eventId) {
-        this.eventId = eventId;
+    public void setId(int eventId) {
+        this.id = eventId;
     }
 
     public String getName() {
@@ -76,17 +75,17 @@ public class Event {
     }
 
     public String getImage() {
-        return image;
+        return imageURL;
     }
 
     public void setImage(String image) {
-        this.image = image;
+        this.imageURL = image;
     }
 
     @Override
     public String toString() {
         return "Event{" +
-                "eventId=" + eventId +
+                "eventId=" + id +
                 ", name='" + name + '\'' +
                 ", date=" + date +
                 ", place=" + place +

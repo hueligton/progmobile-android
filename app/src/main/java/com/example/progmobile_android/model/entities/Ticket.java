@@ -5,14 +5,17 @@ import java.util.Date;
 public class Ticket {
 
     private Event event;
-    private int ticketId;
+    private int id;
     private String validationHash;
     private boolean validated;
     private Date validatedDate;
     private TicketType ticketType;
 
+    public Ticket() {
+    }
+
     public Ticket (int ticketId, Event event, String validationHash, boolean validated, Date validatedDate, TicketType ticketType){
-        this.ticketId = ticketId;
+        this.id = ticketId;
         this.event=event;
         this.validationHash = validationHash;
         this.validated = validated;
@@ -20,12 +23,32 @@ public class Ticket {
         this.ticketType=ticketType;
     }
 
-    public Ticket() {
-
+    public void setEvent(Event event) {
+        this.event = event;
     }
 
-    public int getTicketId() {
-        return ticketId;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setValidationHash(String validationHash) {
+        this.validationHash = validationHash;
+    }
+
+    public void setValidated(boolean validated) {
+        this.validated = validated;
+    }
+
+    public void setValidatedDate(Date validatedDate) {
+        this.validatedDate = validatedDate;
+    }
+
+    public void setTicketType(TicketType ticketType) {
+        this.ticketType = ticketType;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getValidationHash() {
@@ -52,7 +75,7 @@ public class Ticket {
     public String toString() {
         return "Ticket{" +
                 "event=" + event +
-                ", ticketId=" + ticketId +
+                ", ticketId=" + id +
                 ", validationHash='" + validationHash + '\'' +
                 ", validated=" + validated +
                 ", validatedDate=" + validatedDate +

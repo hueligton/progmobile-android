@@ -4,26 +4,39 @@ import java.util.Date;
 
 public class Purchase {
 
-    private int purchaseId;
+    private int id;
     private Date date;
     private double value;
     private PaymentStatus paymentStatus;
-    private Ticket ticket;
 
-    public Purchase (int purchaseId, Date date, double value, PaymentStatus paymentStatus, Ticket ticket){
-        this.purchaseId = purchaseId;
+    public Purchase() {
+    }
+
+    public Purchase(int purchaseId, Date date, double value, PaymentStatus paymentStatus) {
+        this.id = purchaseId;
         this.date = date;
         this.value = value;
         this.paymentStatus = paymentStatus;
-        this.ticket = ticket;
     }
 
-    public Purchase() {
-
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public int getPurchaseId() {
-        return purchaseId;
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public void setValue(double value) {
+        this.value = value;
+    }
+
+    public void setPaymentStatus(PaymentStatus paymentStatus) {
+        this.paymentStatus = paymentStatus;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public Date getDate() {
@@ -38,18 +51,13 @@ public class Purchase {
         return paymentStatus;
     }
 
-    public Ticket getTicket() {
-        return ticket;
-    }
-
     @Override
     public String toString() {
         return "Purchase{" +
-                "purchaseId=" + purchaseId +
+                "purchaseId=" + id +
                 ", date=" + date +
                 ", value=" + value +
                 ", paymentStatus=" + paymentStatus +
-                ", ticket=" + ticket +
                 '}';
     }
 }

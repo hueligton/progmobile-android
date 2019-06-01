@@ -28,6 +28,8 @@ public class UserManager {
     private Context context;
     private String url = Constants.URL;
 
+    private UserToken userToken;
+
     public UserManager(Context context) {
         this.context = context;
         this.gson = new Gson();
@@ -43,13 +45,9 @@ public class UserManager {
                 JSONObject jsonFromResponse = new JSONObject(response);
                 JSONObject jsonUser = jsonFromResponse.getJSONObject("user");
                 String token = jsonFromResponse.getString("token");
-                int userId = Integer.parseInt(jsonUser.getString("id"));
-                String userLogin = jsonUser.getString("login");
-                String userEmail = jsonUser.getString("email");
-                String userName = jsonUser.getString("name");
 
-                User user = new User(userId, userLogin, userName, null, userEmail);
-                UserToken userToken = new UserToken(user, token);
+                User user = gson.fromJson(jsonUser.toString(), User.class);
+                userToken = new UserToken(user, token);
 
                 callback.onSuccess(userToken);
 
@@ -59,7 +57,7 @@ public class UserManager {
 
         }, error -> {
             Log.d("login", error.toString());
-            callback.onSuccess(null);
+            callback.onError(null);
         }) {
 
             @Override
@@ -79,45 +77,6 @@ public class UserManager {
         Repository.getInstance(context).addToRequestQueue(stringRequest);
 
     }
-
-//    public void login(String login, String password, final ServerCallback serverCallback) {
-//        final String endPoint = url + "authentication";
-//
-//        JsonArrayRequest jsonObjectRequest = new JsonArrayRequest
-//                (Request.Method.POST, endPoint, null, new Response.Listener<JSONArray>() {
-//
-//                    @Override
-//                    public void onResponse(JSONArray response) {
-//                        try {
-//                            JSONObject userJSON = response.getJSONObject(0);
-//                            User user = gson.fromJson(userJSON.toString(), User.class);
-//
-//                            JSONObject tokenJSON = response.getJSONObject(1);
-//                            String token = tokenJSON.getString("token");
-//
-//                            UserToken userToken = new UserToken(user, token);
-//                            serverCallback.onSuccess(userToken);
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                        }
-//                    }
-//                }, new Response.ErrorListener() {
-//                    @Override
-//                    public void onErrorResponse(VolleyError error) {
-//                        Log.e("login", error.toString());
-//                    }
-//                }) {
-//            @Override
-//            protected Map<String, String> getParams() throws AuthFailureError {
-//                Map<String, String> params = new HashMap<>();
-//                params.put("login", login);
-//                params.put("password", password);
-//                return params;
-//            }
-//        };
-//
-//        Repository.getInstance(context).addToRequestQueue(jsonObjectRequest);
-//    }
 
     public void logout(String userId, String token, final ServerCallback serverCallback) {
 
@@ -177,5 +136,12 @@ public class UserManager {
         };
 
         Repository.getInstance(context).addToRequestQueue(jsonObjectRequest);
+    }
+
+    public void getUser(ServerCallback serverCallback) {
+        if (userToken != null)
+            serverCallback.onSuccess(userToken);
+        else
+            serverCallback.onError(null);
     }
 }

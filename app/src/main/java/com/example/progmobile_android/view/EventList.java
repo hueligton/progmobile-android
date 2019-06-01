@@ -10,6 +10,7 @@ import android.view.WindowManager;
 import com.example.progmobile_android.R;
 import com.example.progmobile_android.model.ManagerFacade;
 import com.example.progmobile_android.model.entities.Event;
+import com.example.progmobile_android.model.repository.ServerCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +40,28 @@ public class EventList extends AppCompatActivity {
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 1);
         recyclerView.setLayoutManager(layoutManager);
 
-        managerFacade.getListEvents(this::onSuccess);
+        managerFacade.getListEvents(new ServerCallback() {
+            @Override
+            public void onSuccess(Object object) {
+                List<Event> list = (List<Event>) object;
+
+                List<String> eventImage = new ArrayList<>();
+                List<String> eventName = new ArrayList<>();
+
+                list.forEach(event -> {
+                    eventImage.add(event.getImage());
+                    eventName.add(event.getName());
+                });
+
+                EventRecyclerAdapter eventRecyclerAdapter = new EventRecyclerAdapter(eventImage, eventName);
+                recyclerView.setAdapter(eventRecyclerAdapter);
+            }
+
+            @Override
+            public void onError(Object object) {
+
+            }
+        });
 
         /* for unsuccessful managerFacade.getListEvents
 
@@ -56,22 +78,6 @@ public class EventList extends AppCompatActivity {
         recyclerView.setAdapter(eventRecyclerAdapter);
 
         */
-    }
-
-    private void onSuccess(Object object) {
-        @SuppressWarnings("unchecked")
-        List<Event> list = (List<Event>) object;
-
-        List<String> eventImage = new ArrayList<>();
-        List<String> eventName = new ArrayList<>();
-
-        list.forEach(event -> {
-            eventImage.add(event.getImage());
-            eventName.add(event.getName());
-        });
-
-        EventRecyclerAdapter eventRecyclerAdapter = new EventRecyclerAdapter(eventImage, eventName);
-        recyclerView.setAdapter(eventRecyclerAdapter);
     }
 
 }

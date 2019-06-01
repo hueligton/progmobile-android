@@ -85,6 +85,12 @@ public class EventManager {
                 public void onSuccess(Object object) {
                     searchEventByName(name, serverCallback);
                 }
+
+                @Override
+                public void onError(Object object) {
+
+                }
+
             });
         }
         //Se lista já preenchida, filtra lista e retorna via callback para quem requisitou

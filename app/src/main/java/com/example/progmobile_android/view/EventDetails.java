@@ -3,7 +3,6 @@ package com.example.progmobile_android.view;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -20,10 +19,12 @@ import com.example.progmobile_android.model.entities.TicketType;
 import com.example.progmobile_android.model.repository.ServerCallback;
 import com.example.progmobile_android.view.RecyclerAdapter.TicketTypeRecyclerAdapter;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
-public class EventDetails extends AppCompatActivity {
+public class EventDetails extends BaseActivity {
 
     public Context context;
     ManagerFacade managerFacade = ManagerFacade.getInstance(this);
@@ -87,18 +88,25 @@ public class EventDetails extends AppCompatActivity {
     public void insertPaymentData(View view) {
         List<Pair> pairList = ticketTypeRecyclerAdapter.getInformations();
 
-        final boolean[] filledAmount = {false};
-        pairList.forEach(pair -> {
-            if (pair.getAmount()>0)
-                filledAmount[0] = true;
-        });
+        if (!pairList
+                .stream()
+                .filter(pair ->
+                        pair.getAmount() > 0)
+                .collect(Collectors.toList())
+                .isEmpty()) {
 
-        if (filledAmount[0]) {
-            Intent intent = new Intent(this, PaymentData.class);
-            Bundle bundle = new Bundle();
+            if (super.getCustomMenu().isNotLogged()) {
+                startActivityForResult(new Intent(this, Login.class), 0);
+            } else {
+                Intent intent = new Intent(this, PaymentData.class);
+                Bundle bundle = new Bundle();
 
-            intent.putExtras(bundle);
-            startActivity(intent);
+                bundle.putSerializable("pairList", (Serializable) pairList);
+                bundle.putInt("eventId", getIntent().getIntExtra("event_id", 0));
+
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
         } else {
             Toast.makeText(this, R.string.toast_unfilled_amount, Toast.LENGTH_SHORT).show();
         }

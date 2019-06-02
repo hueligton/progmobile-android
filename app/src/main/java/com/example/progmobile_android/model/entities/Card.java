@@ -1,16 +1,18 @@
 package com.example.progmobile_android.model.entities;
 
-public class Card {
+import java.io.Serializable;
+
+public class Card implements Serializable {
 
     private String cardHolderName;
     private String cardNumber;
     private String valid;
-    private Integer securityCode;
+    private String securityCode;
 
     public Card() {
     }
 
-    public Card(String cardHolderName, String cardNumber, String valid, Integer securityCode) {
+    public Card(String cardHolderName, String cardNumber, String valid, String securityCode) {
         this.cardHolderName = cardHolderName;
         this.cardNumber = cardNumber;
         this.valid = valid;
@@ -41,11 +43,11 @@ public class Card {
         this.valid = valid;
     }
 
-    public Integer getSecurityCode() {
+    public String getSecurityCode() {
         return securityCode;
     }
 
-    public void setSecurityCode(Integer securityCode) {
+    public void setSecurityCode(String securityCode) {
         this.securityCode = securityCode;
     }
 

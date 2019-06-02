@@ -18,11 +18,18 @@
     <string name="form_name_hint">Seu nome</string>
     <string name="form_password">password</string>
     <string name="form_password_hint">********</string>
+    <string name="form_cardHolderName">Titular</string>
+    <string name="form_cardNumber">Número do cartão</string>
+    <string name="form_valid">Vencimento</string>
+    <string name="form_valid_hint">MM/AA</string>
+    <string name="form_securityCode">Código de segurança</string>
 
     <!--buttons-->
     <string name="button_finalize_register">Finalizar cadastro</string>
     <string name="button_login">Login</string>
     <string name="button_register">Cadastrar</string>
+    <string name="button_advance">Avançar</string>
+    <string name="button_back">Voltar</string>
 
     <!--Toast messages-->
     <string name="toast_invalid_login">login inválido</string>

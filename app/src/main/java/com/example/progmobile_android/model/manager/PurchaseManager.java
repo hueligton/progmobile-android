@@ -6,6 +6,7 @@ import android.util.Log;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
+import com.example.progmobile_android.model.entities.Card;
 import com.example.progmobile_android.model.entities.Pair;
 import com.example.progmobile_android.model.entities.Purchase;
 import com.example.progmobile_android.model.entities.Ticket;
@@ -32,7 +33,7 @@ public class PurchaseManager {
         this.gson = new Gson();
     }
 
-    public void getListPurchases(String userId, String token, final ServerCallback serverCallback) {
+    public void getListPurchases(int userId, String token, final ServerCallback serverCallback) {
         final String endPoint = url + "purchases";
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET,
@@ -59,7 +60,7 @@ public class PurchaseManager {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> headers = new HashMap<>();
-                headers.put("userId", userId);
+                headers.put("userId", String.valueOf(userId));
                 headers.put("token", token);
                 return headers;
             }
@@ -68,7 +69,7 @@ public class PurchaseManager {
         Repository.getInstance(context).addToRequestQueue(stringRequest);
     }
 
-    public void setPurchase(String userId, String token, int eventId, List<Pair> list, final ServerCallback serverCallback) {
+    public void setPurchase(int userId, String token, Card card, int eventId, List<Pair> list, final ServerCallback serverCallback) {
         final String endPoint = url + "purchases/";
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST,
@@ -85,7 +86,7 @@ public class PurchaseManager {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> headers = new HashMap<>();
-                headers.put("userId", userId);
+                headers.put("userId", String.valueOf(userId));
                 headers.put("token", token);
                 return headers;
             }
@@ -93,6 +94,7 @@ public class PurchaseManager {
             @Override
             public byte[] getBody() {
                 HashMap<String, String> params = new HashMap<>();
+                params.put("card", gson.toJson(card));
                 params.put("eventId", String.valueOf(eventId));
                 params.put("Pair", gson.toJson(list));
                 return new JSONObject(params).toString().getBytes();
@@ -107,7 +109,7 @@ public class PurchaseManager {
         Repository.getInstance(context).addToRequestQueue(stringRequest);
     }
 
-    public void getPurchase(String userId, String token, int purchaseId, final ServerCallback serverCallback) {
+    public void getPurchase(int userId, String token, int purchaseId, final ServerCallback serverCallback) {
         final String endPoint = url + "purchases/" + purchaseId;
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET,
@@ -124,7 +126,7 @@ public class PurchaseManager {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> headers = new HashMap<>();
-                headers.put("userId", userId);
+                headers.put("userId", String.valueOf(userId));
                 headers.put("token", token);
                 return headers;
             }
@@ -133,7 +135,7 @@ public class PurchaseManager {
         Repository.getInstance(context).addToRequestQueue(stringRequest);
     }
 
-    public void getTicket(String userId, String token, int ticketId, final ServerCallback serverCallback) {
+    public void getTicket(int userId, String token, int ticketId, final ServerCallback serverCallback) {
         final String endPoint = url + "ticket/" + ticketId;
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET,
@@ -150,7 +152,7 @@ public class PurchaseManager {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> headers = new HashMap<>();
-                headers.put("userId", userId);
+                headers.put("userId", String.valueOf(userId));
                 headers.put("token", token);
                 return headers;
             }

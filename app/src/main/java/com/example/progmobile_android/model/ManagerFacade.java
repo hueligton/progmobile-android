@@ -2,6 +2,7 @@ package com.example.progmobile_android.model;
 
 import android.content.Context;
 
+import com.example.progmobile_android.model.entities.Card;
 import com.example.progmobile_android.model.entities.Pair;
 import com.example.progmobile_android.model.manager.EventManager;
 import com.example.progmobile_android.model.manager.PurchaseManager;
@@ -107,7 +108,7 @@ public class ManagerFacade {
      * @param token token do usuário
      * @return Retorna Object via CallBack. Necessário cast para List<Purchase>.
      */
-    public void getListPurchases(String userId, String token, ServerCallback serverCallback) {
+    public void getListPurchases(int userId, String token, ServerCallback serverCallback) {
         purchaseManager.getListPurchases(userId, token, serverCallback);
     }
 
@@ -120,8 +121,8 @@ public class ManagerFacade {
      * @param list lista tipo do ingresso e quantidade selecionados pelo usuário
      * @return Retorna Object via CallBack. Necessário cast para Purchase.
      */
-    public void setPurchase(String userId, String token, int eventId, List<Pair> list, ServerCallback serverCallback) {
-        purchaseManager.setPurchase(userId, token, eventId, list, serverCallback);
+    public void setPurchase(int userId, String token, Card card, int eventId, List<Pair> list, ServerCallback serverCallback) {
+        purchaseManager.setPurchase(userId, token, card, eventId, list, serverCallback);
     }
 
     /***
@@ -132,7 +133,7 @@ public class ManagerFacade {
      * @param purchaseId id da compra
      * @return Retorna Object via CallBack. Necessário cast para Purchase.
      */
-    public void getPurchase(String userId, String token, int purchaseId, ServerCallback serverCallback) {
+    public void getPurchase(int userId, String token, int purchaseId, ServerCallback serverCallback) {
         purchaseManager.getPurchase(userId, token, purchaseId, serverCallback);
     }
 
@@ -144,7 +145,7 @@ public class ManagerFacade {
      * @param ticketId id do ticket
      * @return Retorna Object via CallBack. Necessário cast para Ticket.
      */
-    public void getTicket(String userId, String token, int ticketId, ServerCallback serverCallback) {
+    public void getTicket(int userId, String token, int ticketId, ServerCallback serverCallback) {
         purchaseManager.getTicket(userId, token, ticketId, serverCallback);
     }
 

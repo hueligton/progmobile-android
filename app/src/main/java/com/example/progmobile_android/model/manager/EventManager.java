@@ -49,7 +49,7 @@ public class EventManager {
                     Log.d("getListEvents", response);
                     try {
                         JSONArray jsonFromResponse = new JSONArray(response);
-                        for (int i = 0; i < response.length(); i++) {
+                        for (int i = 0; i < jsonFromResponse.length(); i++) {
                             JSONObject event = jsonFromResponse.getJSONObject(i);
                             listEvent.add(gson.fromJson(event.toString(), Event.class));
                         }

@@ -30,15 +30,21 @@
     <string name="button_register">Cadastrar</string>
     <string name="button_advance">Avançar</string>
     <string name="button_back">Voltar</string>
+    <string name="button_conclude">Concluir</string>
+    <string name="button_home">HOME</string>
 
     <!--Toast messages-->
     <string name="toast_invalid_login">login inválido</string>
     <string name="toast_unfilled_fields">campos obrigatórios não preenchidos</string>
     <string name="toast_unsuccessful_registration">cadastro não realizado, por favor tente novamente</string>
     <string name="toast_successful_registration">cadastro realizado com sucesso</string>
+    <string name="toast_unsuccessful_purchase">compra não realizada, por favor tente novamente</string>
 
     <!--Event layout-->
     <string name="event_example_name">Event 1</string>
     <string name="event_example_description">Description of event 1</string>
 
+    <!--Purchase Completed Layout-->
+    <string name="pcompleted_sucess">Compra concluída com sucesso</string>
+    <string name="pcompleted_purchaseId">O número da sua compra é</string>
 </resources>

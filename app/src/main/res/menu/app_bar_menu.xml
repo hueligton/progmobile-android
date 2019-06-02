@@ -9,4 +9,10 @@
         android:title="@string/action_login"
         app:showAsAction="ifRoom"/>
 
+    <item
+        android:id="@+id/action_logout"
+        android:title="@string/action_logout"
+        app:showAsAction="ifRoom"
+        android:visible="false" />
+
 </menu>

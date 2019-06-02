@@ -18,7 +18,7 @@ import java.util.Objects;
 
 public class EventList extends AppCompatActivity {
 
-    ManagerFacade managerFacade = new ManagerFacade(this);
+    ManagerFacade managerFacade = ManagerFacade.getInstance(this);
 
     private RecyclerView recyclerView;
 
@@ -49,7 +49,7 @@ public class EventList extends AppCompatActivity {
                 List<String> eventName = new ArrayList<>();
 
                 list.forEach(event -> {
-                    eventImage.add(event.getImage());
+                    eventImage.add(event.getImageURL());
                     eventName.add(event.getName());
                 });
 

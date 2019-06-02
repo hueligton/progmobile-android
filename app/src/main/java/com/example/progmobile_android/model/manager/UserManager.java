@@ -3,6 +3,7 @@ package com.example.progmobile_android.model.manager;
 import android.content.Context;
 import android.util.Log;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
 import com.example.progmobile_android.model.entities.User;
@@ -15,6 +16,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class UserManager {
     private Gson gson;
@@ -42,7 +44,7 @@ public class UserManager {
                         String token = jsonFromResponse.getString("token");
 
                         User user = gson.fromJson(jsonUser.toString(), User.class);
-                        userToken = new UserToken(user, token);
+                        this.userToken = new UserToken(user, token);
 
                         serverCallback.onSuccess(userToken);
 
@@ -75,29 +77,27 @@ public class UserManager {
 
     }
 
-    public void logout(String userId, String token, final ServerCallback serverCallback) {
+    public void logout(final ServerCallback serverCallback) {
 
         final String endPoint = url + "authentication";
 
         StringRequest stringRequest = new StringRequest(Request.Method.DELETE,
                 endPoint,
-                response -> serverCallback.onSuccess(true),
+                response -> {
+                    userToken = null;
+                    serverCallback.onSuccess(true);
+                },
                 error -> {
                     Log.d("logout", error.toString());
                     serverCallback.onError(false);
                 }) {
 
             @Override
-            public byte[] getBody() {
-                HashMap<String, String> params = new HashMap<>();
-                params.put("userId", userId);
-                params.put("token", token);
-                return new JSONObject(params).toString().getBytes();
-            }
-
-            @Override
-            public String getBodyContentType() {
-                return "application/json";
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> headers = new HashMap<>();
+                headers.put("userId", String.valueOf(userToken.getUser().getId()));
+                headers.put("token", userToken.getToken());
+                return headers;
             }
         };
 

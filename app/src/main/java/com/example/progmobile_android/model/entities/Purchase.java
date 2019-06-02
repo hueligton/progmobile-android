@@ -1,8 +1,9 @@
 package com.example.progmobile_android.model.entities;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Purchase {
+public class Purchase implements Serializable {
 
     private int id;
     private Date date;

@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.progmobile_android.R;
+import com.example.progmobile_android.model.entities.Pair;
 import com.example.progmobile_android.model.entities.TicketType;
 
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ import java.util.List;
 public class TicketTypeRecyclerAdapter extends RecyclerView.Adapter<TicketTypeRecyclerAdapter.TicketTypeViewHolder> {
 
     private List<TicketType> ticketTypes;
+    private static List<Pair> informations;
 
     public TicketTypeRecyclerAdapter(List<TicketType> ticketTypes) {
         this.ticketTypes = ticketTypes;
@@ -32,6 +34,18 @@ public class TicketTypeRecyclerAdapter extends RecyclerView.Adapter<TicketTypeRe
         this.ticketTypes.add(ticketType2);
         this.ticketTypes.add(ticketType3);
         /* To test categories --------------------------------------------------------------------*/
+
+        informations = new ArrayList<>();
+
+        this.ticketTypes.forEach(ticketType -> {
+            Pair pair = new Pair(ticketType.getId(), 0);
+            informations.add(pair);
+        });
+
+    }
+
+    public List<Pair> getInformations() {
+        return informations;
     }
 
     @NonNull
@@ -39,7 +53,7 @@ public class TicketTypeRecyclerAdapter extends RecyclerView.Adapter<TicketTypeRe
     public TicketTypeViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int position) {
         View view = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.component_type_ticket, viewGroup, false);
-        return new TicketTypeViewHolder(view);
+        return new TicketTypeViewHolder(view, ticketTypes, informations);
     }
 
     @Override
@@ -57,7 +71,6 @@ public class TicketTypeRecyclerAdapter extends RecyclerView.Adapter<TicketTypeRe
     }
 
 
-
     static class TicketTypeViewHolder extends RecyclerView.ViewHolder {
         private TextView tvTicketType;
         private TextView tvTicketPrice;
@@ -66,7 +79,13 @@ public class TicketTypeRecyclerAdapter extends RecyclerView.Adapter<TicketTypeRe
         private Button btLess;
         private Button btMore;
 
-        TicketTypeViewHolder(@NonNull View itemView) {
+        private List<TicketType> ticketTypes;
+        private List<Pair> informations;
+
+        private Pair pair;
+        private double ticketPrice;
+
+        TicketTypeViewHolder(@NonNull View itemView, List<TicketType> ticketTypes, List<Pair> informations) {
             super(itemView);
             tvTicketType = itemView.findViewById(R.id.tvTicketType);
             tvTicketPrice = itemView.findViewById(R.id.tvTicketPrice);
@@ -75,21 +94,27 @@ public class TicketTypeRecyclerAdapter extends RecyclerView.Adapter<TicketTypeRe
             btLess = itemView.findViewById(R.id.btLess);
             btMore = itemView.findViewById(R.id.btMore);
 
+            this.ticketTypes = ticketTypes;
+            this.informations = informations;
+
             btLess.setOnClickListener(v -> {
-                int updatedAmount = Integer.parseInt(tvTicketAmount.getText().toString()) - 1;
-                double updatedPrice = Double.parseDouble(tvTicketPrice.getText().toString()) * updatedAmount ;
-                if (updatedAmount >= 0) {
-                    tvTicketAmount.setText(String.format("%s", updatedAmount));
-                    tvTotalPrice.setText(String.format("%s", updatedPrice));
+                ticketPrice = this.ticketTypes.get(getAdapterPosition()).getPrice();
+                pair = this.informations.get(getAdapterPosition());
+                if (pair.getAmount() > 0) {
+                    pair.setAmount(pair.getAmount() - 1);
+                    tvTicketAmount.setText(String.format("%s", pair.getAmount()));
+                    tvTotalPrice.setText(String.format("%s", pair.getAmount() * ticketPrice));
                 }
             });
 
             btMore.setOnClickListener(v -> {
-                int updatedAmount = Integer.parseInt(tvTicketAmount.getText().toString()) + 1;
-                double updatedPrice = Double.parseDouble(tvTicketPrice.getText().toString()) * updatedAmount ;
-                tvTicketAmount.setText(String.format("%s", updatedAmount));
-                tvTotalPrice.setText(String.format("%s", updatedPrice));
+                ticketPrice = this.ticketTypes.get(getAdapterPosition()).getPrice();
+                pair = this.informations.get(getAdapterPosition());
+                pair.setAmount(pair.getAmount() + 1);
+                tvTicketAmount.setText(String.format("%s", pair.getAmount()));
+                tvTotalPrice.setText(String.format("%s", pair.getAmount() * ticketPrice));
             });
         }
+
     }
 }

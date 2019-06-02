@@ -1,6 +1,7 @@
 package com.example.progmobile_android.view;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,10 +10,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.progmobile_android.R;
 import com.example.progmobile_android.model.ManagerFacade;
 import com.example.progmobile_android.model.entities.Event;
+import com.example.progmobile_android.model.entities.Pair;
 import com.example.progmobile_android.model.entities.TicketType;
 import com.example.progmobile_android.model.repository.ServerCallback;
 import com.example.progmobile_android.view.RecyclerAdapter.TicketTypeRecyclerAdapter;
@@ -25,6 +28,7 @@ public class EventDetails extends AppCompatActivity {
     public Context context;
     ManagerFacade managerFacade = ManagerFacade.getInstance(this);
 
+    private TicketTypeRecyclerAdapter ticketTypeRecyclerAdapter;
     private RecyclerView recyclerView;
 
     private TextView tvEventName;
@@ -60,7 +64,6 @@ public class EventDetails extends AppCompatActivity {
                 Event event = (Event) object;
                 List<TicketType> ticketTypes = event.getTicketTypes();
 
-                TicketTypeRecyclerAdapter ticketTypeRecyclerAdapter;
                 ticketTypeRecyclerAdapter = new TicketTypeRecyclerAdapter(ticketTypes);
                 recyclerView.setAdapter(ticketTypeRecyclerAdapter);
 
@@ -81,7 +84,24 @@ public class EventDetails extends AppCompatActivity {
         tvEventDescription = findViewById(R.id.tvEventDescription);
     }
 
-    public void buyTickets(View view) {
+    public void insertPaymentData(View view) {
+        List<Pair> pairList = ticketTypeRecyclerAdapter.getInformations();
+
+        final boolean[] filledAmount = {false};
+        pairList.forEach(pair -> {
+            if (pair.getAmount()>0)
+                filledAmount[0] = true;
+        });
+
+        if (filledAmount[0]) {
+            Intent intent = new Intent(this, PaymentData.class);
+            Bundle bundle = new Bundle();
+
+            intent.putExtras(bundle);
+            startActivity(intent);
+        } else {
+            Toast.makeText(this, R.string.toast_unfilled_amount, Toast.LENGTH_SHORT).show();
+        }
     }
 
 }

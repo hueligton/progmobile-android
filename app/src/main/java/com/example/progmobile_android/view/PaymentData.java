@@ -8,7 +8,10 @@ import android.widget.EditText;
 
 import com.example.progmobile_android.R;
 import com.example.progmobile_android.model.entities.Card;
+import com.example.progmobile_android.model.entities.Pair;
 
+import java.io.Serializable;
+import java.util.List;
 import java.util.stream.Stream;
 
 import static android.widget.Toast.LENGTH_SHORT;
@@ -46,8 +49,14 @@ public class PaymentData extends AppCompatActivity {
         if (validateFields(cardHolderName, cardNumber, valid, securityCode)) {
             Card card = new Card(cardHolderName, cardNumber, valid, securityCode);
 
+            Intent oldIntent = getIntent();
+            int eventId = oldIntent.getIntExtra("eventId", 0);
+            List<Pair> pairList = (List<Pair>) oldIntent.getSerializableExtra("pairList");
+
             Intent intent = new Intent(this, PurchaseConfirmation.class);
             intent.putExtra("card", card);
+            intent.putExtra("eventId", eventId);
+            intent.putExtra("pairList", (Serializable) pairList);
             startActivity(intent);
         }
     }

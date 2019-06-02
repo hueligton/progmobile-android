@@ -86,6 +86,22 @@ public class Home extends AppCompatActivity {
     }
 
     @Override
+    protected void onRestart() {
+        super.onRestart();
+        managerFacade.getUser(new ServerCallback() {
+            @Override
+            public void onSuccess(Object object) {
+                updateMenu(false);
+            }
+
+            @Override
+            public void onError(Object object) {
+                updateMenu(true);
+            }
+        });
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         managerFacade.logout(new ServerCallback() {

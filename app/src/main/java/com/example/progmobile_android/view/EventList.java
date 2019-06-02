@@ -22,6 +22,7 @@ public class EventList extends AppCompatActivity {
 
     ManagerFacade managerFacade = ManagerFacade.getInstance(this);
 
+    private EventRecyclerAdapter eventRecyclerAdapter;
     private RecyclerView recyclerView;
 
     @Override
@@ -47,18 +48,7 @@ public class EventList extends AppCompatActivity {
             @Override
             public void onSuccess(Object object) {
                 List<Event> list = (List<Event>) object;
-
-                List<Integer> eventId = new ArrayList<>();
-                List<String> eventImage = new ArrayList<>();
-                List<String> eventName = new ArrayList<>();
-
-                list.forEach(event -> {
-                    eventId.add(event.getId());
-                    eventImage.add(event.getImageURL());
-                    eventName.add(event.getName());
-                });
-
-                EventRecyclerAdapter eventRecyclerAdapter = new EventRecyclerAdapter(eventId, eventImage, eventName, context);
+                eventRecyclerAdapter = new EventRecyclerAdapter(list, context);
                 recyclerView.setAdapter(eventRecyclerAdapter);
             }
 

@@ -11,22 +11,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.progmobile_android.R;
+import com.example.progmobile_android.model.entities.Event;
 import com.example.progmobile_android.view.EventDetails;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class EventRecyclerAdapter extends RecyclerView.Adapter<EventRecyclerAdapter.EventViewHolder> {
-    private List<Integer> ids;
-    private List<String> images;
-    private List<String> names;
 
+    private List<Event> events;
     private Context context;
 
-    public EventRecyclerAdapter(List<Integer> ids, List<String> images, List<String> names, Context context) {
-        this.ids = ids;
-        this.images = images;
-        this.names = names;
+    public EventRecyclerAdapter(List<Event> events, Context context) {
+        this.events = events;
         this.context = context;
     }
 
@@ -35,40 +32,41 @@ public class EventRecyclerAdapter extends RecyclerView.Adapter<EventRecyclerAdap
     public EventViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int position) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.component_event,
                 viewGroup, false);
-        return new EventViewHolder(view, ids, context);
+        return new EventViewHolder(view, events, context);
     }
 
     @Override
     public void onBindViewHolder(@NonNull EventViewHolder viewHolder, int position) {
-        String url = images.get(position);
+        Event event = events.get(position);
+        String url = event.getImageURL();
         Picasso.get().load(url).into(viewHolder.eventImage);
-        viewHolder.eventName.setText(names.get(position));
+        viewHolder.eventName.setText(event.getName());
     }
 
     @Override
     public int getItemCount() {
-        return images.size();
+        return events.size();
     }
 
     static class EventViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private ImageView eventImage;
         private TextView eventName;
-        private List<Integer> ids;
+        private List<Event> events;
         private Context context;
 
-        EventViewHolder(@NonNull View itemView, List<Integer> ids, Context context) {
+        EventViewHolder(@NonNull View itemView, List<Event> events, Context context) {
             super(itemView);
             eventImage = itemView.findViewById(R.id.event_image);
             eventName = itemView.findViewById(R.id.event_name);
             itemView.setOnClickListener(this);
-            this.ids = ids;
+            this.events = events;
             this.context = context;
         }
 
         @Override
         public void onClick(View view) {
             Intent intent = new Intent(context, EventDetails.class);
-            intent.putExtra("event_id", ids.get(getAdapterPosition()));
+            intent.putExtra("event_id", events.get(getAdapterPosition()).getId());
             context.startActivity(intent);
         }
     }

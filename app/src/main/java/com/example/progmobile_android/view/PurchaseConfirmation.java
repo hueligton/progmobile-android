@@ -31,9 +31,8 @@ public class PurchaseConfirmation extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        //TODO pegar dados da intent
-        int eventId = 0;
-        List<Pair> pairList = new LinkedList<>();
+        int eventId = intent.getIntExtra("eventId", 0);
+        List<Pair> pairList = (List<Pair>) intent.getSerializableExtra("pairList");
         Card card = (Card) intent.getSerializableExtra("card");
 
         managerFacade.getUser(new ServerCallback() {

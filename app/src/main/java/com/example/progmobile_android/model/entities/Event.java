@@ -9,20 +9,20 @@ public class Event {
     private String name;
     private String description;
     private Date date;
+    private String imageUrl;
     private Place place;
-    private String imageURL;
     private List<TicketType> ticketTypes;
 
     public Event() {
     }
 
-    public Event(int eventId, String name, String description, Date date, Place place, String image, List<TicketType> ticketTypes) {
+    public Event(int eventId, String name, String description, Date date, String image, Place place, List<TicketType> ticketTypes) {
         this.id = eventId;
         this.name = name;
         this.description = description;
         this.date = date;
         this.place = place;
-        this.imageURL = image;
+        this.imageUrl = image;
         this.ticketTypes = ticketTypes;
     }
 
@@ -74,21 +74,23 @@ public class Event {
         this.description = description;
     }
 
-    public String getImageURL() {
-        return imageURL;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setImageURL(String image) {
-        this.imageURL = image;
+    public void getImageUrl(String image) {
+        this.imageUrl = image;
     }
 
     @Override
     public String toString() {
         return "Event{" +
-                "eventId=" + id +
+                "id=" + id +
                 ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
                 ", date=" + date +
                 ", place=" + place +
+                ", imageURL='" + imageUrl + '\'' +
                 ", ticketTypes=" + ticketTypes +
                 '}';
     }

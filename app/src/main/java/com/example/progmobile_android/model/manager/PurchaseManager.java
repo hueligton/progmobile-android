@@ -34,7 +34,7 @@ public class PurchaseManager {
     }
 
     public void getListPurchases(int userId, String token, final ServerCallback serverCallback) {
-        final String endPoint = url + "purchases";
+        final String endPoint = url + "/purchases";
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET,
                 endPoint,
@@ -70,7 +70,7 @@ public class PurchaseManager {
     }
 
     public void setPurchase(int userId, String token, Card card, int eventId, List<Pair> list, final ServerCallback serverCallback) {
-        final String endPoint = url + "purchases/";
+        final String endPoint = url + "/purchases/";
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST,
                 endPoint,
@@ -110,7 +110,7 @@ public class PurchaseManager {
     }
 
     public void getPurchase(int userId, String token, int purchaseId, final ServerCallback serverCallback) {
-        final String endPoint = url + "purchases/" + purchaseId;
+        final String endPoint = url + "/purchases/" + purchaseId;
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET,
                 endPoint,
@@ -136,7 +136,7 @@ public class PurchaseManager {
     }
 
     public void getTicket(int userId, String token, int ticketId, final ServerCallback serverCallback) {
-        final String endPoint = url + "ticket/" + ticketId;
+        final String endPoint = url + "/ticket/" + ticketId;
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET,
                 endPoint,

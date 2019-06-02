@@ -41,12 +41,11 @@ public class EventManager {
             listEvent.clear();
         }
 
-        final String endPoint = url + "events";
+        final String endPoint = url + "/events";
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET,
                 endPoint,
                 response -> {
-                    Log.d("getListEvents", response);
                     try {
                         JSONArray jsonFromResponse = new JSONArray(response);
                         for (int i = 0; i < jsonFromResponse.length(); i++) {
@@ -108,7 +107,7 @@ public class EventManager {
      * @param serverCallback callback de retorno
      */
     public void getEvent(int eventId, final ServerCallback serverCallback) {
-        final String endPoint = url + "events/" + eventId;
+        final String endPoint = url + "/events/" + eventId;
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET,
                 endPoint,

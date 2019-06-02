@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.example.progmobile_android.R;
 import com.example.progmobile_android.model.entities.Event;
+import com.example.progmobile_android.model.manager.Constants;
 import com.example.progmobile_android.view.EventDetails;
 import com.squareup.picasso.Picasso;
 
@@ -38,8 +39,8 @@ public class EventRecyclerAdapter extends RecyclerView.Adapter<EventRecyclerAdap
     @Override
     public void onBindViewHolder(@NonNull EventViewHolder viewHolder, int position) {
         Event event = events.get(position);
-        String url = event.getImageURL();
-        Picasso.get().load(url).into(viewHolder.eventImage);
+        String url = event.getImageUrl();
+        Picasso.get().load(Constants.URL + url).into(viewHolder.eventImage);
         viewHolder.eventName.setText(event.getName());
     }
 

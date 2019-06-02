@@ -32,7 +32,7 @@ public class UserManager {
 
     public void login(String login, String password, final ServerCallback serverCallback) {
 
-        final String endPoint = url + "authentication";
+        final String endPoint = url + "/authentication";
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST,
                 endPoint,
@@ -79,7 +79,7 @@ public class UserManager {
 
     public void logout(final ServerCallback serverCallback) {
 
-        final String endPoint = url + "authentication";
+        final String endPoint = url + "/authentication";
 
         StringRequest stringRequest = new StringRequest(Request.Method.DELETE,
                 endPoint,
@@ -105,7 +105,7 @@ public class UserManager {
     }
 
     public void createUser(String login, String name, String password, String email, final ServerCallback serverCallback) {
-        final String endPoint = url + "user";
+        final String endPoint = url + "/user";
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST,
                 endPoint,

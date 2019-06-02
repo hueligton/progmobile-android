@@ -25,8 +25,11 @@
     <string name="form_securityCode">Código de segurança</string>
 
     <!--buttons-->
+    <string name="button_buy">comprar</string>
     <string name="button_finalize_register">Finalizar cadastro</string>
+    <string name="button_less">-</string>
     <string name="button_login">Login</string>
+    <string name="button_more">+</string>
     <string name="button_register">Cadastrar</string>
     <string name="button_advance">Avançar</string>
     <string name="button_back">Voltar</string>
@@ -41,10 +44,19 @@
     <string name="toast_unsuccessful_purchase">compra não realizada, por favor tente novamente</string>
 
     <!--Event layout-->
-    <string name="event_example_name">Event 1</string>
-    <string name="event_example_description">Description of event 1</string>
+    <string name="event_example_name">Arctic Monkeys</string>
+    <string name="event_example_description">Em 2018 a banda lançou o seu sexto disco de estúdio, Tranquility Base Hotel &amp; Casino, e mostrou uma sonoridade bem diferente do que costumava fazer até então. Repleto de referências aos Anos 60 e 70, o álbum tem um clima retrô que vai pescar tanto as influências musicais da época quanto as cinematográficas de nomes como Stanley Kubrick. É com esse show, mesclando canções do disco com clássicos do passado, que a banda vem ao Brasil e promete dar o que falar.</string>
+
+    <!--Event details-->
+    <string name="event_label_name">Evento:</string>
+    <string name="event_label_description">Descriçao:</string>
+    <string name="ticket_amount">0</string>
+    <string name="ticket_price_example">R$ 123,00</string>
+    <string name="ticket_type_example">Camarote</string>
+    <string name="total_price">0.0</string>
 
     <!--Purchase Completed Layout-->
-    <string name="pcompleted_sucess">Compra concluída com sucesso</string>
-    <string name="pcompleted_purchaseId">O número da sua compra é</string>
+    <string name="completed_success">Compra concluída com sucesso</string>
+    <string name="completed_purchaseId">O número da sua compra é</string>
+    <string name="currency">R$</string>
 </resources>

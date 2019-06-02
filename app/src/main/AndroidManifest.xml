@@ -15,19 +15,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".view.PurchaseConfirmation"></activity>
-        <activity android:name=".view.PurchaseCompleted" />
-        <activity android:name=".view.MyTickets" />
-        <activity android:name=".view.PaymentData" />
-        <activity android:name=".view.TicketDetails" />
-        <activity android:name=".view.EventDetails" />
-        <activity
-            android:name=".view.EventList"
-            android:parentActivityName=".view.Home">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".view.Home" />
-        </activity>
         <activity android:name=".view.Home">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -50,6 +37,25 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".view.Login" />
         </activity>
+        <activity
+            android:name=".view.EventList"
+            android:parentActivityName=".view.Home">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.Home" />
+        </activity>
+        <activity
+            android:name=".view.EventDetails"
+            android:parentActivityName=".view.Login">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.EventList" />
+        </activity>
+        <activity android:name=".view.PurchaseConfirmation" />
+        <activity android:name=".view.PurchaseCompleted" />
+        <activity android:name=".view.MyTickets" />
+        <activity android:name=".view.PaymentData" />
+        <activity android:name=".view.TicketDetails" />
     </application>
 
 </manifest>

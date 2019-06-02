@@ -1,5 +1,6 @@
 package com.example.progmobile_android.view;
 
+import android.content.Context;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import com.example.progmobile_android.R;
 import com.example.progmobile_android.model.ManagerFacade;
 import com.example.progmobile_android.model.entities.Event;
 import com.example.progmobile_android.model.repository.ServerCallback;
+import com.example.progmobile_android.view.RecyclerAdapter.EventRecyclerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,20 +42,23 @@ public class EventList extends AppCompatActivity {
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 1);
         recyclerView.setLayoutManager(layoutManager);
 
+        Context context = this;
         managerFacade.getListEvents(new ServerCallback() {
             @Override
             public void onSuccess(Object object) {
                 List<Event> list = (List<Event>) object;
 
+                List<Integer> eventId = new ArrayList<>();
                 List<String> eventImage = new ArrayList<>();
                 List<String> eventName = new ArrayList<>();
 
                 list.forEach(event -> {
+                    eventId.add(event.getId());
                     eventImage.add(event.getImageURL());
                     eventName.add(event.getName());
                 });
 
-                EventRecyclerAdapter eventRecyclerAdapter = new EventRecyclerAdapter(eventImage, eventName);
+                EventRecyclerAdapter eventRecyclerAdapter = new EventRecyclerAdapter(eventId, eventImage, eventName, context);
                 recyclerView.setAdapter(eventRecyclerAdapter);
             }
 

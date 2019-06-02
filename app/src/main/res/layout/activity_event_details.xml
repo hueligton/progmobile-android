@@ -78,7 +78,7 @@
                 android:layout_height="wrap_content"
 
                 android:background="@color/colorPrimary"
-                android:onClick="buyTickets"
+                android:onClick="insertPaymentData"
                 android:text="@string/button_buy" />
         </LinearLayout>
 

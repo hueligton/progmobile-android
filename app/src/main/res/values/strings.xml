@@ -65,4 +65,6 @@
     <string name="completed_success">Compra concluída com sucesso</string>
     <string name="completed_purchaseId">O número da sua compra é</string>
     <string name="currency">R$</string>
+    <string name="ticket_label_amount">qtd</string>
+    <string name="ticket_label_total_price">valor total</string>
 </resources>

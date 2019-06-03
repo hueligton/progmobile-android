@@ -19,7 +19,7 @@ public class BaseActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         this.menu = menu;
         getMenuInflater().inflate(R.menu.app_bar_menu, menu);
-        customMenu.updateMenu(menu, customMenu.isbLogin());
+        customMenu.updateMenu(menu, customMenu.isNotLogged());
         return true;
     }
 
@@ -61,7 +61,7 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onRestart() {
         super.onRestart();
-        customMenu.updateMenu(menu, customMenu.isbLogin());
+        customMenu.updateMenu(menu, customMenu.isNotLogged());
     }
 
     public Menu getMenu() {

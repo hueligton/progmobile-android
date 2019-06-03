@@ -1,17 +1,17 @@
 package com.example.progmobile_android.view;
 
 import android.content.Intent;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
 import com.example.progmobile_android.R;
 import com.example.progmobile_android.model.entities.Card;
-import com.example.progmobile_android.model.entities.Pair;
 
-import java.io.Serializable;
-import java.util.List;
+import java.util.Objects;
 import java.util.stream.Stream;
 
 import static android.widget.Toast.LENGTH_SHORT;
@@ -28,6 +28,11 @@ public class PaymentData extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment_data);
+
+        setSupportActionBar(findViewById(R.id.toolbar));
+
+        ActionBar actionBar = getSupportActionBar();
+        Objects.requireNonNull(actionBar).setDisplayHomeAsUpEnabled(true);
 
         captureViewComponents();
     }
@@ -49,14 +54,12 @@ public class PaymentData extends AppCompatActivity {
         if (validateFields(cardHolderName, cardNumber, valid, securityCode)) {
             Card card = new Card(cardHolderName, cardNumber, valid, securityCode);
 
-            Intent oldIntent = getIntent();
-            int eventId = oldIntent.getIntExtra("eventId", 0);
-            List<Pair> pairList = (List<Pair>) oldIntent.getSerializableExtra("pairList");
-
             Intent intent = new Intent(this, PurchaseConfirmation.class);
-            intent.putExtra("card", card);
-            intent.putExtra("eventId", eventId);
-            intent.putExtra("pairList", (Serializable) pairList);
+
+            Bundle bundle = getIntent().getExtras();
+            bundle.putSerializable("card", card);
+
+            intent.putExtras(bundle);
             startActivity(intent);
         }
     }
@@ -71,5 +74,15 @@ public class PaymentData extends AppCompatActivity {
             return false;
         }
         return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

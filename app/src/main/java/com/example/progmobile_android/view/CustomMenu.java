@@ -8,10 +8,10 @@ import com.example.progmobile_android.R;
 public class CustomMenu {
 
     private static CustomMenu customMenu;
-    private boolean bLogin;
+    private boolean isNotLogged;
 
     private CustomMenu() {
-        bLogin = true;
+        isNotLogged = true;
     }
 
     public static CustomMenu getCustomMenu() {
@@ -21,17 +21,17 @@ public class CustomMenu {
         return customMenu;
     }
 
-    public void updateMenu(Menu menu, boolean bLogin) {
-        this.bLogin = bLogin;
+    public void updateMenu(Menu menu, boolean isNotLogged) {
+        this.isNotLogged = isNotLogged;
 
         MenuItem login = menu.findItem(R.id.action_login);
-        login.setVisible(bLogin);
+        login.setVisible(isNotLogged);
 
         MenuItem logout = menu.findItem(R.id.action_logout);
-        logout.setVisible(!bLogin);
+        logout.setVisible(!isNotLogged);
     }
 
-    public boolean isbLogin() {
-        return bLogin;
+    public boolean isNotLogged() {
+        return isNotLogged;
     }
 }

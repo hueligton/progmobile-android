@@ -18,26 +18,26 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class EventRecyclerAdapter extends RecyclerView.Adapter<EventRecyclerAdapter.EventViewHolder> {
+public class RVEvent extends RecyclerView.Adapter<RVEvent.ViewHolder> {
 
     private List<Event> events;
     private Context context;
 
-    public EventRecyclerAdapter(List<Event> events, Context context) {
+    public RVEvent(List<Event> events, Context context) {
         this.events = events;
         this.context = context;
     }
 
     @NonNull
     @Override
-    public EventViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int position) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.component_event,
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int position) {
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.comp_event,
                 viewGroup, false);
-        return new EventViewHolder(view, events, context);
+        return new ViewHolder(view, events, context);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull EventViewHolder viewHolder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
         Event event = events.get(position);
         String url = event.getImageUrl();
         Picasso.get().load(Constants.URL + url).into(viewHolder.eventImage);
@@ -49,13 +49,13 @@ public class EventRecyclerAdapter extends RecyclerView.Adapter<EventRecyclerAdap
         return events.size();
     }
 
-    static class EventViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private ImageView eventImage;
         private TextView eventName;
         private List<Event> events;
         private Context context;
 
-        EventViewHolder(@NonNull View itemView, List<Event> events, Context context) {
+        ViewHolder(@NonNull View itemView, List<Event> events, Context context) {
             super(itemView);
             eventImage = itemView.findViewById(R.id.event_image);
             eventName = itemView.findViewById(R.id.event_name);

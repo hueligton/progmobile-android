@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -18,6 +20,7 @@ import com.example.progmobile_android.model.entities.Purchase;
 import com.example.progmobile_android.model.entities.TicketType;
 import com.example.progmobile_android.model.entities.UserToken;
 import com.example.progmobile_android.model.repository.ServerCallback;
+import com.example.progmobile_android.view.RecyclerAdapter.RVTicketType2;
 
 import java.util.List;
 import java.util.Objects;
@@ -32,6 +35,9 @@ public class PurchaseConfirmation extends AppCompatActivity {
     private TextView tvCardNumber;
     private TextView tvValid;
     private TextView tvEvent;
+
+    private RVTicketType2 rvTicketType2;
+    private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +57,10 @@ public class PurchaseConfirmation extends AppCompatActivity {
         pairList = (List<Pair>) bundle.getSerializable("pairList");
         card = (Card) bundle.getSerializable("card");
 
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setHasFixedSize(true);
+
         managerFacade.getEvent(eventId, new ServerCallback() {
             @Override
             public void onSuccess(Object object) {
@@ -61,6 +71,9 @@ public class PurchaseConfirmation extends AppCompatActivity {
                 tvCardNumber.setText(card.getCardNumber());
                 tvValid.setText(card.getValid());
                 tvEvent.setText(event.getName());
+
+                rvTicketType2 = new RVTicketType2(ticketTypes, pairList);
+                recyclerView.setAdapter(rvTicketType2);
             }
 
             @Override
@@ -75,6 +88,7 @@ public class PurchaseConfirmation extends AppCompatActivity {
         tvCardNumber = findViewById(R.id.tvCardNumber);
         tvValid = findViewById(R.id.tvValid);
         tvEvent = findViewById(R.id.tvEvent);
+        recyclerView = findViewById(R.id.recyclerView);
     }
 
     public void conclude(View view) {

@@ -15,12 +15,12 @@ import com.example.progmobile_android.model.entities.TicketType;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TicketTypeRecyclerAdapter extends RecyclerView.Adapter<TicketTypeRecyclerAdapter.TicketTypeViewHolder> {
+public class RVTicketType1 extends RecyclerView.Adapter<RVTicketType1.TicketTypeViewHolder> {
 
     private List<TicketType> ticketTypes;
-    private static List<Pair> informations;
+    private static List<Pair> information;
 
-    public TicketTypeRecyclerAdapter(List<TicketType> ticketTypes) {
+    public RVTicketType1(List<TicketType> ticketTypes) {
         this.ticketTypes = ticketTypes;
 
         /* To test categories --------------------------------------------------------------------*/
@@ -35,25 +35,25 @@ public class TicketTypeRecyclerAdapter extends RecyclerView.Adapter<TicketTypeRe
         this.ticketTypes.add(ticketType3);
         /* To test categories --------------------------------------------------------------------*/
 
-        informations = new ArrayList<>();
+        information = new ArrayList<>();
 
         this.ticketTypes.forEach(ticketType -> {
             Pair pair = new Pair(ticketType.getId(), 0);
-            informations.add(pair);
+            information.add(pair);
         });
 
     }
 
     public List<Pair> getInformations() {
-        return informations;
+        return information;
     }
 
     @NonNull
     @Override
     public TicketTypeViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int position) {
         View view = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.component_type_ticket, viewGroup, false);
-        return new TicketTypeViewHolder(view, ticketTypes, informations);
+                .inflate(R.layout.comp_type_ticket_1, viewGroup, false);
+        return new TicketTypeViewHolder(view, ticketTypes, information);
     }
 
     @Override

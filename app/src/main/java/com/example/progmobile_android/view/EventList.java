@@ -10,15 +10,14 @@ import android.view.WindowManager;
 import com.example.progmobile_android.R;
 import com.example.progmobile_android.model.entities.Event;
 import com.example.progmobile_android.model.repository.ServerCallback;
-import com.example.progmobile_android.view.RecyclerAdapter.EventRecyclerAdapter;
+import com.example.progmobile_android.view.RecyclerAdapter.RVEvent;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class EventList extends BaseActivity {
 
-    private EventRecyclerAdapter eventRecyclerAdapter;
+    private RVEvent rvEvent;
     private RecyclerView recyclerView;
 
     @Override
@@ -44,8 +43,8 @@ public class EventList extends BaseActivity {
             @Override
             public void onSuccess(Object object) {
                 List<Event> list = (List<Event>) object;
-                eventRecyclerAdapter = new EventRecyclerAdapter(list, context);
-                recyclerView.setAdapter(eventRecyclerAdapter);
+                rvEvent = new RVEvent(list, context);
+                recyclerView.setAdapter(rvEvent);
             }
 
             @Override
@@ -53,21 +52,5 @@ public class EventList extends BaseActivity {
 
             }
         });
-
-        /* for unsuccessful managerFacade.getListEvents
-
-        List<String> eventImage = new ArrayList<>();
-        List<String> eventName = new ArrayList<>();
-
-        eventImage.add("http://caliescribe.com/sites/default/files/imagenes_revista/2011/noviembre/13-19/gastronomia/gastronomia-minimalista.jpg");
-        eventImage.add("https://img.pystatic.com/header-backgrounds/mobile/comida-internacional-6.jpg");
-
-        eventName.add("food 1");
-        eventName.add("food 2");
-
-        EventRecyclerAdapter eventRecyclerAdapter = new EventRecyclerAdapter(eventImage, eventName);
-        recyclerView.setAdapter(eventRecyclerAdapter);
-
-        */
     }
 }

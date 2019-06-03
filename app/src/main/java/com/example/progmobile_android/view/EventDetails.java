@@ -17,7 +17,7 @@ import com.example.progmobile_android.model.entities.Event;
 import com.example.progmobile_android.model.entities.Pair;
 import com.example.progmobile_android.model.entities.TicketType;
 import com.example.progmobile_android.model.repository.ServerCallback;
-import com.example.progmobile_android.view.RecyclerAdapter.TicketTypeRecyclerAdapter;
+import com.example.progmobile_android.view.RecyclerAdapter.RVTicketType1;
 
 import java.io.Serializable;
 import java.util.List;
@@ -29,7 +29,7 @@ public class EventDetails extends BaseActivity {
     public Context context;
     ManagerFacade managerFacade = ManagerFacade.getInstance(this);
 
-    private TicketTypeRecyclerAdapter ticketTypeRecyclerAdapter;
+    private RVTicketType1 rvTicketType1;
     private RecyclerView recyclerView;
 
     private TextView tvEventName;
@@ -65,8 +65,8 @@ public class EventDetails extends BaseActivity {
                 Event event = (Event) object;
                 List<TicketType> ticketTypes = event.getTicketTypes();
 
-                ticketTypeRecyclerAdapter = new TicketTypeRecyclerAdapter(ticketTypes);
-                recyclerView.setAdapter(ticketTypeRecyclerAdapter);
+                rvTicketType1 = new RVTicketType1(ticketTypes);
+                recyclerView.setAdapter(rvTicketType1);
 
                 tvEventDescription.setText(event.getDescription());
                 tvEventName.setText(event.getName());
@@ -86,7 +86,7 @@ public class EventDetails extends BaseActivity {
     }
 
     public void insertPaymentData(View view) {
-        List<Pair> pairList = ticketTypeRecyclerAdapter.getInformations();
+        List<Pair> pairList = rvTicketType1.getInformations();
 
         if (!pairList
                 .stream()

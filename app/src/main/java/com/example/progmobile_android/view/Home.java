@@ -27,7 +27,7 @@ public class Home extends BaseActivity {
     }
 
     public void showMyTickets(View view) {
-        // startActivity(new Intent(this, MyTickets.class));
+        startActivity(new Intent(this, MyTickets.class));
     }
 
     @Override

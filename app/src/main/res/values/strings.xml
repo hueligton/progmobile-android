@@ -67,4 +67,8 @@
     <string name="currency">R$</string>
     <string name="ticket_label_amount">qtd</string>
     <string name="ticket_label_total_price">valor total</string>
+    <string name="purchase_date">12.04.2019</string>
+    <string name="purchase_payment_status">pago</string>
+    <string name="purchase_label">Compra</string>
+    <string name="purchase_example_id">1</string>
 </resources>

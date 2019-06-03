@@ -49,12 +49,17 @@
     <string name="event_example_description">Em 2018 a banda lançou o seu sexto disco de estúdio, Tranquility Base Hotel &amp; Casino, e mostrou uma sonoridade bem diferente do que costumava fazer até então. Repleto de referências aos Anos 60 e 70, o álbum tem um clima retrô que vai pescar tanto as influências musicais da época quanto as cinematográficas de nomes como Stanley Kubrick. É com esse show, mesclando canções do disco com clássicos do passado, que a banda vem ao Brasil e promete dar o que falar.</string>
 
     <!--Event details-->
-    <string name="event_label_name">Evento:</string>
-    <string name="event_label_description">Descriçao:</string>
+    <string name="event_label_name">Evento</string>
+    <string name="event_label_description">Descriçao</string>
     <string name="ticket_amount">0</string>
     <string name="ticket_price_example">123.00</string>
     <string name="ticket_type_example">Camarote</string>
     <string name="total_price">0.0</string>
+
+    <!--Purchase Confirmation Layout-->
+    <string name="payment_information">Dados de pagamento</string>
+    <string name="event_information">Dados do Evento</string>
+    <string name="ticketType_information">Ingressos selecionados</string>
 
     <!--Purchase Completed Layout-->
     <string name="completed_success">Compra concluída com sucesso</string>

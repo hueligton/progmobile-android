@@ -21,7 +21,12 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/tvCardHolderName"
+            android:textSize="25sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/payment_information" />
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/form_cardHolderName" />
@@ -35,7 +40,6 @@
             android:inputType="textPersonName" />
 
         <TextView
-            android:id="@+id/tvCardNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/form_cardNumber" />
@@ -49,7 +53,6 @@
             android:inputType="textPersonName" />
 
         <TextView
-            android:id="@+id/tvValid"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/form_valid" />
@@ -64,7 +67,6 @@
             android:inputType="textPersonName" />
 
         <TextView
-            android:id="@+id/tvSecurityCode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/form_securityCode" />

@@ -1,14 +1,17 @@
 package com.example.progmobile_android.view;
 
 import android.content.Intent;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
 import com.example.progmobile_android.R;
 import com.example.progmobile_android.model.entities.Card;
 
+import java.util.Objects;
 import java.util.stream.Stream;
 
 import static android.widget.Toast.LENGTH_SHORT;
@@ -25,6 +28,11 @@ public class PaymentData extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment_data);
+
+        setSupportActionBar(findViewById(R.id.toolbar));
+
+        ActionBar actionBar = getSupportActionBar();
+        Objects.requireNonNull(actionBar).setDisplayHomeAsUpEnabled(true);
 
         captureViewComponents();
     }
@@ -66,5 +74,15 @@ public class PaymentData extends AppCompatActivity {
             return false;
         }
         return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

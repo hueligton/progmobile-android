@@ -15,6 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".view.PurchaseDetails"></activity>
         <activity android:name=".view.Home">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

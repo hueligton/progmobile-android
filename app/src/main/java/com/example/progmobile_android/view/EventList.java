@@ -10,15 +10,15 @@ import android.view.WindowManager;
 import com.example.progmobile_android.R;
 import com.example.progmobile_android.model.entities.Event;
 import com.example.progmobile_android.model.repository.ServerCallback;
-import com.example.progmobile_android.view.RecyclerAdapter.RVEvent;
+import com.example.progmobile_android.view.RecyclerAdapter.RAEvent;
 
 import java.util.List;
 import java.util.Objects;
 
 public class EventList extends BaseActivity {
 
-    private RVEvent rvEvent;
-    private RecyclerView recyclerView;
+    private RAEvent raEvent;
+    private RecyclerView rvEventList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,24 +33,22 @@ public class EventList extends BaseActivity {
         ActionBar actionBar = getSupportActionBar();
         Objects.requireNonNull(actionBar).setDisplayHomeAsUpEnabled(true);
 
-        recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setHasFixedSize(true);
+        rvEventList = findViewById(R.id.rvEventList);
+        rvEventList.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 1);
-        recyclerView.setLayoutManager(layoutManager);
+        rvEventList.setLayoutManager(layoutManager);
 
         Context context = this;
         super.getManagerFacade().getListEvents(new ServerCallback() {
             @Override
             public void onSuccess(Object object) {
                 List<Event> list = (List<Event>) object;
-                rvEvent = new RVEvent(list, context);
-                recyclerView.setAdapter(rvEvent);
+                raEvent = new RAEvent(list, context);
+                rvEventList.setAdapter(raEvent);
             }
 
             @Override
-            public void onError(Object object) {
-
-            }
+            public void onError(Object object) {}
         });
     }
 }

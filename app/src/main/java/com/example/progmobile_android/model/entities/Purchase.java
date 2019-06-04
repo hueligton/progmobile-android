@@ -2,6 +2,7 @@ package com.example.progmobile_android.model.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 public class Purchase implements Serializable {
 
@@ -60,5 +61,10 @@ public class Purchase implements Serializable {
                 ", value=" + value +
                 ", paymentStatus=" + paymentStatus +
                 '}';
+    }
+
+    // TODO: 03/06/19 Implementation of tickets list
+    public List<Ticket> getTickets() {
+        return null;
     }
 }

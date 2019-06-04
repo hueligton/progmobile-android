@@ -14,12 +14,12 @@ import com.example.progmobile_android.model.entities.TicketType;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RVTicketType2 extends RecyclerView.Adapter<RVTicketType2.ViewHolder> {
+public class RATicketType2 extends RecyclerView.Adapter<RATicketType2.ViewHolder> {
 
     private List<TicketType> ticketTypes;
     private List<Pair> pairList;
 
-    public RVTicketType2(List<TicketType> ticketTypes, List<Pair> pairList) {
+    public RATicketType2(List<TicketType> ticketTypes, List<Pair> pairList) {
         this.ticketTypes = ticketTypes;
         this.pairList = pairList;
 

@@ -17,7 +17,7 @@ import com.example.progmobile_android.model.entities.Event;
 import com.example.progmobile_android.model.entities.Pair;
 import com.example.progmobile_android.model.entities.TicketType;
 import com.example.progmobile_android.model.repository.ServerCallback;
-import com.example.progmobile_android.view.RecyclerAdapter.RVTicketType1;
+import com.example.progmobile_android.view.RecyclerAdapter.RATicketType1;
 
 import java.io.Serializable;
 import java.util.List;
@@ -29,8 +29,8 @@ public class EventDetails extends BaseActivity {
     public Context context;
     ManagerFacade managerFacade = ManagerFacade.getInstance(this);
 
-    private RVTicketType1 rvTicketType1;
-    private RecyclerView recyclerView;
+    private RATicketType1 raTicketType1;
+    private RecyclerView rvTicketType;
 
     private TextView tvEventName;
     private TextView tvEventDescription;
@@ -52,10 +52,9 @@ public class EventDetails extends BaseActivity {
 
         captureViewComponents();
 
-        recyclerView = findViewById(R.id.rvTicketType);
-        recyclerView.setHasFixedSize(true);
+        rvTicketType.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 1);
-        recyclerView.setLayoutManager(layoutManager);
+        rvTicketType.setLayoutManager(layoutManager);
 
         context = this;
         managerFacade.getEvent(eventId, new ServerCallback() {
@@ -65,8 +64,8 @@ public class EventDetails extends BaseActivity {
                 Event event = (Event) object;
                 List<TicketType> ticketTypes = event.getTicketTypes();
 
-                rvTicketType1 = new RVTicketType1(ticketTypes);
-                recyclerView.setAdapter(rvTicketType1);
+                raTicketType1 = new RATicketType1(ticketTypes);
+                rvTicketType.setAdapter(raTicketType1);
 
                 tvEventDescription.setText(event.getDescription());
                 tvEventName.setText(event.getName());
@@ -83,10 +82,11 @@ public class EventDetails extends BaseActivity {
     private void captureViewComponents() {
         tvEventName = findViewById(R.id.tvEventName);
         tvEventDescription = findViewById(R.id.tvEventDescription);
+        rvTicketType = findViewById(R.id.rvTicketType);
     }
 
     public void insertPaymentData(View view) {
-        List<Pair> pairList = rvTicketType1.getInformations();
+        List<Pair> pairList = raTicketType1.getInformations();
 
         if (!pairList
                 .stream()

@@ -18,12 +18,12 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class RVEvent extends RecyclerView.Adapter<RVEvent.ViewHolder> {
+public class RAEvent extends RecyclerView.Adapter<RAEvent.ViewHolder> {
 
     private List<Event> events;
     private Context context;
 
-    public RVEvent(List<Event> events, Context context) {
+    public RAEvent(List<Event> events, Context context) {
         this.events = events;
         this.context = context;
     }

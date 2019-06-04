@@ -22,12 +22,18 @@ public class Home extends BaseActivity {
 
     }
 
-    public void buyTickets(View view) {
+    public void listEvents(View view) {
         startActivity(new Intent(this, EventList.class));
     }
 
-    public void showMyTickets(View view) {
-        startActivity(new Intent(this, MyTickets.class));
+    public void showMyPurchases(View view) {
+
+        if (super.getCustomMenu().isNotLogged())
+            startActivityForResult(new Intent(this, Login.class), 0);
+
+        else
+            startActivity(new Intent(this, Purchases.class));
+
     }
 
     @Override

@@ -2,33 +2,28 @@ package com.example.progmobile_android.view;
 
 import android.content.Context;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
-import android.view.Window;
 import android.view.WindowManager;
 
 import com.example.progmobile_android.R;
 import com.example.progmobile_android.model.ManagerFacade;
-import com.example.progmobile_android.model.entities.PaymentStatus;
 import com.example.progmobile_android.model.entities.Purchase;
-import com.example.progmobile_android.model.entities.User;
 import com.example.progmobile_android.model.entities.UserToken;
 import com.example.progmobile_android.model.repository.ServerCallback;
-import com.example.progmobile_android.view.RecyclerAdapter.RVPurchase;
+import com.example.progmobile_android.view.RecyclerAdapter.RAPurchase;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
-public class MyTickets extends AppCompatActivity {
+public class Purchases extends BaseActivity {
 
     ManagerFacade managerFacade = ManagerFacade.getInstance(this);
 
-    private RVPurchase rvPurchase;
-    private RecyclerView recyclerView;
+    private RAPurchase raPurchase;
+    private RecyclerView rvPurchases;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,17 +32,17 @@ public class MyTickets extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        setContentView(R.layout.activity_my_tickets);
+        setContentView(R.layout.activity_purchases);
         setSupportActionBar(findViewById(R.id.toolbar));
 
         ActionBar actionBar = getSupportActionBar();
         Objects.requireNonNull(actionBar).setDisplayHomeAsUpEnabled(true);
 
-        recyclerView = findViewById(R.id.rvTickets);
-        recyclerView.setHasFixedSize(true);
+        rvPurchases = findViewById(R.id.rvPurchases);
+        rvPurchases.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setHasFixedSize(true);
+        rvPurchases.setLayoutManager(layoutManager);
+        rvPurchases.setHasFixedSize(true);
         Context context = this;
 
         managerFacade.getUser(new ServerCallback() {
@@ -62,8 +57,8 @@ public class MyTickets extends AppCompatActivity {
                     public void onSuccess(Object object) {
                         List<Purchase> list = (List<Purchase>) object;
 
-                        rvPurchase = new RVPurchase(list, context);
-                        recyclerView.setAdapter(rvPurchase);
+                        raPurchase = new RAPurchase(list, context);
+                        rvPurchases.setAdapter(raPurchase);
                     }
 
                     @Override

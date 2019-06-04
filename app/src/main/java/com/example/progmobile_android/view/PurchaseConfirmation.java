@@ -20,7 +20,7 @@ import com.example.progmobile_android.model.entities.Purchase;
 import com.example.progmobile_android.model.entities.TicketType;
 import com.example.progmobile_android.model.entities.UserToken;
 import com.example.progmobile_android.model.repository.ServerCallback;
-import com.example.progmobile_android.view.RecyclerAdapter.RVTicketType2;
+import com.example.progmobile_android.view.RecyclerAdapter.RATicketType2;
 
 import java.util.List;
 import java.util.Objects;
@@ -36,8 +36,8 @@ public class PurchaseConfirmation extends AppCompatActivity {
     private TextView tvValid;
     private TextView tvEvent;
 
-    private RVTicketType2 rvTicketType2;
-    private RecyclerView recyclerView;
+    private RATicketType2 raTicketType2;
+    private RecyclerView rvTicketType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,8 +58,8 @@ public class PurchaseConfirmation extends AppCompatActivity {
         card = (Card) bundle.getSerializable("card");
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setHasFixedSize(true);
+        rvTicketType.setLayoutManager(layoutManager);
+        rvTicketType.setHasFixedSize(true);
 
         managerFacade.getEvent(eventId, new ServerCallback() {
             @Override
@@ -72,8 +72,8 @@ public class PurchaseConfirmation extends AppCompatActivity {
                 tvValid.setText(card.getValid());
                 tvEvent.setText(event.getName());
 
-                rvTicketType2 = new RVTicketType2(ticketTypes, pairList);
-                recyclerView.setAdapter(rvTicketType2);
+                raTicketType2 = new RATicketType2(ticketTypes, pairList);
+                rvTicketType.setAdapter(raTicketType2);
             }
 
             @Override
@@ -88,7 +88,7 @@ public class PurchaseConfirmation extends AppCompatActivity {
         tvCardNumber = findViewById(R.id.tvCardNumber);
         tvValid = findViewById(R.id.tvValid);
         tvEvent = findViewById(R.id.tvEvent);
-        recyclerView = findViewById(R.id.recyclerView);
+        rvTicketType = findViewById(R.id.rvTicketType);
     }
 
     public void conclude(View view) {

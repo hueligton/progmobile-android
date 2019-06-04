@@ -54,9 +54,8 @@
         </activity>
         <activity android:name=".view.PurchaseConfirmation" />
         <activity android:name=".view.PurchaseCompleted" />
-        <activity android:name=".view.MyTickets" />
+        <activity android:name=".view.Purchases" />
         <activity android:name=".view.PaymentData" />
-        <activity android:name=".view.TicketDetails" />
     </application>
 
 </manifest>

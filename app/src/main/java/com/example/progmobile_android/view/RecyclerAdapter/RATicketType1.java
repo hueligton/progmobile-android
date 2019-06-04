@@ -15,12 +15,12 @@ import com.example.progmobile_android.model.entities.TicketType;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RVTicketType1 extends RecyclerView.Adapter<RVTicketType1.TicketTypeViewHolder> {
+public class RATicketType1 extends RecyclerView.Adapter<RATicketType1.ViewHolder> {
 
     private List<TicketType> ticketTypes;
     private static List<Pair> information;
 
-    public RVTicketType1(List<TicketType> ticketTypes) {
+    public RATicketType1(List<TicketType> ticketTypes) {
         this.ticketTypes = ticketTypes;
 
         /* To test categories --------------------------------------------------------------------*/
@@ -50,14 +50,14 @@ public class RVTicketType1 extends RecyclerView.Adapter<RVTicketType1.TicketType
 
     @NonNull
     @Override
-    public TicketTypeViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int position) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int position) {
         View view = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.comp_type_ticket_1, viewGroup, false);
-        return new TicketTypeViewHolder(view, ticketTypes, information);
+        return new ViewHolder(view, ticketTypes, information);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull TicketTypeViewHolder viewHolder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
         TicketType ticketType = ticketTypes.get(position);
 
         viewHolder.tvTicketType.setText(ticketType.getType());
@@ -71,7 +71,7 @@ public class RVTicketType1 extends RecyclerView.Adapter<RVTicketType1.TicketType
     }
 
 
-    static class TicketTypeViewHolder extends RecyclerView.ViewHolder {
+    static class ViewHolder extends RecyclerView.ViewHolder {
         private TextView tvTicketType;
         private TextView tvTicketPrice;
         private TextView tvTicketAmount;
@@ -85,7 +85,7 @@ public class RVTicketType1 extends RecyclerView.Adapter<RVTicketType1.TicketType
         private Pair pair;
         private double ticketPrice;
 
-        TicketTypeViewHolder(@NonNull View itemView, List<TicketType> ticketTypes, List<Pair> informations) {
+        ViewHolder(@NonNull View itemView, List<TicketType> ticketTypes, List<Pair> informations) {
             super(itemView);
             tvTicketType = itemView.findViewById(R.id.tvTicketType);
             tvTicketPrice = itemView.findViewById(R.id.tvTicketPrice);

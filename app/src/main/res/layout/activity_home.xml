@@ -29,8 +29,8 @@
             android:layout_gravity="top|center"
             android:layout_marginBottom="10dp"
             android:backgroundTint="@color/colorPrimary"
-            android:onClick="buyTickets"
-            android:text="@string/buy_tickets"
+            android:onClick="listEvents"
+            android:text="@string/list_events"
             android:textColor="@color/colorTextButton" />
 
         <Button
@@ -39,8 +39,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center"
             android:backgroundTint="@color/colorPrimary"
-            android:onClick="showMyTickets"
-            android:text="@string/my_tickets"
+            android:onClick="showMyPurchases"
+            android:text="@string/my_purchases"
             android:textColor="@color/colorTextButton" />
 
     </LinearLayout>

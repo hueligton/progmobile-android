@@ -11,16 +11,16 @@ import android.widget.TextView;
 
 import com.example.progmobile_android.R;
 import com.example.progmobile_android.model.entities.Purchase;
-import com.example.progmobile_android.view.TicketDetails;
+import com.example.progmobile_android.view.PurchaseDetails;
 
 import java.util.List;
 
-public class RVPurchase extends RecyclerView.Adapter<RVPurchase.ViewHolder> {
+public class RAPurchase extends RecyclerView.Adapter<RAPurchase.ViewHolder> {
 
     private List<Purchase> list;
     private Context context;
 
-    public RVPurchase(List<Purchase> list, Context context) {
+    public RAPurchase(List<Purchase> list, Context context) {
         this.list = list;
         this.context = context;
     }
@@ -71,8 +71,8 @@ public class RVPurchase extends RecyclerView.Adapter<RVPurchase.ViewHolder> {
 
         @Override
         public void onClick(View view) {
-            Intent intent = new Intent(context, TicketDetails.class);
-            intent.putExtra("id_purchase", list.get(getAdapterPosition()));
+            Intent intent = new Intent(context, PurchaseDetails.class);
+            intent.putExtra("purchase_id", list.get(getAdapterPosition()).getId());
             context.startActivity(intent);
         }
     }

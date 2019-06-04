@@ -47,7 +47,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:onClick="showMyTickets"
-            android:text="@string/my_tickets" />
+            android:text="@string/my_purchases" />
 
         <Button
             android:layout_width="match_parent"

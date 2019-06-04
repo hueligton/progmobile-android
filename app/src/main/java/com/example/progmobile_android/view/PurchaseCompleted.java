@@ -3,20 +3,12 @@ package com.example.progmobile_android.view;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
 import com.example.progmobile_android.R;
 import com.example.progmobile_android.model.ManagerFacade;
-import com.example.progmobile_android.model.entities.Card;
-import com.example.progmobile_android.model.entities.Pair;
 import com.example.progmobile_android.model.entities.Purchase;
-import com.example.progmobile_android.model.entities.UserToken;
-import com.example.progmobile_android.model.repository.ServerCallback;
-
-import java.util.LinkedList;
-import java.util.List;
 
 public class PurchaseCompleted extends AppCompatActivity {
 
@@ -38,7 +30,7 @@ public class PurchaseCompleted extends AppCompatActivity {
     }
 
     public void showMyTickets(View view) {
-        Intent intent = new Intent(this, MyTickets.class);
+        Intent intent = new Intent(this, Purchases.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }

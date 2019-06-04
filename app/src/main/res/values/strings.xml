@@ -2,14 +2,16 @@
     <string name="app_name">progmobile-android</string>
 
     <!--content home-->
-    <string name="buy_tickets">Comprar ingressos</string>
-    <string name="my_tickets">Meus ingressos</string>
+    <string name="list_events">Listar eventos</string>
+    <string name="my_purchases">Minhas compras</string>
 
     <!--toolbar menu-->
     <string name="action_login">login</string>
     <string name="action_logout">logout</string>
 
     <!--form-->
+    <string name="form_cardHolderName">Titular</string>
+    <string name="form_cardNumber">Número do cartão</string>
     <string name="form_email">Endereço de email</string>
     <string name="form_email_hint">Seu endereço de email</string>
     <string name="form_login">Login</string>
@@ -18,57 +20,65 @@
     <string name="form_name_hint">Seu nome</string>
     <string name="form_password">password</string>
     <string name="form_password_hint">********</string>
-    <string name="form_cardHolderName">Titular</string>
-    <string name="form_cardNumber">Número do cartão</string>
+    <string name="form_securityCode">Código de segurança</string>
     <string name="form_valid">Vencimento</string>
     <string name="form_valid_hint">MM/AA</string>
-    <string name="form_securityCode">Código de segurança</string>
 
     <!--buttons-->
+    <string name="button_advance">Avançar</string>
+    <string name="button_back">Voltar</string>
     <string name="button_buy">comprar</string>
+    <string name="button_conclude">Concluir</string>
     <string name="button_finalize_register">Finalizar cadastro</string>
+    <string name="button_home">HOME</string>
     <string name="button_less">-</string>
     <string name="button_login">Login</string>
     <string name="button_more">+</string>
     <string name="button_register">Cadastrar</string>
-    <string name="button_advance">Avançar</string>
-    <string name="button_back">Voltar</string>
-    <string name="button_conclude">Concluir</string>
-    <string name="button_home">HOME</string>
 
     <!--Toast messages-->
     <string name="toast_invalid_login">login inválido</string>
+    <string name="toast_unfilled_amount">Selecione a quantidade de ingressos</string>
     <string name="toast_unfilled_fields">campos obrigatórios não preenchidos</string>
-    <string name="toast_unsuccessful_registration">cadastro não realizado, por favor tente novamente</string>
     <string name="toast_successful_registration">cadastro realizado com sucesso</string>
     <string name="toast_unsuccessful_purchase">compra não realizada, por favor tente novamente</string>
-    <string name="toast_unfilled_amount">Selecione a quantidade de ingressos</string>
+    <string name="toast_unsuccessful_registration">cadastro não realizado, por favor tente novamente</string>
 
     <!--Event layout-->
-    <string name="event_example_name">Arctic Monkeys</string>
+    <string name="event_date">03-08-2019 21:00</string>
     <string name="event_example_description">Em 2018 a banda lançou o seu sexto disco de estúdio, Tranquility Base Hotel &amp; Casino, e mostrou uma sonoridade bem diferente do que costumava fazer até então. Repleto de referências aos Anos 60 e 70, o álbum tem um clima retrô que vai pescar tanto as influências musicais da época quanto as cinematográficas de nomes como Stanley Kubrick. É com esse show, mesclando canções do disco com clássicos do passado, que a banda vem ao Brasil e promete dar o que falar.</string>
+    <string name="event_example_name">Arctic Monkeys</string>
+    <string name="event_local">Av. Embaixador Abelardo Bueno, 3401 - Barra da Tijuca, 22775-039</string>
 
-    <!--Event details-->
+    <!--Labels-->
+    <string name="event_label_date">Data</string>
+    <string name="event_label_description">Descrição</string>
     <string name="event_label_name">Evento</string>
-    <string name="event_label_description">Descriçao</string>
+    <string name="event_label_local">Local</string>
+    <string name="purchase_label">Compra</string>
+    <string name="ticket_label_amount">qtd</string>
+    <string name="ticket_label_total_price">valor total</string>
+    <string name="ticket_label_price">valor</string>
+
+    <!--Ticket layout-->
     <string name="ticket_amount">0</string>
     <string name="ticket_price_example">123.00</string>
     <string name="ticket_type_example">Camarote</string>
     <string name="total_price">0.0</string>
 
     <!--Purchase Confirmation Layout-->
-    <string name="payment_information">Dados de pagamento</string>
     <string name="event_information">Dados do Evento</string>
+    <string name="payment_information">Dados de pagamento</string>
     <string name="ticketType_information">Ingressos selecionados</string>
 
     <!--Purchase Completed Layout-->
-    <string name="completed_success">Compra concluída com sucesso</string>
     <string name="completed_purchaseId">O número da sua compra é</string>
+    <string name="completed_success">Compra concluída com sucesso</string>
     <string name="currency">R$</string>
-    <string name="ticket_label_amount">qtd</string>
-    <string name="ticket_label_total_price">valor total</string>
+
+    <!--Purchases-->
     <string name="purchase_date">12.04.2019</string>
     <string name="purchase_payment_status">pago</string>
-    <string name="purchase_label">Compra</string>
     <string name="purchase_example_id">1</string>
+
 </resources>

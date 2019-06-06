@@ -43,7 +43,6 @@ public class Purchases extends BaseActivity {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         rvPurchases.setLayoutManager(layoutManager);
         rvPurchases.setHasFixedSize(true);
-        Context context = this;
 
         managerFacade.getUser(new ServerCallback() {
             @Override
@@ -57,7 +56,7 @@ public class Purchases extends BaseActivity {
                     public void onSuccess(Object object) {
                         List<Purchase> list = (List<Purchase>) object;
 
-                        raPurchase = new RAPurchase(list, context);
+                        raPurchase = new RAPurchase(list, Purchases.this);
                         rvPurchases.setAdapter(raPurchase);
                     }
 

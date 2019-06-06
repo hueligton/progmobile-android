@@ -1,6 +1,8 @@
 package com.example.progmobile_android.model.entities;
 
-public class Place {
+import java.io.Serializable;
+
+public class Place implements Serializable {
 
     private int id;
     private String name;

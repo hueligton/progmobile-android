@@ -31,13 +31,13 @@ public class PurchaseCompleted extends AppCompatActivity {
 
     public void showMyTickets(View view) {
         Intent intent = new Intent(this, Purchases.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(intent);
     }
 
     public void home(View view) {
         Intent intent = new Intent(this, Home.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(intent);
     }
 }

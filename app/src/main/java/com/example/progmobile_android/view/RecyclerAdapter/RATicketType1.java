@@ -23,18 +23,6 @@ public class RATicketType1 extends RecyclerView.Adapter<RATicketType1.ViewHolder
     public RATicketType1(List<TicketType> ticketTypes) {
         this.ticketTypes = ticketTypes;
 
-        /* To test categories --------------------------------------------------------------------*/
-        this.ticketTypes = new ArrayList<>();
-
-        TicketType ticketType1 = new TicketType(1, "Pista", 100.00);
-        TicketType ticketType2 = new TicketType(2, "Camarote", 200.00);
-        TicketType ticketType3 = new TicketType(3, "Area VIP", 400.00);
-
-        this.ticketTypes.add(ticketType1);
-        this.ticketTypes.add(ticketType2);
-        this.ticketTypes.add(ticketType3);
-        /* To test categories --------------------------------------------------------------------*/
-
         information = new ArrayList<>();
 
         this.ticketTypes.forEach(ticketType -> {
@@ -60,7 +48,7 @@ public class RATicketType1 extends RecyclerView.Adapter<RATicketType1.ViewHolder
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
         TicketType ticketType = ticketTypes.get(position);
 
-        viewHolder.tvTicketType.setText(ticketType.getType());
+        viewHolder.tvTicketType.setText(ticketType.getName());
         viewHolder.tvTicketPrice.setText(String.format("%s", ticketType.getPrice()));
         viewHolder.tvTicketAmount.setText("0");
     }

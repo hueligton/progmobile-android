@@ -29,6 +29,11 @@ public class BaseActivity extends AppCompatActivity {
             case android.R.id.home:
                 onBackPressed();
                 return true;
+            case R.id.action_home:
+                Intent intent = new Intent(this, Home.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+                return true;
             case R.id.action_login:
                 startActivityForResult(new Intent(this, Login.class), 0);
                 return true;

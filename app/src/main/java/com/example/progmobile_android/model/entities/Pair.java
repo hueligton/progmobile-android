@@ -3,20 +3,20 @@ package com.example.progmobile_android.model.entities;
 import java.io.Serializable;
 
 public class Pair implements Serializable {
-    private int eventTypeId;
+    private int ticketTypeId;
     private int amount;
 
-    public Pair(int eventTypeId, int amount) {
-        this.eventTypeId = eventTypeId;
+    public Pair(int ticketTypeId, int amount) {
+        this.ticketTypeId = ticketTypeId;
         this.amount = amount;
     }
 
-    public int getEventTypeId() {
-        return eventTypeId;
+    public int getTicketTypeId() {
+        return ticketTypeId;
     }
 
-    public void setEventTypeId(int eventTypeId) {
-        this.eventTypeId = eventTypeId;
+    public void setTicketTypeId(int ticketTypeId) {
+        this.ticketTypeId = ticketTypeId;
     }
 
     public int getAmount() {

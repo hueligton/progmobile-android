@@ -9,7 +9,6 @@ import com.android.volley.toolbox.StringRequest;
 import com.example.progmobile_android.model.entities.Card;
 import com.example.progmobile_android.model.entities.Pair;
 import com.example.progmobile_android.model.entities.Purchase;
-import com.example.progmobile_android.model.entities.Ticket;
 import com.example.progmobile_android.model.repository.Repository;
 import com.example.progmobile_android.model.repository.ServerCallback;
 import com.google.gson.Gson;
@@ -121,32 +120,6 @@ public class PurchaseManager {
                 },
                 error -> {
                     Log.d("getPurchase", error.toString());
-                    serverCallback.onError(null);
-                }) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> headers = new HashMap<>();
-                headers.put("userId", String.valueOf(userId));
-                headers.put("token", token);
-                return headers;
-            }
-        };
-
-        Repository.getInstance(context).addToRequestQueue(stringRequest);
-    }
-
-    public void getTicket(int userId, String token, int ticketId, final ServerCallback serverCallback) {
-        final String endPoint = url + "/ticket/" + ticketId;
-
-        StringRequest stringRequest = new StringRequest(Request.Method.GET,
-                endPoint,
-                response -> {
-                    Log.d("getTicket", response);
-                    final Ticket ticket = gson.fromJson(response, Ticket.class);
-                    serverCallback.onSuccess(ticket);
-                },
-                error -> {
-                    Log.d("getTicket", error.toString());
                     serverCallback.onError(null);
                 }) {
             @Override

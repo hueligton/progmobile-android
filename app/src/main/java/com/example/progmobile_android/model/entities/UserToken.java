@@ -1,6 +1,8 @@
 package com.example.progmobile_android.model.entities;
 
-public class UserToken {
+import java.io.Serializable;
+
+public class UserToken implements Serializable {
     private User user;
     private String token;
 

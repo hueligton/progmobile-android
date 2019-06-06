@@ -65,7 +65,7 @@ public class PurchaseConfirmation extends AppCompatActivity {
             @Override
             public void onSuccess(Object object) {
                 Event event = (Event) object;
-                List<TicketType> ticketTypes = event.getTicketTypes();
+                List<TicketType> ticketTypes = event.getTicket_types();
 
                 tvCardHolderName.setText(card.getCardHolderName());
                 tvCardNumber.setText(card.getCardNumber());

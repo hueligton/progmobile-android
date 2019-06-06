@@ -62,7 +62,7 @@ public class EventDetails extends BaseActivity {
             @Override
             public void onSuccess(Object object) {
                 Event event = (Event) object;
-                List<TicketType> ticketTypes = event.getTicketTypes();
+                List<TicketType> ticketTypes = event.getTicket_types();
 
                 raTicketType1 = new RATicketType1(ticketTypes);
                 rvTicketType.setAdapter(raTicketType1);

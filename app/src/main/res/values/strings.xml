@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">progmobile-android</string>
+    <string name="app_name">""</string>
 
     <!--content home-->
     <string name="list_events">Listar eventos</string>
@@ -12,14 +12,14 @@
 
     <!--form-->
     <string name="form_cardHolderName">Titular</string>
-    <string name="form_cardNumber">Número do cartão</string>
+    <string name="form_cardNumber">Nº cartão</string>
     <string name="form_email">Endereço de email</string>
     <string name="form_email_hint">Seu endereço de email</string>
     <string name="form_login">Login</string>
     <string name="form_login_hint">Seu login</string>
     <string name="form_name">Nome</string>
     <string name="form_name_hint">Seu nome</string>
-    <string name="form_password">password</string>
+    <string name="form_password">Password</string>
     <string name="form_password_hint">********</string>
     <string name="form_securityCode">Código de segurança</string>
     <string name="form_valid">Vencimento</string>
@@ -46,7 +46,7 @@
     <string name="toast_unsuccessful_registration">cadastro não realizado, por favor tente novamente</string>
 
     <!--Event layout-->
-    <string name="event_date">03-08-2019 21:00</string>
+    <string name="event_date">03-08-2019</string>
     <string name="event_example_description">Em 2018 a banda lançou o seu sexto disco de estúdio, Tranquility Base Hotel &amp; Casino, e mostrou uma sonoridade bem diferente do que costumava fazer até então. Repleto de referências aos Anos 60 e 70, o álbum tem um clima retrô que vai pescar tanto as influências musicais da época quanto as cinematográficas de nomes como Stanley Kubrick. É com esse show, mesclando canções do disco com clássicos do passado, que a banda vem ao Brasil e promete dar o que falar.</string>
     <string name="event_example_name">Arctic Monkeys</string>
     <string name="event_local">Av. Embaixador Abelardo Bueno, 3401 - Barra da Tijuca, 22775-039</string>
@@ -81,5 +81,11 @@
     <string name="purchase_date">12.04.2019</string>
     <string name="purchase_payment_status">pago</string>
     <string name="purchase_example_id">1</string>
+    <string name="event_hour">21:00</string>
+    <string name="icon_alarm">icone de hora</string>
+    <string name="icon_event">icone de data</string>
+    <string name="icon_location">icone de localizaçao</string>
+    <string name="button_event_local">ver local</string>
+    <string name="ticket_label_unit">und</string>
 
 </resources>

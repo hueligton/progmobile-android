@@ -2,12 +2,17 @@ package com.example.progmobile_android.view;
 
 import android.content.Context;
 import android.content.Intent;
+import android.icu.text.SimpleDateFormat;
 import android.support.v7.app.ActionBar;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,8 +21,10 @@ import com.example.progmobile_android.model.ManagerFacade;
 import com.example.progmobile_android.model.entities.Event;
 import com.example.progmobile_android.model.entities.Pair;
 import com.example.progmobile_android.model.entities.TicketType;
+import com.example.progmobile_android.model.manager.Constants;
 import com.example.progmobile_android.model.repository.ServerCallback;
 import com.example.progmobile_android.view.RecyclerAdapter.RATicketType1;
+import com.squareup.picasso.Picasso;
 
 import java.io.Serializable;
 import java.util.List;
@@ -26,14 +33,16 @@ import java.util.stream.Collectors;
 
 public class EventDetails extends BaseActivity {
 
-    public Context context;
     ManagerFacade managerFacade = ManagerFacade.getInstance(this);
 
     private RATicketType1 raTicketType1;
     private RecyclerView rvTicketType;
-
-    private TextView tvEventName;
+    
+    private ImageView ivEventImage;
+    private TextView tvEventDate;
     private TextView tvEventDescription;
+    private TextView tvEventName;
+    private TextView tvEventTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +65,6 @@ public class EventDetails extends BaseActivity {
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 1);
         rvTicketType.setLayoutManager(layoutManager);
 
-        context = this;
         managerFacade.getEvent(eventId, new ServerCallback() {
 
             @Override
@@ -64,11 +72,16 @@ public class EventDetails extends BaseActivity {
                 Event event = (Event) object;
                 List<TicketType> ticketTypes = event.getTicket_types();
 
-                raTicketType1 = new RATicketType1(ticketTypes);
-                rvTicketType.setAdapter(raTicketType1);
+                ivEventImage.setContentDescription(event.getDescription());
+                Picasso.get().load(Constants.URL + event.getImageUrl()).into(ivEventImage);
 
+                tvEventDate.setText(new SimpleDateFormat("dd.MM.yyyy").format(event.getDate().getTime()));
                 tvEventDescription.setText(event.getDescription());
                 tvEventName.setText(event.getName());
+                tvEventTime.setText(new SimpleDateFormat("HH:mm").format(event.getDate().getTime()));
+
+                raTicketType1 = new RATicketType1(ticketTypes);
+                rvTicketType.setAdapter(raTicketType1);
             }
 
             @Override
@@ -80,9 +93,14 @@ public class EventDetails extends BaseActivity {
     }
 
     private void captureViewComponents() {
-        tvEventName = findViewById(R.id.tvEventName);
-        tvEventDescription = findViewById(R.id.tvEventDescription);
+        ivEventImage = findViewById(R.id.ivEventImage);
+
         rvTicketType = findViewById(R.id.rvTicketType);
+
+        tvEventDate = findViewById(R.id.tvEventDate);
+        tvEventDescription = findViewById(R.id.tvEventDescription);
+        tvEventName = findViewById(R.id.tvEventName);
+        tvEventTime = findViewById(R.id.tvEventTime);
     }
 
     public void insertPaymentData(View view) {

@@ -1,83 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="10dp"
-    android:elevation="3dp"
+    android:baselineAligned="false"
     android:columnOrderPreserved="true"
-    android:background="@color/colorTextButton"
+    android:elevation="1dp"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
     android:orientation="horizontal"
-    android:padding="10dp">
-
+    android:padding="10dp"
+    >
     <LinearLayout
+        android:clickable="false"
         android:gravity="center"
-        android:layout_alignParentStart="true"
         android:layout_gravity="start"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
+        android:layout_height="match_parent"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        style="@style/Widget.AppCompat.Button"
+        >
         <TextView
             android:id="@+id/tvTicketType"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/ticket_type_example" />
+            android:layout_width="wrap_content"
+            android:text="@string/ticket_type_example"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textColor="@android:color/black"
+            />
+
         <TextView
             android:id="@+id/tvTicketPrice"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/ticket_price_example"/>
+            android:layout_width="wrap_content"
+            android:text="@string/ticket_price_example"
+            android:textColor="@android:color/black"
+            />
 
     </LinearLayout>
 
     <LinearLayout
-        android:gravity="center"
-        android:layout_centerHorizontal="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/ticket_label_amount"/>
-        <TextView
-            android:id="@+id/tvTicketAmount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/ticket_amount" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:gravity="center"
-        android:layout_alignParentEnd="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/ticket_label_total_price" />
+        android:layout_height="match_parent"
+        android:layout_width="150dp"
+        android:orientation="vertical"
+        >
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:clickable="false"
+            android:gravity="center"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            style="@style/Widget.AppCompat.Button"
+            >
+            <TextView
+                android:id="@+id/tvTicketAmount"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="@string/ticket_amount"
+                android:textColor="@android:color/black"
+                />
 
             <TextView
-                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/currency" />
-            <TextView
-                android:id="@+id/tvTotalPrice"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/ticket_price_example"/>
+                android:layout_marginStart="10dp"
+                android:text="@string/ticket_label_unit"
+                android:textAllCaps="true"
+                android:textColor="@android:color/black"
+                />
 
         </LinearLayout>
 
-    </LinearLayout>
+        <LinearLayout
+            android:clickable="false"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            style="@style/Widget.AppCompat.Button.Colored"
+            >
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="@string/ticket_label_total_price"-->
+                <!--android:textAllCaps="true"-->
+                <!--android:textColor="@android:color/white"-->
+                <!--android:textStyle="bold"-->
+                <!--/>-->
 
-</RelativeLayout>
+            <LinearLayout
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_marginEnd="10dp"
+                    android:text="@string/currency"
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold"
+                    />
+
+                <TextView
+                    android:id="@+id/tvTotalPrice"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="@string/ticket_price_example"
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold"
+                    />
+
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

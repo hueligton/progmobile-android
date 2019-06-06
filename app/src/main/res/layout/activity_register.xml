@@ -1,101 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:background="@drawable/background"
     android:layout_height="match_parent"
-    tools:context=".view.Register">
-
+    android:layout_width="match_parent"
+    tools:context=".view.Register"
+    >
     <include layout="@layout/toolbar_layout"/>
 
     <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:background="@drawable/form_transparency"
+        android:gravity="center"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
+        android:padding="50dp"
+        android:translationZ="1dp"
+        >
         <TextView
-            android:id="@+id/tvName"
-            android:layout_width="wrap_content"
+            android:layout_gravity="start"
             android:layout_height="wrap_content"
-            android:text="@string/form_name" />
+            android:layout_width="wrap_content"
+            android:layout_margin="10dp"
+            android:text="@string/form_name"
+            style="@style/TextAppearance.AppCompat.Widget.Button.Colored"
+            />
 
         <EditText
             android:id="@+id/etName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:ems="10"
             android:hint="@string/form_name_hint"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_marginBottom="10dp"
+            style="@style/Widget.AppCompat.Button"
+            />
 
         <TextView
-            android:id="@+id/tvEmail"
-            android:layout_width="wrap_content"
+            android:layout_gravity="start"
             android:layout_height="wrap_content"
-            android:text="@string/form_email" />
+            android:layout_width="wrap_content"
+            android:layout_margin="10dp"
+            android:text="@string/form_email"
+            style="@style/TextAppearance.AppCompat.Widget.Button.Colored"
+            />
 
         <EditText
             android:id="@+id/etEmail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:ems="10"
             android:hint="@string/form_email_hint"
-            android:inputType="textPersonName" />
+            android:inputType="textEmailAddress"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_marginBottom="10dp"
+            style="@style/Widget.AppCompat.Button"
+            />
 
         <TextView
-            android:id="@+id/tvLogin"
-            android:layout_width="wrap_content"
+            android:layout_gravity="start"
             android:layout_height="wrap_content"
-            android:text="@string/form_login" />
+            android:layout_width="wrap_content"
+            android:layout_margin="10dp"
+            android:text="@string/form_login"
+            style="@style/TextAppearance.AppCompat.Widget.Button.Colored"
+            />
 
         <EditText
             android:id="@+id/etLogin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:ems="10"
             android:hint="@string/form_login_hint"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_marginBottom="10dp"
+            style="@style/Widget.AppCompat.Button"
+            />
 
         <TextView
-            android:id="@+id/tvPassword"
-            android:layout_width="wrap_content"
+            android:layout_gravity="start"
             android:layout_height="wrap_content"
-            android:text="@string/form_password" />
+            android:layout_width="wrap_content"
+            android:layout_margin="10dp"
+            android:text="@string/form_password"
+            style="@style/TextAppearance.AppCompat.Widget.Button.Colored"
+            />
 
         <EditText
             android:id="@+id/etPassword"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
             android:hint="@string/form_password_hint"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            style="@style/Widget.AppCompat.Button"
+            />
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="20dp">
-
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_marginTop="30dp"
+            >
             <Button
                 android:id="@+id/btRegisterRegister"
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                android:layout_weight="1"
+                android:layout_width="match_parent"
                 android:onClick="register"
-                android:text="@string/button_finalize_register" />
+                android:text="@string/button_finalize_register"
+                style="@style/Widget.AppCompat.Button.Colored"
+                />
 
         </LinearLayout>
-
     </LinearLayout>
-
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>

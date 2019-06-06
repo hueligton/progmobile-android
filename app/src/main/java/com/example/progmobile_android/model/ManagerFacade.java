@@ -136,18 +136,4 @@ public class ManagerFacade {
     public void getPurchase(int userId, String token, int purchaseId, ServerCallback serverCallback) {
         purchaseManager.getPurchase(userId, token, purchaseId, serverCallback);
     }
-
-    /***
-     * Ticket de um usuário pelo ID do ticket
-     * @param serverCallback interface para retorno da chamada HTTP
-     * @param userId id do usuário
-     * @param token token do usuário
-     * @param ticketId id do ticket
-     * @return Retorna Object via CallBack. Necessário cast para Ticket.
-     */
-    public void getTicket(int userId, String token, int ticketId, ServerCallback serverCallback) {
-        purchaseManager.getTicket(userId, token, ticketId, serverCallback);
-    }
-
-
 }

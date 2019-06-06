@@ -8,17 +8,23 @@ public class Purchase implements Serializable {
 
     private int id;
     private Date date;
-    private double value;
-    private PaymentStatus paymentStatus;
+    private double total_value;
+    private PaymentStatus payment_status;
+    private List<Ticket> tickets;
+    private Event event;
+    private int userId;
 
     public Purchase() {
     }
 
-    public Purchase(int purchaseId, Date date, double value, PaymentStatus paymentStatus) {
-        this.id = purchaseId;
+    public Purchase(int id, Date date, double total_value, PaymentStatus payment_status, List<Ticket> tickets, Event event, int userId) {
+        this.id = id;
         this.date = date;
-        this.value = value;
-        this.paymentStatus = paymentStatus;
+        this.total_value = total_value;
+        this.payment_status = payment_status;
+        this.tickets = tickets;
+        this.event = event;
+        this.userId = userId;
     }
 
     public void setId(int id) {
@@ -29,12 +35,12 @@ public class Purchase implements Serializable {
         this.date = date;
     }
 
-    public void setValue(double value) {
-        this.value = value;
+    public void setTotal_value(double total_value) {
+        this.total_value = total_value;
     }
 
-    public void setPaymentStatus(PaymentStatus paymentStatus) {
-        this.paymentStatus = paymentStatus;
+    public void setPayment_status(PaymentStatus payment_status) {
+        this.payment_status = payment_status;
     }
 
     public int getId() {
@@ -45,26 +51,48 @@ public class Purchase implements Serializable {
         return date;
     }
 
-    public double getValue() {
-        return value;
+    public double getTotal_value() {
+        return total_value;
     }
 
-    public PaymentStatus getPaymentStatus() {
-        return paymentStatus;
+    public PaymentStatus getPayment_status() {
+        return payment_status;
+    }
+
+    public void setTickets(List<Ticket> tickets) {
+        this.tickets = tickets;
+    }
+
+    public List<Ticket> getTickets() {
+        return tickets;
+    }
+
+    public Event getEvent() {
+        return event;
+    }
+
+    public void setEvent(Event event) {
+        this.event = event;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     @Override
     public String toString() {
         return "Purchase{" +
-                "purchaseId=" + id +
+                "id=" + id +
                 ", date=" + date +
-                ", value=" + value +
-                ", paymentStatus=" + paymentStatus +
+                ", total_value=" + total_value +
+                ", payment_status=" + payment_status +
+                ", tickets=" + tickets +
+                ", event=" + event +
+                ", userId=" + userId +
                 '}';
-    }
-
-    // TODO: 03/06/19 Implementation of tickets list
-    public List<Ticket> getTickets() {
-        return null;
     }
 }

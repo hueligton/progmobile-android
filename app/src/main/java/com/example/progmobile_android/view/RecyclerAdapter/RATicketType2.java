@@ -22,19 +22,6 @@ public class RATicketType2 extends RecyclerView.Adapter<RATicketType2.ViewHolder
     public RATicketType2(List<TicketType> ticketTypes, List<Pair> pairList) {
         this.ticketTypes = ticketTypes;
         this.pairList = pairList;
-
-        /* To test categories --------------------------------------------------------------------*/
-        this.ticketTypes = new ArrayList<>();
-
-        TicketType ticketType1 = new TicketType(1, "Pista", 100.00);
-        TicketType ticketType2 = new TicketType(2, "Camarote", 200.00);
-        TicketType ticketType3 = new TicketType(3, "Area VIP", 400.00);
-
-        this.ticketTypes.add(ticketType1);
-        this.ticketTypes.add(ticketType2);
-        this.ticketTypes.add(ticketType3);
-        /* To test categories --------------------------------------------------------------------*/
-
     }
 
     @NonNull
@@ -50,7 +37,7 @@ public class RATicketType2 extends RecyclerView.Adapter<RATicketType2.ViewHolder
         TicketType ticketType = ticketTypes.get(i);
         Pair pair = pairList.get(i);
 
-        viewHolder.tvTicketType.setText(ticketType.getType());
+        viewHolder.tvTicketType.setText(ticketType.getName());
         viewHolder.tvTicketPrice.setText(String.format("%s", ticketType.getPrice()));
         viewHolder.tvTicketAmount.setText(String.format("%s", pair.getAmount()));
 

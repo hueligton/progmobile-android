@@ -1,8 +1,8 @@
 package com.example.progmobile_android.view;
 
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
@@ -14,14 +14,12 @@ import com.example.progmobile_android.model.ManagerFacade;
 import com.example.progmobile_android.model.entities.Event;
 import com.example.progmobile_android.model.entities.Purchase;
 import com.example.progmobile_android.model.entities.Ticket;
-import com.example.progmobile_android.model.entities.UserToken;
-import com.example.progmobile_android.model.repository.ServerCallback;
 import com.example.progmobile_android.view.RecyclerAdapter.RATicketType3;
 
 import java.util.List;
 import java.util.Objects;
 
-public class PurchaseDetails extends BaseActivity {
+public class PurchaseDetails extends AppCompatActivity {
 
     ManagerFacade managerFacade = ManagerFacade.getInstance(this);
 
@@ -50,9 +48,29 @@ public class PurchaseDetails extends BaseActivity {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         rvTickets.setLayoutManager(layoutManager);
 
-        int purchaseId = getIntent().getIntExtra("purchase_id", 0);
+        //TODO VOLTAR
+        //int purchaseId = getIntent().getIntExtra("purchase_id", 0);
+        Purchase purchase = (Purchase) getIntent().getSerializableExtra("purchase_id");
 
-        managerFacade.getUser(new ServerCallback() {
+        List<Ticket> list = purchase.getTickets();
+        Event event = purchase.getEvent();
+        list.forEach(ticket ->
+                ticket.setTicketType(event
+                        .getTicket_types()
+                        .stream()
+                        .filter(ticketType ->
+                                ticketType.getId() == ticket.getTicketTypeId())
+                        .findFirst().get()));
+
+        tvEventDate.setText(event.getDate().toString());
+        tvEventName.setText(event.getName());
+        tvEventLocal.setText(event.getPlace().getAddress());
+
+        raTicketType3 = new RATicketType3(list);
+        rvTickets.setAdapter(raTicketType3);
+
+        //TODO VOLTAR
+        /*managerFacade.getUser(new ServerCallback() {
             @Override
             public void onSuccess(Object object) {
                 UserToken userToken = (UserToken) object;
@@ -64,7 +82,7 @@ public class PurchaseDetails extends BaseActivity {
                     public void onSuccess(Object object) {
                         Purchase purchase = (Purchase) object;
                         List<Ticket> list = purchase.getTickets();
-                        Event event = list.get(0).getEvent();
+                        Event event = purchase.getEvent();
 
                         tvEventDate.setText(event.getDate().toString());
                         tvEventName.setText(event.getName());
@@ -81,7 +99,7 @@ public class PurchaseDetails extends BaseActivity {
 
             @Override
             public void onError(Object object) { }
-        });
+        });*/
     }
 
     private void captureViewComponents() {

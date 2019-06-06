@@ -1,84 +1,76 @@
 package com.example.progmobile_android.model.entities;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Ticket {
+public class Ticket implements Serializable {
 
-    private Event event;
     private int id;
-    private String validationHash;
+    private String validation_hash;
     private boolean validated;
-    private Date validatedDate;
+    private Date validated_date;
+    private int ticketTypeId;
     private TicketType ticketType;
 
     public Ticket() {
-    }
-
-    public Ticket (int ticketId, Event event, String validationHash, boolean validated, Date validatedDate, TicketType ticketType){
-        this.id = ticketId;
-        this.event=event;
-        this.validationHash = validationHash;
-        this.validated = validated;
-        this.validatedDate = validatedDate;
-        this.ticketType=ticketType;
-    }
-
-    public void setEvent(Event event) {
-        this.event = event;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setValidationHash(String validationHash) {
-        this.validationHash = validationHash;
-    }
-
-    public void setValidated(boolean validated) {
-        this.validated = validated;
-    }
-
-    public void setValidatedDate(Date validatedDate) {
-        this.validatedDate = validatedDate;
-    }
-
-    public void setTicketType(TicketType ticketType) {
-        this.ticketType = ticketType;
     }
 
     public int getId() {
         return id;
     }
 
-    public String getValidationHash() {
-        return validationHash;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getValidation_hash() {
+        return validation_hash;
+    }
+
+    public void setValidation_hash(String validation_hash) {
+        this.validation_hash = validation_hash;
     }
 
     public boolean isValidated() {
         return validated;
     }
 
-    public Date getValidatedDate() {
-        return validatedDate;
+    public void setValidated(boolean validated) {
+        this.validated = validated;
     }
 
-    public Event getEvent() {
-        return event;
+    public Date getValidated_date() {
+        return validated_date;
+    }
+
+    public void setValidated_date(Date validated_date) {
+        this.validated_date = validated_date;
+    }
+
+    public int getTicketTypeId() {
+        return ticketTypeId;
+    }
+
+    public void setTicketTypeId(int ticketTypeId) {
+        this.ticketTypeId = ticketTypeId;
     }
 
     public TicketType getTicketType() {
         return ticketType;
     }
 
+    public void setTicketType(TicketType ticketType) {
+        this.ticketType = ticketType;
+    }
+
     @Override
     public String toString() {
         return "Ticket{" +
-                "event=" + event +
-                ", ticketId=" + id +
-                ", validationHash='" + validationHash + '\'' +
+                "id=" + id +
+                ", validation_hash='" + validation_hash + '\'' +
                 ", validated=" + validated +
-                ", validatedDate=" + validatedDate +
+                ", validated_date=" + validated_date +
+                ", ticketTypeId=" + ticketTypeId +
                 ", ticketType=" + ticketType +
                 '}';
     }

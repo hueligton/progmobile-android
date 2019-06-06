@@ -38,8 +38,8 @@ public class RAPurchase extends RecyclerView.Adapter<RAPurchase.ViewHolder> {
         Purchase purchase = list.get(i);
         viewHolder.tvPurchaseId.setText(String.format("%s", purchase.getId()));
         viewHolder.tvPurchaseDate.setText(String.format("%s", purchase.getDate()));
-        viewHolder.tvPurchaseValue.setText(String.format("%s", purchase.getValue()));
-        viewHolder.tvPurchaseStatus.setText(String.format("%s", purchase.getPaymentStatus()));
+        viewHolder.tvPurchaseValue.setText(String.format("%s", purchase.getTotal_value()));
+        viewHolder.tvPurchaseStatus.setText(String.format("%s", purchase.getPayment_status()));
     }
 
     @Override
@@ -72,7 +72,9 @@ public class RAPurchase extends RecyclerView.Adapter<RAPurchase.ViewHolder> {
         @Override
         public void onClick(View view) {
             Intent intent = new Intent(context, PurchaseDetails.class);
-            intent.putExtra("purchase_id", list.get(getAdapterPosition()).getId());
+            //TODO VOLTAR AO ANTERIOR
+            //intent.putExtra("purchase_id", list.get(getAdapterPosition()).getId());
+            intent.putExtra("purchase_id", list.get(getAdapterPosition()));
             context.startActivity(intent);
         }
     }

@@ -1,9 +1,10 @@
 package com.example.progmobile_android.model.entities;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-public class Event {
+public class Event implements Serializable {
 
     private int id;
     private String name;
@@ -11,19 +12,19 @@ public class Event {
     private Date date;
     private String imageUrl;
     private Place place;
-    private List<TicketType> ticketTypes;
+    private List<TicketType> ticket_types;
 
     public Event() {
     }
 
-    public Event(int eventId, String name, String description, Date date, String image, Place place, List<TicketType> ticketTypes) {
+    public Event(int eventId, String name, String description, Date date, String image, Place place, List<TicketType> ticket_types) {
         this.id = eventId;
         this.name = name;
         this.description = description;
         this.date = date;
         this.place = place;
         this.imageUrl = image;
-        this.ticketTypes = ticketTypes;
+        this.ticket_types = ticket_types;
     }
 
     public int getId() {
@@ -58,12 +59,12 @@ public class Event {
         this.place = place;
     }
 
-    public List<TicketType> getTicketTypes() {
-        return ticketTypes;
+    public List<TicketType> getTicket_types() {
+        return ticket_types;
     }
 
-    public void setTicketTypes(List<TicketType> ticketTypes) {
-        this.ticketTypes = ticketTypes;
+    public void setTicket_types(List<TicketType> ticket_types) {
+        this.ticket_types = ticket_types;
     }
 
     public String getDescription() {
@@ -91,7 +92,7 @@ public class Event {
                 ", date=" + date +
                 ", place=" + place +
                 ", imageURL='" + imageUrl + '\'' +
-                ", ticketTypes=" + ticketTypes +
+                ", ticket_types=" + ticket_types +
                 '}';
     }
 }

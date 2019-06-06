@@ -31,13 +31,13 @@ public class RATicketType3 extends RecyclerView.Adapter<RATicketType3.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         Ticket ticket = list.get(i);
-        viewHolder.tvTicketPrice.setText(ticket.getTicketType().getType());
+        viewHolder.tvTicketPrice.setText(ticket.getTicketType().getName());
         viewHolder.tvTicketType.setText(String.format("%s", ticket.getTicketType().getPrice()));
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return list.size();
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {

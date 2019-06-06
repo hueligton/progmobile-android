@@ -1,16 +1,18 @@
 package com.example.progmobile_android.model.entities;
 
-public class TicketType {
+import java.io.Serializable;
+
+public class TicketType implements Serializable {
     private int id;
-    private String type;
+    private String name;
     private double price;
 
     public TicketType() {
     }
 
-    public TicketType(int ticketTypeId, String type, double price){
+    public TicketType(int ticketTypeId, String name, double price) {
         this.id = ticketTypeId;
-        this.type = type;
+        this.name = name;
         this.price = price;
     }
 
@@ -18,8 +20,8 @@ public class TicketType {
         this.id = id;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setPrice(double price) {
@@ -30,8 +32,8 @@ public class TicketType {
         return id;
     }
 
-    public String getType() {
-        return type;
+    public String getName() {
+        return name;
     }
 
     public double getPrice() {
@@ -42,7 +44,7 @@ public class TicketType {
     public String toString() {
         return "TicketType{" +
                 "ticketTypeId=" + id +
-                ", type='" + type + '\'' +
+                ", name='" + name + '\'' +
                 ", price=" + price +
                 '}';
     }

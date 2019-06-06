@@ -5,14 +5,19 @@
     >
 
     <item
+        android:id="@+id/action_home"
+        android:title="@string/action_home"
+        app:showAsAction="always" />
+
+    <item
         android:id="@+id/action_login"
         android:title="@string/action_login"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="always" />
 
     <item
         android:id="@+id/action_logout"
         android:title="@string/action_logout"
-        app:showAsAction="ifRoom"
+        app:showAsAction="always"
         android:visible="false" />
 
 </menu>

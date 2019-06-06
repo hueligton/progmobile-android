@@ -6,6 +6,7 @@
     <string name="my_purchases">Minhas compras</string>
 
     <!--toolbar menu-->
+    <string name="action_home">home</string>
     <string name="action_login">login</string>
     <string name="action_logout">logout</string>
 

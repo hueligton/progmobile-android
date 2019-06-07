@@ -81,7 +81,7 @@ public class RAEvent extends RecyclerView.Adapter<RAEvent.ViewHolder> {
         @Override
         public void onClick(View view) {
             Intent intent = new Intent(context, EventDetails.class);
-            intent.putExtra("event_id", events.get(getAdapterPosition()).getId());
+            intent.putExtra("event", events.get(getAdapterPosition()));
             context.startActivity(intent);
         }
     }

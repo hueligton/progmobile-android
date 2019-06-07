@@ -7,8 +7,10 @@ import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
 import com.example.progmobile_android.model.entities.Card;
+import com.example.progmobile_android.model.entities.Event;
 import com.example.progmobile_android.model.entities.Pair;
 import com.example.progmobile_android.model.entities.Purchase;
+import com.example.progmobile_android.model.entities.Ticket;
 import com.example.progmobile_android.model.repository.Repository;
 import com.example.progmobile_android.model.repository.ServerCallback;
 import com.google.gson.Gson;
@@ -44,7 +46,18 @@ public class PurchaseManager {
                         JSONArray jsonFromResponse = new JSONArray(response);
                         for (int i = 0; i < jsonFromResponse.length(); i++) {
                             JSONObject object = jsonFromResponse.getJSONObject(i);
-                            listPurchase.add(gson.fromJson(object.toString(), Purchase.class));
+                            Purchase purchase = gson.fromJson(object.toString(), Purchase.class);
+                            listPurchase.add(purchase);
+
+                            List<Ticket> list = purchase.getTickets();
+                            Event event = purchase.getEvent();
+                            list.forEach(ticket ->
+                                    ticket.setTicketType(event
+                                            .getTicket_types()
+                                            .stream()
+                                            .filter(ticketType ->
+                                                    ticketType.getId() == ticket.getTicketTypeId())
+                                            .findFirst().get()));
                         }
                         serverCallback.onSuccess(listPurchase);
                     } catch (JSONException e) {
@@ -116,6 +129,17 @@ public class PurchaseManager {
                 response -> {
                     Log.d("getPurchase", response);
                     Purchase purchase = gson.fromJson(response, Purchase.class);
+
+                    List<Ticket> list = purchase.getTickets();
+                    Event event = purchase.getEvent();
+                    list.forEach(ticket ->
+                            ticket.setTicketType(event
+                                    .getTicket_types()
+                                    .stream()
+                                    .filter(ticketType ->
+                                            ticketType.getId() == ticket.getTicketTypeId())
+                                    .findFirst().get()));
+
                     serverCallback.onSuccess(purchase);
                 },
                 error -> {

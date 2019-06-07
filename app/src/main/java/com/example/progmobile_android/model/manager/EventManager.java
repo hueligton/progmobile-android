@@ -38,32 +38,34 @@ public class EventManager {
      */
     public void getListEvents(final ServerCallback serverCallback) {
         if (listEvent.size() > 0) {
-            listEvent.clear();
+            serverCallback.onSuccess(listEvent);
+        } else {
+            final String endPoint = url + "/events";
+
+            StringRequest stringRequest = new StringRequest(Request.Method.GET,
+                    endPoint,
+                    response -> {
+                        try {
+                            JSONArray jsonFromResponse = new JSONArray(response);
+                            for (int i = 0; i < jsonFromResponse.length(); i++) {
+                                JSONObject event = jsonFromResponse.getJSONObject(i);
+                                listEvent.add(gson.fromJson(event.toString(), Event.class));
+                            }
+                            serverCallback.onSuccess(listEvent);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            serverCallback.onError(null);
+                        }
+                    },
+                    error -> {
+                        Log.d("getListEvents", error.toString());
+                        serverCallback.onError(null);
+                    });
+
+            Repository.getInstance(context).addToRequestQueue(stringRequest);
         }
 
-        final String endPoint = url + "/events";
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET,
-                endPoint,
-                response -> {
-                    try {
-                        JSONArray jsonFromResponse = new JSONArray(response);
-                        for (int i = 0; i < jsonFromResponse.length(); i++) {
-                            JSONObject event = jsonFromResponse.getJSONObject(i);
-                            listEvent.add(gson.fromJson(event.toString(), Event.class));
-                        }
-                        serverCallback.onSuccess(listEvent);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                        serverCallback.onError(null);
-                    }
-                },
-                error -> {
-                    Log.d("getListEvents", error.toString());
-                    serverCallback.onError(null);
-                });
-
-        Repository.getInstance(context).addToRequestQueue(stringRequest);
     }
 
     /**

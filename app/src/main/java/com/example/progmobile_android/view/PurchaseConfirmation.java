@@ -58,7 +58,7 @@ public class PurchaseConfirmation extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
 
-        eventId = bundle.getInt("eventId", 0);
+        eventId = ((Event) bundle.getSerializable("event")).getId();
         pairList = (List<Pair>) bundle.getSerializable("pairList");
         card = (Card) bundle.getSerializable("card");
 

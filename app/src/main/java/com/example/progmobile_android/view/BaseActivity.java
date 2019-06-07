@@ -20,6 +20,7 @@ public class BaseActivity extends AppCompatActivity {
         this.menu = menu;
         getMenuInflater().inflate(R.menu.app_bar_menu, menu);
         customMenu.updateMenu(menu, customMenu.isNotLogged());
+        getCustomMenu().adaptMenu(getMenu(), this.getClass().getSimpleName());
         return true;
     }
 

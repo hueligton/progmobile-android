@@ -3,6 +3,7 @@ package com.example.progmobile_android.model;
 import android.content.Context;
 
 import com.example.progmobile_android.model.entities.Card;
+import com.example.progmobile_android.model.entities.Event;
 import com.example.progmobile_android.model.entities.Pair;
 import com.example.progmobile_android.model.manager.EventManager;
 import com.example.progmobile_android.model.manager.PurchaseManager;
@@ -83,12 +84,11 @@ public class ManagerFacade {
 
     /***
      * Lista de eventos filtrada por nome
-     * @param serverCallback interface para retorno da chamada HTTP
      * @param name nome do evento
-     * @return Retorna Object via CallBack. Necessário cast para List<Event>.
+     * @return Retorna List<Event> filtrado.
      */
-    public void searchEventByName(String name, ServerCallback serverCallback) {
-        eventManager.searchEventByName(name, serverCallback);
+    public List<Event> searchEventByName(String name) {
+        return eventManager.searchEventByName(name);
     }
 
     /***

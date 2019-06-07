@@ -6,6 +6,7 @@ import android.util.Log;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
+import com.example.progmobile_android.model.entities.CreateError;
 import com.example.progmobile_android.model.entities.User;
 import com.example.progmobile_android.model.entities.UserToken;
 import com.example.progmobile_android.model.repository.Repository;
@@ -15,6 +16,7 @@ import com.google.gson.Gson;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -116,7 +118,13 @@ public class UserManager {
                 },
                 error -> {
                     Log.d("createUser", error.toString());
-                    serverCallback.onError(null);
+                    try {
+                        String s = new String(error.networkResponse.data, "UTF-8");
+                        CreateError strings = gson.fromJson(s, CreateError.class);
+                        serverCallback.onError(strings);
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
                 }) {
 
             @Override

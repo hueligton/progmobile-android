@@ -85,4 +85,9 @@ public class RAEvent extends RecyclerView.Adapter<RAEvent.ViewHolder> {
             context.startActivity(intent);
         }
     }
+
+    public void updateList(List<Event> newEvents) {
+        events = newEvents;
+        notifyDataSetChanged();
+    }
 }

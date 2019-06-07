@@ -1,6 +1,5 @@
 package com.example.progmobile_android.view;
 
-import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -59,13 +58,13 @@ public class Register extends AppCompatActivity {
             managerFacade.createUser(login, name, password, email, new ServerCallback() {
                 @Override
                 public void onSuccess(Object object) {
-                    makeText(Register.this, R.string.toast_successful_registration, LENGTH_SHORT).show();
+                    makeText(Register.this, R.string.toast_successful_registration, LENGTH_LONG).show();
                     finish();
                 }
 
                 @Override
                 public void onError(Object object) {
-                    makeText(Register.this, R.string.toast_unsuccessful_registration, LENGTH_SHORT).show();
+                    makeText(Register.this, object.toString(), LENGTH_LONG).show();
                     etName.getText().clear();
                     etEmail.getText().clear();
                     etLogin.getText().clear();
@@ -76,7 +75,7 @@ public class Register extends AppCompatActivity {
 
     private boolean validateFields(String name, String email, String login, String password) {
         if(Stream.of(name, email, login, password).anyMatch(String::isEmpty)) {
-            makeText(this, R.string.toast_unfilled_fields, LENGTH_SHORT).show();
+            makeText(this, R.string.toast_unfilled_fields, LENGTH_LONG).show();
             return false;
         }
         return true;

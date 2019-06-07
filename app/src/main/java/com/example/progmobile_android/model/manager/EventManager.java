@@ -70,15 +70,14 @@ public class EventManager {
      * Retorna via callback lista de todos os eventos disponíveis no webservice filtrados pelo nome fornecido
      *
      * @param name           nome do evento
-     * @param serverCallback callback para retorno
      */
-    public void searchEventByName(String name, final ServerCallback serverCallback) {
+    public List<Event> searchEventByName(String name) {
         //Se vazio, preencher lista
         if (listEvent.size() == 0) {
             getListEvents(new ServerCallback() {
                 @Override
                 public void onSuccess(Object object) {
-                    searchEventByName(name, serverCallback);
+                    searchEventByName(name);
                 }
 
                 @Override
@@ -97,8 +96,9 @@ public class EventManager {
                                     .contains(name.toLowerCase()))
                     .collect(Collectors.<Event>toList());
 
-            serverCallback.onSuccess(eventList);
+            return eventList;
         }
+        return null;
     }
 
     /**

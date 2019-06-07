@@ -31,6 +31,25 @@ public class CustomMenu {
         logout.setVisible(!isNotLogged);
     }
 
+    public void adaptMenu(Menu menu, String name) {
+        MenuItem home = menu.findItem(R.id.action_home);
+        MenuItem search = menu.findItem(R.id.action_search);
+
+        switch (name) {
+            case "Home":
+                home.setVisible(false);
+                search.setVisible(false);
+                break;
+            case "EventList":
+                home.setVisible(true);
+                search.setVisible(true);
+                break;
+            default:
+                home.setVisible(true);
+                search.setVisible(false);
+        }
+    }
+
     public boolean isNotLogged() {
         return isNotLogged;
     }

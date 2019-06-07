@@ -72,9 +72,7 @@ public class RAPurchase extends RecyclerView.Adapter<RAPurchase.ViewHolder> {
         @Override
         public void onClick(View view) {
             Intent intent = new Intent(context, PurchaseDetails.class);
-            //TODO VOLTAR AO ANTERIOR
-            //intent.putExtra("purchase_id", list.get(getAdapterPosition()).getId());
-            intent.putExtra("purchase_id", list.get(getAdapterPosition()));
+            intent.putExtra("purchase", list.get(getAdapterPosition()));
             context.startActivity(intent);
         }
     }

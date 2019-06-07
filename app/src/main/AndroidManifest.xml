@@ -30,7 +30,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".view.Home" />
         </activity>
-        <activity android:name=".MainActivity" />
         <activity
             android:name=".view.Register"
             android:parentActivityName=".view.Login">

@@ -48,19 +48,10 @@ public class PurchaseDetails extends AppCompatActivity {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         rvTickets.setLayoutManager(layoutManager);
 
-        //TODO VOLTAR
-        //int purchaseId = getIntent().getIntExtra("purchase_id", 0);
-        Purchase purchase = (Purchase) getIntent().getSerializableExtra("purchase_id");
+        Purchase purchase = (Purchase) getIntent().getSerializableExtra("purchase");
 
         List<Ticket> list = purchase.getTickets();
         Event event = purchase.getEvent();
-        list.forEach(ticket ->
-                ticket.setTicketType(event
-                        .getTicket_types()
-                        .stream()
-                        .filter(ticketType ->
-                                ticketType.getId() == ticket.getTicketTypeId())
-                        .findFirst().get()));
 
         tvEventDate.setText(event.getDate().toString());
         tvEventName.setText(event.getName());
@@ -68,38 +59,6 @@ public class PurchaseDetails extends AppCompatActivity {
 
         raTicketType3 = new RATicketType3(list);
         rvTickets.setAdapter(raTicketType3);
-
-        //TODO VOLTAR
-        /*managerFacade.getUser(new ServerCallback() {
-            @Override
-            public void onSuccess(Object object) {
-                UserToken userToken = (UserToken) object;
-                int userId = userToken.getUser().getId();
-                String token = userToken.getToken();
-
-                managerFacade.getPurchase(userId, token, purchaseId, new ServerCallback() {
-                    @Override
-                    public void onSuccess(Object object) {
-                        Purchase purchase = (Purchase) object;
-                        List<Ticket> list = purchase.getTickets();
-                        Event event = purchase.getEvent();
-
-                        tvEventDate.setText(event.getDate().toString());
-                        tvEventName.setText(event.getName());
-                        tvEventLocal.setText(event.getPlace().getAddress());
-
-                        raTicketType3 = new RATicketType3(list);
-                        rvTickets.setAdapter(raTicketType3);
-                    }
-
-                    @Override
-                    public void onError(Object object) { }
-                });
-            }
-
-            @Override
-            public void onError(Object object) { }
-        });*/
     }
 
     private void captureViewComponents() {

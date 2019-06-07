@@ -57,7 +57,7 @@ public class EventDetails extends BaseActivity {
         ActionBar actionBar = getSupportActionBar();
         Objects.requireNonNull(actionBar).setDisplayHomeAsUpEnabled(true);
 
-        int eventId = getIntent().getIntExtra("event_id", 0);
+        Event event = (Event) getIntent().getSerializableExtra("event");
 
         captureViewComponents();
 
@@ -65,31 +65,18 @@ public class EventDetails extends BaseActivity {
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 1);
         rvTicketType.setLayoutManager(layoutManager);
 
-        managerFacade.getEvent(eventId, new ServerCallback() {
+        List<TicketType> ticketTypes = event.getTicket_types();
 
-            @Override
-            public void onSuccess(Object object) {
-                Event event = (Event) object;
-                List<TicketType> ticketTypes = event.getTicket_types();
+        ivEventImage.setContentDescription(event.getDescription());
+        Picasso.get().load(Constants.URL + event.getImageUrl()).into(ivEventImage);
 
-                ivEventImage.setContentDescription(event.getDescription());
-                Picasso.get().load(Constants.URL + event.getImageUrl()).into(ivEventImage);
+        tvEventDate.setText(new SimpleDateFormat("dd.MM.yyyy").format(event.getDate().getTime()));
+        tvEventDescription.setText(event.getDescription());
+        tvEventName.setText(event.getName());
+        tvEventTime.setText(new SimpleDateFormat("HH:mm").format(event.getDate().getTime()));
 
-                tvEventDate.setText(new SimpleDateFormat("dd.MM.yyyy").format(event.getDate().getTime()));
-                tvEventDescription.setText(event.getDescription());
-                tvEventName.setText(event.getName());
-                tvEventTime.setText(new SimpleDateFormat("HH:mm").format(event.getDate().getTime()));
-
-                raTicketType1 = new RATicketType1(ticketTypes);
-                rvTicketType.setAdapter(raTicketType1);
-            }
-
-            @Override
-            public void onError(Object object) {
-
-            }
-        });
-
+        raTicketType1 = new RATicketType1(ticketTypes);
+        rvTicketType.setAdapter(raTicketType1);
     }
 
     private void captureViewComponents() {
@@ -120,7 +107,7 @@ public class EventDetails extends BaseActivity {
                 Bundle bundle = new Bundle();
 
                 bundle.putSerializable("pairList", (Serializable) pairList);
-                bundle.putInt("eventId", getIntent().getIntExtra("event_id", 0));
+                bundle.putSerializable("event", getIntent().getSerializableExtra("event"));
 
                 intent.putExtras(bundle);
                 startActivity(intent);

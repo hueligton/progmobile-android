@@ -5,19 +5,26 @@
     >
 
     <item
+        android:id="@+id/action_search"
+        android:title="search"
+        android:icon="@mipmap/searchicon"
+        app:actionViewClass="android.widget.SearchView"
+        app:showAsAction="always" />
+
+    <item
         android:id="@+id/action_home"
         android:title="@string/action_home"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/action_login"
         android:title="@string/action_login"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/action_logout"
         android:title="@string/action_logout"
-        app:showAsAction="always"
+        app:showAsAction="ifRoom"
         android:visible="false" />
 
 </menu>

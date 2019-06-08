@@ -2,7 +2,6 @@
 <GridLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:columnOrderPreserved="true"
-    android:elevation="0dp"
     android:layout_height="wrap_content"
     android:layout_width="match_parent"
     android:orientation="horizontal"
@@ -15,7 +14,7 @@
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:text="@string/ticket_type_example"
-                android:textColor="@color/colorTextButton"
+                android:textColor="@android:color/white"
                 />
 
             <TextView
@@ -23,7 +22,7 @@
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:text="@string/ticket_price_example"
-                android:textColor="@color/colorTextButton"
+                android:textColor="@android:color/white"
                 />
         </LinearLayout>
 
@@ -42,7 +41,7 @@
                 android:layout_width="match_parent"
                 android:text="@string/currency"
                 android:textAlignment="center"
-                android:textColor="@color/colorTextButton"
+                android:textColor="@android:color/white"
                 />
 
             <TextView
@@ -53,7 +52,7 @@
                 android:layout_marginStart="2dp"
                 android:text="@string/total_price"
                 android:textAlignment="center"
-                android:textColor="@color/colorTextButton"
+                android:textColor="@android:color/white"
                 />
 
         </LinearLayout>
@@ -76,7 +75,7 @@
                 android:layout_margin="10dp"
                 android:text="@string/ticket_amount"
                 android:textAlignment="center"
-                android:textColor="@color/colorTextButton"
+                android:textColor="@android:color/white"
                 />
 
             <Button

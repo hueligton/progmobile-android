@@ -36,6 +36,7 @@ public class PurchaseConfirmation extends AppCompatActivity {
     private TextView tvCardNumber;
     private TextView tvValid;
     private TextView tvEvent;
+    private TextView tvTotalPrice;
 
     private RATicketType2 raTicketType2;
     private RecyclerView rvTicketType;
@@ -79,6 +80,17 @@ public class PurchaseConfirmation extends AppCompatActivity {
 
                 raTicketType2 = new RATicketType2(ticketTypes, pairList);
                 rvTicketType.setAdapter(raTicketType2);
+
+                double totalPrice = 0.0;
+                for (int i = 0; i < ticketTypes.size(); i++) {
+                    for (int j = 0; j < pairList.size(); j++) {
+                        if (pairList.get(j).getTicketTypeId() == ticketTypes.get(i).getId())
+                            totalPrice += pairList.get(j).getAmount() * ticketTypes.get(i).getPrice();
+                    }
+
+                }
+
+                tvTotalPrice.setText(String.format("%s", totalPrice));
             }
 
             @Override
@@ -93,6 +105,7 @@ public class PurchaseConfirmation extends AppCompatActivity {
         tvCardNumber = findViewById(R.id.tvCardNumber);
         tvValid = findViewById(R.id.tvValid);
         tvEvent = findViewById(R.id.tvEvent);
+        tvTotalPrice = findViewById(R.id.tvTotalPrice);
         rvTicketType = findViewById(R.id.rvTicketType);
     }
 

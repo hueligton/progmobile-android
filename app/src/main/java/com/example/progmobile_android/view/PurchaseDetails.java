@@ -1,5 +1,6 @@
 package com.example.progmobile_android.view;
 
+import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -16,18 +17,17 @@ import com.example.progmobile_android.model.entity.Purchase;
 import com.example.progmobile_android.model.entity.Ticket;
 import com.example.progmobile_android.view.RecyclerAdapter.RATicketType3;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
 public class PurchaseDetails extends AppCompatActivity {
 
-    ManagerFacade managerFacade = ManagerFacade.getInstance(this);
-
     private TextView tvEventDate;
     private TextView tvEventLocal;
     private TextView tvEventName;
+    private TextView tvEventTime;
     private RecyclerView rvTickets;
-    private RATicketType3 raTicketType3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,12 +52,14 @@ public class PurchaseDetails extends AppCompatActivity {
 
         List<Ticket> list = purchase.getTickets();
         Event event = purchase.getEvent();
+        Date date = event.getDate();
 
-        tvEventDate.setText(event.getDate().toString());
+        tvEventDate.setText(new SimpleDateFormat("dd.MM.yyyy").format(date.getTime()));
         tvEventName.setText(event.getName());
         tvEventLocal.setText(event.getPlace().getAddress());
+        tvEventTime.setText(new SimpleDateFormat("HH:mm").format(date.getTime()));
 
-        raTicketType3 = new RATicketType3(list);
+        RATicketType3 raTicketType3 = new RATicketType3(list);
         rvTickets.setAdapter(raTicketType3);
     }
 
@@ -65,6 +67,7 @@ public class PurchaseDetails extends AppCompatActivity {
         tvEventDate = findViewById(R.id.tvEventDate);
         tvEventLocal = findViewById(R.id.tvEventLocal);
         tvEventName = findViewById(R.id.tvEventName);
+        tvEventTime = findViewById(R.id.tvEventTime);
         rvTickets = findViewById(R.id.rvTickets);
     }
 

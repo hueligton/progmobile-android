@@ -40,7 +40,7 @@ public class RATicketType1 extends RecyclerView.Adapter<RATicketType1.ViewHolder
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int position) {
         View view = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.comp_type_ticket_1, viewGroup, false);
+                .inflate(R.layout.comp_ticket_type_1, viewGroup, false);
         return new ViewHolder(view, ticketTypes, information);
     }
 

@@ -87,5 +87,8 @@
     <string name="icon_location">icone de localizaçao</string>
     <string name="button_event_local">ver local</string>
     <string name="ticket_label_unit">und</string>
+    <string name="purchase_information">10</string>
+    <string name="icon_confirm">icone de confirmaçao</string>
+    <string name="purchase_hour">12:32</string>
 
 </resources>

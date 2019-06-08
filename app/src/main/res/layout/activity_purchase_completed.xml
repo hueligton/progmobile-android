@@ -1,62 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:background="@drawable/background"
     android:layout_height="match_parent"
-    tools:context=".view.PurchaseCompleted">
-
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    tools:context=".view.PurchaseCompleted"
+    >
     <include layout="@layout/toolbar_layout" />
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:gravity="center"
+        android:background="@drawable/form_transparency"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:layout_width="180dp"
-            android:layout_height="180dp"
-            android:src="@drawable/confirmation"
-            android:contentDescription="SUCESSO" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/completed_success"
-            android:textSize="30sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/completed_purchaseId"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/purchaseInformation"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+        >
+        <LinearLayout
+            android:layout_centerInParent="true"
             android:gravity="center"
-            android:textSize="25sp" />
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:orientation="vertical"
+            >
+            <ImageView
+                android:contentDescription="@string/icon_confirm"
+                android:layout_height="120dp"
+                android:layout_width="120dp"
+                android:layout_marginBottom="20dp"
+                android:src="@drawable/confirmation"
+                />
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:onClick="showMyTickets"
-            android:text="@string/my_purchases" />
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="@string/completed_success"
+                android:textAlignment="center"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                />
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:onClick="home"
-            android:text="@string/button_home" />
+            <LinearLayout
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:text="@string/completed_purchaseId"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/white"
+                    android:textSize="20sp"
+                    />
 
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/purchaseInformation"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/purchase_information"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/white"
+                    android:textSize="20sp"
+                    />
 
-</android.support.constraint.ConstraintLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_marginTop="30dp"
+                android:orientation="vertical"
+                >
+                <Button
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:onClick="showMyTickets"
+                    android:text="@string/my_purchases"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    />
+
+                <Button
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:onClick="home"
+                    android:text="@string/button_home"
+                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                    />
+
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+</RelativeLayout>

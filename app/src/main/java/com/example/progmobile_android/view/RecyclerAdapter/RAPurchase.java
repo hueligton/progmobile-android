@@ -2,6 +2,7 @@ package com.example.progmobile_android.view.RecyclerAdapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.icu.text.SimpleDateFormat;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import com.example.progmobile_android.R;
 import com.example.progmobile_android.model.entity.Purchase;
 import com.example.progmobile_android.view.PurchaseDetails;
 
+import java.util.Date;
 import java.util.List;
 
 public class RAPurchase extends RecyclerView.Adapter<RAPurchase.ViewHolder> {
@@ -36,10 +38,14 @@ public class RAPurchase extends RecyclerView.Adapter<RAPurchase.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         Purchase purchase = list.get(i);
+        Date date = purchase.getDate();
+
+
+        viewHolder.tvPurchaseDate.setText(new SimpleDateFormat("dd.MM.yyyy").format(date.getTime()));
         viewHolder.tvPurchaseId.setText(String.format("%s", purchase.getId()));
-        viewHolder.tvPurchaseDate.setText(String.format("%s", purchase.getDate()));
-        viewHolder.tvPurchaseValue.setText(String.format("%s", purchase.getTotal_value()));
         viewHolder.tvPurchaseStatus.setText(String.format("%s", purchase.getPayment_status()));
+        viewHolder.tvPurchaseTime.setText(new SimpleDateFormat("HH:mm").format(date.getTime()));
+        viewHolder.tvPurchaseValue.setText(String.format("%s", purchase.getTotal_value()));
     }
 
     @Override
@@ -49,20 +55,23 @@ public class RAPurchase extends RecyclerView.Adapter<RAPurchase.ViewHolder> {
 
     static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        private TextView tvPurchaseId;
         private TextView tvPurchaseDate;
-        private TextView tvPurchaseValue;
+        private TextView tvPurchaseId;
         private TextView tvPurchaseStatus;
+        private TextView tvPurchaseTime;
+        private TextView tvPurchaseValue;
+
         private List<Purchase> list;
         private Context context;
 
         ViewHolder(@NonNull View itemView, List<Purchase> list, Context context) {
             super(itemView);
 
-            this.tvPurchaseId = itemView.findViewById(R.id.tvPurchaseId);
             this.tvPurchaseDate = itemView.findViewById(R.id.tvPurchaseDate);
-            this.tvPurchaseValue = itemView.findViewById(R.id.tvPurchaseValue);
+            this.tvPurchaseId = itemView.findViewById(R.id.tvPurchaseId);
             this.tvPurchaseStatus = itemView.findViewById(R.id.tvPurchaseStatus);
+            this.tvPurchaseTime = itemView.findViewById(R.id.tvPurchaseTime);
+            this.tvPurchaseValue = itemView.findViewById(R.id.tvPurchaseValue);
             this.list = list;
             this.context = context;
 

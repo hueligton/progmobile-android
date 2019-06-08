@@ -67,7 +67,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_width="wrap_content"
                                 android:text="@string/event_date"
-                                android:textColor="@color/colorTextButton"
+                                android:textColor="@android:color/white"
                                 />
 
                         </TableRow>
@@ -86,7 +86,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_width="wrap_content"
                                 android:text="@string/event_hour"
-                                android:textColor="@color/colorTextButton"
+                                android:textColor="@android:color/white"
                                 />
 
                         </TableRow>
@@ -116,7 +116,7 @@
                         android:layout_marginTop="10dp"
                         android:text="@string/event_example_description"
                         android:textAlignment="textEnd"
-                        android:textColor="@color/colorTextButton"
+                        android:textColor="@android:color/white"
                         />
 
                     <LinearLayout
@@ -140,7 +140,7 @@
                             android:layout_width="0dp"
                             android:layout_weight="1"
                             android:text="@string/event_local"
-                            android:textColor="@color/colorTextButton"
+                            android:textColor="@android:color/white"
                             />
 
                         <Button

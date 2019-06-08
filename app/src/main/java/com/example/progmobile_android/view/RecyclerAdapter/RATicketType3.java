@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.progmobile_android.R;
-import com.example.progmobile_android.model.entities.Ticket;
+import com.example.progmobile_android.model.entity.Ticket;
 
 import java.util.List;
 

@@ -1,28 +1,23 @@
 package com.example.progmobile_android.view;
 
-import android.content.Context;
 import android.content.Intent;
 import android.icu.text.SimpleDateFormat;
-import android.support.v7.app.ActionBar;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.DisplayMetrics;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.progmobile_android.R;
 import com.example.progmobile_android.model.ManagerFacade;
-import com.example.progmobile_android.model.entities.Event;
-import com.example.progmobile_android.model.entities.Pair;
-import com.example.progmobile_android.model.entities.TicketType;
-import com.example.progmobile_android.model.manager.Constants;
-import com.example.progmobile_android.model.repository.ServerCallback;
+import com.example.progmobile_android.model.entity.Event;
+import com.example.progmobile_android.model.entity.Pair;
+import com.example.progmobile_android.model.entity.TicketType;
+import com.example.progmobile_android.model.util.Constants;
 import com.example.progmobile_android.view.RecyclerAdapter.RATicketType1;
 import com.squareup.picasso.Picasso;
 
@@ -93,12 +88,13 @@ public class EventDetails extends BaseActivity {
     public void insertPaymentData(View view) {
         List<Pair> pairList = raTicketType1.getInformations();
 
-        if (!pairList
+        pairList = pairList
                 .stream()
                 .filter(pair ->
                         pair.getAmount() > 0)
-                .collect(Collectors.toList())
-                .isEmpty()) {
+                .collect(Collectors.toList());
+
+        if (!pairList.isEmpty()) {
 
             if (super.getCustomMenu().isNotLogged()) {
                 startActivityForResult(new Intent(this, Login.class), 0);

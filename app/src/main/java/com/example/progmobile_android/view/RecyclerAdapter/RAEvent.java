@@ -12,8 +12,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.progmobile_android.R;
-import com.example.progmobile_android.model.entities.Event;
-import com.example.progmobile_android.model.manager.Constants;
+import com.example.progmobile_android.model.entity.Event;
+import com.example.progmobile_android.model.util.Constants;
 import com.example.progmobile_android.view.EventDetails;
 import com.squareup.picasso.Picasso;
 

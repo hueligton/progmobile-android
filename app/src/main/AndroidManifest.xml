@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".view.PurchaseDetails"></activity>
+        <activity android:name=".view.PurchaseDetails" />
         <activity android:name=".view.Home">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -55,6 +55,7 @@
         <activity android:name=".view.PurchaseCompleted" />
         <activity android:name=".view.Purchases" />
         <activity android:name=".view.PaymentData" />
+        <activity android:name=".view.BaseActivity" />
     </application>
 
 </manifest>

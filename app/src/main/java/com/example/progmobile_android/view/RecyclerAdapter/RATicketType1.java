@@ -9,8 +9,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.progmobile_android.R;
-import com.example.progmobile_android.model.entities.Pair;
-import com.example.progmobile_android.model.entities.TicketType;
+import com.example.progmobile_android.model.entity.Pair;
+import com.example.progmobile_android.model.entity.TicketType;
 
 import java.util.ArrayList;
 import java.util.List;

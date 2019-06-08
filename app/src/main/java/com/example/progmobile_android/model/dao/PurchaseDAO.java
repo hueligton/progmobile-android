@@ -1,4 +1,4 @@
-package com.example.progmobile_android.model.manager;
+package com.example.progmobile_android.model.dao;
 
 import android.content.Context;
 import android.util.Log;
@@ -6,13 +6,13 @@ import android.util.Log;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
-import com.example.progmobile_android.model.entities.Card;
-import com.example.progmobile_android.model.entities.Event;
-import com.example.progmobile_android.model.entities.Pair;
-import com.example.progmobile_android.model.entities.Purchase;
-import com.example.progmobile_android.model.entities.Ticket;
-import com.example.progmobile_android.model.repository.Repository;
-import com.example.progmobile_android.model.repository.ServerCallback;
+import com.example.progmobile_android.model.entity.Card;
+import com.example.progmobile_android.model.entity.Event;
+import com.example.progmobile_android.model.entity.Pair;
+import com.example.progmobile_android.model.entity.Purchase;
+import com.example.progmobile_android.model.entity.Ticket;
+import com.example.progmobile_android.model.util.Constants;
+import com.example.progmobile_android.model.util.ServerCallback;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -24,12 +24,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class PurchaseManager {
+public class PurchaseDAO {
     private Gson gson;
     private Context context;
     private String url = Constants.URL;
 
-    public PurchaseManager(Context context){
+    public PurchaseDAO(Context context) {
         this.context = context;
         this.gson = new Gson();
     }
@@ -70,7 +70,7 @@ public class PurchaseManager {
                     serverCallback.onError(null);
                 }) {
             @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
+            public Map<String, String> getHeaders() {
                 Map<String, String> headers = new HashMap<>();
                 headers.put("userId", String.valueOf(userId));
                 headers.put("token", token);
@@ -96,7 +96,7 @@ public class PurchaseManager {
                     serverCallback.onError(null);
                 }) {
             @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
+            public Map<String, String> getHeaders() {
                 Map<String, String> headers = new HashMap<>();
                 headers.put("userId", String.valueOf(userId));
                 headers.put("token", token);
@@ -108,7 +108,7 @@ public class PurchaseManager {
                 HashMap<String, String> params = new HashMap<>();
                 params.put("card", gson.toJson(card));
                 params.put("eventId", String.valueOf(eventId));
-                params.put("Pair", gson.toJson(list));
+                params.put("tickets", gson.toJson(list));
                 return new JSONObject(params).toString().getBytes();
             }
 
@@ -147,7 +147,7 @@ public class PurchaseManager {
                     serverCallback.onError(null);
                 }) {
             @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
+            public Map<String, String> getHeaders() {
                 Map<String, String> headers = new HashMap<>();
                 headers.put("userId", String.valueOf(userId));
                 headers.put("token", token);

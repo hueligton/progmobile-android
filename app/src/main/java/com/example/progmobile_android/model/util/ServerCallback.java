@@ -1,4 +1,4 @@
-package com.example.progmobile_android.model.repository;
+package com.example.progmobile_android.model.util;
 
 public interface ServerCallback {
     void onSuccess(Object object);

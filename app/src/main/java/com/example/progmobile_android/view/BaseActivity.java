@@ -7,7 +7,7 @@ import android.view.MenuItem;
 
 import com.example.progmobile_android.R;
 import com.example.progmobile_android.model.ManagerFacade;
-import com.example.progmobile_android.model.repository.ServerCallback;
+import com.example.progmobile_android.model.util.ServerCallback;
 
 public class BaseActivity extends AppCompatActivity {
 

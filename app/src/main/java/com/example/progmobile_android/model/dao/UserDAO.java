@@ -1,4 +1,4 @@
-package com.example.progmobile_android.model.manager;
+package com.example.progmobile_android.model.dao;
 
 import android.content.Context;
 import android.util.Log;
@@ -6,28 +6,29 @@ import android.util.Log;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
-import com.example.progmobile_android.model.entities.CreateError;
-import com.example.progmobile_android.model.entities.User;
-import com.example.progmobile_android.model.entities.UserToken;
-import com.example.progmobile_android.model.repository.Repository;
-import com.example.progmobile_android.model.repository.ServerCallback;
+import com.example.progmobile_android.model.entity.CreateError;
+import com.example.progmobile_android.model.entity.User;
+import com.example.progmobile_android.model.entity.UserToken;
+import com.example.progmobile_android.model.util.Constants;
+import com.example.progmobile_android.model.util.ServerCallback;
 import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
-public class UserManager {
+public class UserDAO {
     private Gson gson;
     private Context context;
     private String url = Constants.URL;
 
     private UserToken userToken;
 
-    public UserManager(Context context) {
+    public UserDAO(Context context) {
         this.context = context;
         this.gson = new Gson();
     }
@@ -95,7 +96,7 @@ public class UserManager {
                 }) {
 
             @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
+            public Map<String, String> getHeaders() {
                 Map<String, String> headers = new HashMap<>();
                 headers.put("userId", String.valueOf(userToken.getUser().getId()));
                 headers.put("token", userToken.getToken());
@@ -118,13 +119,9 @@ public class UserManager {
                 },
                 error -> {
                     Log.d("createUser", error.toString());
-                    try {
-                        String s = new String(error.networkResponse.data, "UTF-8");
-                        CreateError strings = gson.fromJson(s, CreateError.class);
-                        serverCallback.onError(strings);
-                    } catch (UnsupportedEncodingException e) {
-                        e.printStackTrace();
-                    }
+                    String s = new String(error.networkResponse.data, StandardCharsets.UTF_8);
+                    CreateError strings = gson.fromJson(s, CreateError.class);
+                    serverCallback.onError(strings);
                 }) {
 
             @Override

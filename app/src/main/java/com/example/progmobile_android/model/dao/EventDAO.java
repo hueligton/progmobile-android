@@ -1,13 +1,13 @@
-package com.example.progmobile_android.model.manager;
+package com.example.progmobile_android.model.dao;
 
 import android.content.Context;
 import android.util.Log;
 
 import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
-import com.example.progmobile_android.model.entities.Event;
-import com.example.progmobile_android.model.repository.Repository;
-import com.example.progmobile_android.model.repository.ServerCallback;
+import com.example.progmobile_android.model.entity.Event;
+import com.example.progmobile_android.model.util.Constants;
+import com.example.progmobile_android.model.util.ServerCallback;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -18,14 +18,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class EventManager {
+public class EventDAO {
     private Gson gson;
     private Context context;
     private String url = Constants.URL;
 
     private List<Event> listEvent;
 
-    public EventManager(Context context) {
+    public EventDAO(Context context) {
         this.context = context;
         this.gson = new Gson();
         listEvent = new ArrayList<>();
@@ -96,7 +96,7 @@ public class EventManager {
                             e.getName()
                                     .toLowerCase()
                                     .contains(name.toLowerCase()))
-                    .collect(Collectors.<Event>toList());
+                    .collect(Collectors.toList());
 
             return eventList;
         }

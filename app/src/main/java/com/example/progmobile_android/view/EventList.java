@@ -1,8 +1,8 @@
 package com.example.progmobile_android.view;
 
 import android.content.Context;
-import android.support.v7.app.ActionBar;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
@@ -11,8 +11,8 @@ import android.view.WindowManager;
 import android.widget.SearchView;
 
 import com.example.progmobile_android.R;
-import com.example.progmobile_android.model.entities.Event;
-import com.example.progmobile_android.model.repository.ServerCallback;
+import com.example.progmobile_android.model.entity.Event;
+import com.example.progmobile_android.model.util.ServerCallback;
 import com.example.progmobile_android.view.RecyclerAdapter.RAEvent;
 
 import java.util.List;

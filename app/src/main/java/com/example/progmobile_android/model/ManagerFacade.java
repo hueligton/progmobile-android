@@ -2,26 +2,26 @@ package com.example.progmobile_android.model;
 
 import android.content.Context;
 
-import com.example.progmobile_android.model.entities.Card;
-import com.example.progmobile_android.model.entities.Event;
-import com.example.progmobile_android.model.entities.Pair;
-import com.example.progmobile_android.model.manager.EventManager;
-import com.example.progmobile_android.model.manager.PurchaseManager;
-import com.example.progmobile_android.model.manager.UserManager;
-import com.example.progmobile_android.model.repository.ServerCallback;
+import com.example.progmobile_android.model.entity.Card;
+import com.example.progmobile_android.model.entity.Event;
+import com.example.progmobile_android.model.entity.Pair;
+import com.example.progmobile_android.model.dao.EventDAO;
+import com.example.progmobile_android.model.dao.PurchaseDAO;
+import com.example.progmobile_android.model.dao.UserDAO;
+import com.example.progmobile_android.model.util.ServerCallback;
 
 import java.util.List;
 
 public class ManagerFacade {
-    private EventManager eventManager;
-    private UserManager userManager;
-    private PurchaseManager purchaseManager;
+    private EventDAO eventDAO;
+    private UserDAO userDAO;
+    private PurchaseDAO purchaseDAO;
     private static ManagerFacade managerFacade;
 
     private ManagerFacade(Context context) {
-        this.eventManager=new EventManager(context);
-        this.userManager=new UserManager(context);
-        this.purchaseManager=new PurchaseManager(context);
+        this.eventDAO = new EventDAO(context);
+        this.userDAO = new UserDAO(context);
+        this.purchaseDAO = new PurchaseDAO(context);
     }
 
     public static ManagerFacade getInstance(Context context) {
@@ -39,7 +39,7 @@ public class ManagerFacade {
      * @return Retorna Object via CallBack. Necessário cast para UserToken.
      */
     public void login(String login, String password, ServerCallback serverCallback) {
-        userManager.login(login, password, serverCallback);
+        userDAO.login(login, password, serverCallback);
     }
 
     /***
@@ -48,7 +48,7 @@ public class ManagerFacade {
      * @return Retorna Object via CallBack. Necessário cast para UserToken.
      */
     public void getUser(ServerCallback serverCallback) {
-        userManager.getUser(serverCallback);
+        userDAO.getUser(serverCallback);
     }
 
     /***
@@ -57,7 +57,7 @@ public class ManagerFacade {
      * @return Sem retorno
      */
     public void logout(ServerCallback serverCallback) {
-        userManager.logout(serverCallback);
+        userDAO.logout(serverCallback);
     }
 
     /***
@@ -70,7 +70,7 @@ public class ManagerFacade {
      * @return Retorna Object via CallBack. Necessário cast para User.
      */
     public void createUser(String login, String name, String password, String email, ServerCallback serverCallback) {
-        userManager.createUser(login, name, password, email, serverCallback);
+        userDAO.createUser(login, name, password, email, serverCallback);
     }
 
     /***
@@ -79,7 +79,7 @@ public class ManagerFacade {
      * @return Retorna Object via CallBack. Necessário cast para List<Event>.
      */
     public void getListEvents(ServerCallback serverCallback) {
-        eventManager.getListEvents(serverCallback);
+        eventDAO.getListEvents(serverCallback);
     }
 
     /***
@@ -88,7 +88,7 @@ public class ManagerFacade {
      * @return Retorna List<Event> filtrado.
      */
     public List<Event> searchEventByName(String name) {
-        return eventManager.searchEventByName(name);
+        return eventDAO.searchEventByName(name);
     }
 
     /***
@@ -98,7 +98,7 @@ public class ManagerFacade {
      * @return Retorna Object via CallBack. Necessário cast para Event.
      */
     public void getEvent(int eventId, ServerCallback serverCallback) {
-        eventManager.getEvent(eventId, serverCallback);
+        eventDAO.getEvent(eventId, serverCallback);
     }
 
     /***
@@ -109,7 +109,7 @@ public class ManagerFacade {
      * @return Retorna Object via CallBack. Necessário cast para List<Purchase>.
      */
     public void getListPurchases(int userId, String token, ServerCallback serverCallback) {
-        purchaseManager.getListPurchases(userId, token, serverCallback);
+        purchaseDAO.getListPurchases(userId, token, serverCallback);
     }
 
     /***
@@ -122,7 +122,7 @@ public class ManagerFacade {
      * @return Retorna Object via CallBack. Necessário cast para Purchase.
      */
     public void setPurchase(int userId, String token, Card card, int eventId, List<Pair> list, ServerCallback serverCallback) {
-        purchaseManager.setPurchase(userId, token, card, eventId, list, serverCallback);
+        purchaseDAO.setPurchase(userId, token, card, eventId, list, serverCallback);
     }
 
     /***
@@ -134,6 +134,6 @@ public class ManagerFacade {
      * @return Retorna Object via CallBack. Necessário cast para Purchase.
      */
     public void getPurchase(int userId, String token, int purchaseId, ServerCallback serverCallback) {
-        purchaseManager.getPurchase(userId, token, purchaseId, serverCallback);
+        purchaseDAO.getPurchase(userId, token, purchaseId, serverCallback);
     }
 }

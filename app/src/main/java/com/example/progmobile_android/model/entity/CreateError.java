@@ -1,4 +1,4 @@
-package com.example.progmobile_android.model.entities;
+package com.example.progmobile_android.model.entity;
 
 import java.util.Arrays;
 

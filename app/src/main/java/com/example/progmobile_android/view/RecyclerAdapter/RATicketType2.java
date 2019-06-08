@@ -8,10 +8,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.progmobile_android.R;
-import com.example.progmobile_android.model.entities.Pair;
-import com.example.progmobile_android.model.entities.TicketType;
+import com.example.progmobile_android.model.entity.Pair;
+import com.example.progmobile_android.model.entity.TicketType;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class RATicketType2 extends RecyclerView.Adapter<RATicketType2.ViewHolder> {
@@ -34,8 +33,13 @@ public class RATicketType2 extends RecyclerView.Adapter<RATicketType2.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        TicketType ticketType = ticketTypes.get(i);
         Pair pair = pairList.get(i);
+        TicketType ticketType = ticketTypes
+                .stream()
+                .filter(ticketType1 ->
+                        ticketType1.getId() == pair.getTicketTypeId())
+                .findFirst()
+                .get();
 
         viewHolder.tvTicketType.setText(ticketType.getName());
         viewHolder.tvTicketPrice.setText(String.format("%s", ticketType.getPrice()));
@@ -48,7 +52,7 @@ public class RATicketType2 extends RecyclerView.Adapter<RATicketType2.ViewHolder
 
     @Override
     public int getItemCount() {
-        return ticketTypes.size();
+        return pairList.size();
     }
 
 

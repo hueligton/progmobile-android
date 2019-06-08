@@ -1,8 +1,8 @@
 package com.example.progmobile_android.view;
 
-import android.content.Context;
-import android.support.v7.app.ActionBar;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
@@ -10,15 +10,15 @@ import android.view.WindowManager;
 
 import com.example.progmobile_android.R;
 import com.example.progmobile_android.model.ManagerFacade;
-import com.example.progmobile_android.model.entities.Purchase;
-import com.example.progmobile_android.model.entities.UserToken;
-import com.example.progmobile_android.model.repository.ServerCallback;
+import com.example.progmobile_android.model.entity.Purchase;
+import com.example.progmobile_android.model.entity.UserToken;
+import com.example.progmobile_android.model.util.ServerCallback;
 import com.example.progmobile_android.view.RecyclerAdapter.RAPurchase;
 
 import java.util.List;
 import java.util.Objects;
 
-public class Purchases extends BaseActivity {
+public class Purchases extends AppCompatActivity {
 
     ManagerFacade managerFacade = ManagerFacade.getInstance(this);
 
@@ -77,12 +77,10 @@ public class Purchases extends BaseActivity {
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                onBackPressed();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+            return true;
         }
+        return super.onOptionsItemSelected(item);
     }
 }

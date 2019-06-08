@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.progmobile_android.R;
-import com.example.progmobile_android.model.entities.Purchase;
+import com.example.progmobile_android.model.entity.Purchase;
 import com.example.progmobile_android.view.PurchaseDetails;
 
 import java.util.List;

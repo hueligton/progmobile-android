@@ -1,9 +1,9 @@
 package com.example.progmobile_android.view;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
@@ -11,12 +11,13 @@ import android.widget.EditText;
 
 import com.example.progmobile_android.R;
 import com.example.progmobile_android.model.ManagerFacade;
-import com.example.progmobile_android.model.repository.ServerCallback;
+import com.example.progmobile_android.model.util.ServerCallback;
 
 import java.util.Objects;
 import java.util.stream.Stream;
 
-import static android.widget.Toast.*;
+import static android.widget.Toast.LENGTH_SHORT;
+import static android.widget.Toast.makeText;
 
 public class Login extends AppCompatActivity {
 
@@ -81,12 +82,10 @@ public class Login extends AppCompatActivity {
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                onBackPressed();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+            return true;
         }
+        return super.onOptionsItemSelected(item);
     }
 }

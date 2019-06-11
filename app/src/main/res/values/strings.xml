@@ -90,5 +90,6 @@
     <string name="purchase_information">10</string>
     <string name="icon_confirm">icone de confirmaçao</string>
     <string name="purchase_hour">12:32</string>
+    <string name="title_activity_maps">Map</string>
 
 </resources>

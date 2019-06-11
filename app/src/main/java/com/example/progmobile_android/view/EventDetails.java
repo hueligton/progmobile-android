@@ -39,6 +39,8 @@ public class EventDetails extends BaseActivity {
     private TextView tvEventName;
     private TextView tvEventTime;
 
+    private Event event;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +54,7 @@ public class EventDetails extends BaseActivity {
         ActionBar actionBar = getSupportActionBar();
         Objects.requireNonNull(actionBar).setDisplayHomeAsUpEnabled(true);
 
-        Event event = (Event) getIntent().getSerializableExtra("event");
+        event = (Event) getIntent().getSerializableExtra("event");
 
         captureViewComponents();
 
@@ -111,6 +113,12 @@ public class EventDetails extends BaseActivity {
         } else {
             Toast.makeText(this, R.string.toast_unfilled_amount, Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void seeLocal(View view) {
+        Intent intent = new Intent(this, MapsActivity.class);
+        intent.putExtra("event", event);
+        startActivity(intent);
     }
 
 }

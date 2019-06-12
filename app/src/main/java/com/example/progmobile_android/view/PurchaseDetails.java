@@ -1,5 +1,6 @@
 package com.example.progmobile_android.view;
 
+import android.content.Intent;
 import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -7,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
 
@@ -28,6 +30,8 @@ public class PurchaseDetails extends AppCompatActivity {
     private TextView tvEventName;
     private TextView tvEventTime;
     private RecyclerView rvTickets;
+
+    private Event event;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +55,7 @@ public class PurchaseDetails extends AppCompatActivity {
         Purchase purchase = (Purchase) getIntent().getSerializableExtra("purchase");
 
         List<Ticket> list = purchase.getTickets();
-        Event event = purchase.getEvent();
+        event = purchase.getEvent();
         Date date = event.getDate();
 
         tvEventDate.setText(new SimpleDateFormat("dd.MM.yyyy").format(date.getTime()));
@@ -77,6 +81,12 @@ public class PurchaseDetails extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void seeLocal(View view) {
+        Intent intent = new Intent(this, MapsActivity.class);
+        intent.putExtra("event", event);
+        startActivity(intent);
     }
 
 }

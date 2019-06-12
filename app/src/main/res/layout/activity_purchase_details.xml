@@ -133,6 +133,7 @@
                         android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:text="@string/button_event_local"
+                        android:onClick="seeLocal"
                         style="@style/Widget.AppCompat.Button.Borderless.Colored"
                         />
 

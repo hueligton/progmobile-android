@@ -36,6 +36,7 @@ public class EventDetails extends BaseActivity {
     private ImageView ivEventImage;
     private TextView tvEventDate;
     private TextView tvEventDescription;
+    private TextView tvEventLocal;
     private TextView tvEventName;
     private TextView tvEventTime;
 
@@ -69,6 +70,7 @@ public class EventDetails extends BaseActivity {
 
         tvEventDate.setText(new SimpleDateFormat("dd.MM.yyyy").format(event.getDate().getTime()));
         tvEventDescription.setText(event.getDescription());
+        tvEventLocal.setText(event.getPlace().getAddress());
         tvEventName.setText(event.getName());
         tvEventTime.setText(new SimpleDateFormat("HH:mm").format(event.getDate().getTime()));
 
@@ -83,6 +85,7 @@ public class EventDetails extends BaseActivity {
 
         tvEventDate = findViewById(R.id.tvEventDate);
         tvEventDescription = findViewById(R.id.tvEventDescription);
+        tvEventLocal = findViewById(R.id.tvEventLocal);
         tvEventName = findViewById(R.id.tvEventName);
         tvEventTime = findViewById(R.id.tvEventTime);
     }
